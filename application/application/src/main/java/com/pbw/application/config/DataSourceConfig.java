@@ -1,4 +1,4 @@
-package com.pbw.application;
+package com.pbw.application.config;
 
 import javax.sql.DataSource;
 
