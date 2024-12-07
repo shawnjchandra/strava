@@ -1,4 +1,6 @@
-package com.example.m08.config;
+
+package com.pbw.application.config;
+
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
