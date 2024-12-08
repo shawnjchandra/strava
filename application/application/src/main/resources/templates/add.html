@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Running Activity</title>
+    <link rel="stylesheet" th:href="@{css/add.css}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #activityList {
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Running Activity</h1>
+        <form id="activityForm">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="title">Activity Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" style="resize: none;" required></textarea>
+
+            <label for="duration">Duration (minutes):</label>
+            <input type="number" id="duration" name="duration" required>
+
+            <label for="distance">Distance (km):</label>
+            <input type="number" id="distance" name="distance" step="0.01" required>
+
+            <label for="photo">Activity Photo:</label>
+            <input type="file" id="photo" name="photo" accept="image/*" required>
+
+            <button type="submit">Add Activity</button>
+        </form>
+        <div id="activityList">
+            <h2>Activities</h2>
+            <ul id="activities"></ul>
+        </div>
+    </div>
+    <script>
+        document.getElementById('activityForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const date = document.getElementById('date').value;
+        const title = document.getElementById('title').value;
+        const description = document.getElementById('description').value;
+        const duration = document.getElementById('duration').value;
+        const distance = document.getElementById('distance').value;
+        const photo = document.getElementById('photo').files[0];
+
+        const reader = new FileReader();
+        reader.onloadend = function () {
+            const activity = {
+                date: date,
+                title: title,
+                description: description,
+                duration: duration,
+                distance: distance,
+                photo: reader.result
+            };
+
+            addActivityToList(activity);
+            document.getElementById('activityForm').reset();
+        };
+        
+        if (photo) {
+            reader.readAsDataURL(photo);
+        }
+    });
+
+    function addActivityToList(activity) {
+        const activitiesList = document.getElementById('activities');
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+            <strong>${activity.title}</strong><br>
+            Date: ${activity.date}<br>
+            Description: ${activity.description}<br>
+            Duration: ${activity.duration} minutes<br>
+            Distance: ${activity.distance} km<br>
+            <img src="${activity.photo}" alt="${activity.title}" style="width:100px; height:auto;"/><br>
+        `;
+        activitiesList.appendChild(listItem);
+    }
+    </script>
+</body>
+</html>
