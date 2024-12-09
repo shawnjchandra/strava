@@ -8,6 +8,7 @@ public class MainController {
     
     @GetMapping("/")
     public String homepageView(){
+        System.out.println("Homepage endpoint hit!");
         return "index";
     }
 
