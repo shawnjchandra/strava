@@ -3,35 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
-    <link rel="stylesheet" th:href="@{css/login.css}">
+    <title>Login</title>
+    <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
 </head>
 <body>
-    <div class="login-container">
-        <h1>Log In</h1>
-        <!-- <div class="social-login">
-            <button class="google">Sign In With Google</button>
-            <button class="apple">Sign In With Apple</button>
-            <button class="facebook">Sign In With Facebook</button>
-        </div> -->
-        <div class="divider">
-            <span>or</span>
-        </div>
-        <form>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Password" required>
-            <!-- <div>
-                <input type="checkbox" id="remember-me">
-                <label for="remember-me">Remember me</label>
+    <th:block th:replace="~{/layout/navbar :: navbar2}"></th:block>
+
+    <div class="container">
+
+        <div class="login-container">
+            <h1>Log In</h1>
+            <!-- <div class="divider">
+                <span>or</span>
             </div> -->
-            <br>
-            <br>
-            <button class="login-btn" type="submit">Log In</button>
-        </form>
-        <div class="links">
-            <!-- <p><a href="#">Forgot Your Password?</a></p> -->
-            <p><a href="#">Create a New Account</a></p>
+            <form>
+                <label for="email">Email</label>
+                <input name="email" type="email" placeholder="Email" required>
+
+                <label for="password">Password</label>
+                <input name="password" type="password" placeholder="Password" required>
+                <br>
+                <br>
+                <button class="login-btn" type="submit">Log In</button>
+            </form>
+            <div class="links">
+                <p><a href="#">Create a New Account</a></p>
+            </div>
         </div>
     </div>
+
 </body>
 </html>

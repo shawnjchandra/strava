@@ -1,89 +1,73 @@
-* {
-    margin: 0;
-    padding: 0;
+:root{
+    --blackishgray: #333;
+    --orangeish : #ff6b35;
+    --darker-orange : #e55b2a;
+}
+
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    margin :0;
+    padding : 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
-    height: 100vh;
+
+.container {
+    height: 90dvh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
 }
 
-.login-container {
-    background-color: rgba(0, 0, 0, 0.8);
+.login-container{
+    background-color: rgba(0, 0, 0, 0.6);
     border-radius: 10px;
     width: 350px;
     padding: 20px;
-    color: #fff;
+    color:  #fff;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .login-container h1 {
-    margin-bottom: 20px;
+    margin : 10px 0 20px 0;
     font-size: 1.8em;
 }
 
-
-.divider {
-    display: flex;
-    align-items: center;
-    margin: 15px 0;
-}
-
-.divider::before,
-.divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: #fff;
-}
-
-.divider span {
-    margin: 0 10px;
-    font-size: 1em;
-}
 
 form {
     text-align: left;
 }
 
-form input {
+form input{
     width: 100%;
     padding: 10px;
     margin: 5px 0;
+    margin-bottom: 20px;
     border: none;
     border-radius: 5px;
     font-size: 1em;
 }
 
-form input[type="checkbox"] {
-    width: auto;
-}
-
 form label {
-    font-size: 0.9em;
+    font-size: 1em;
     margin-left: 5px;
 }
 
-.login-btn {
+.login-btn{
     width: 100%;
     padding: 10px;
-    margin-top: 10px;
-    background-color: #FF6B35;
+    background-color: var(--orangeish);
     color: #fff;
     border: none;
+    font-weight: bold;
     border-radius: 5px;
     font-size: 1em;
     cursor: pointer;
 }
 
 .login-btn:hover {
-    background-color: #e55b2a;
+    background-color:  var(--darker-orange);
 }
 
 .links {
@@ -92,10 +76,10 @@ form label {
 }
 
 .links a {
-    color: #FF6B35;
+    color: var(--darker-orange);
     text-decoration: none;
 }
 
-.links a:hover {
+.links a:hover{
     text-decoration: underline;
 }
