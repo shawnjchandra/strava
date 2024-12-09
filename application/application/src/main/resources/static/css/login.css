@@ -9,16 +9,20 @@
     margin :0;
     padding : 0;
     box-sizing: border-box;
+    overflow-y: hidden;
 }
 
 
 .container {
-    height: 90dvh;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+    /* background-color: no-repeat center center/cover */
 }
+
+
+
 
 .login-container{
     background-color: rgba(0, 0, 0, 0.6);
