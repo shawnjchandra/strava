@@ -1,0 +1,211 @@
+:root{
+    --blackishgray: #333;
+    --orangeish : #ff6b35;
+    --darker-orange : #e55b2a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #ebebeb;
+    padding: 30px;
+}
+
+.left, .middle, .right {
+    width: 32%; /* Adjust width of each section */
+    padding: 15px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+}
+
+.left {
+    background-color: #fff;
+}
+
+.profile {
+    text-align: center;
+}
+
+.profile img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+.menu{
+    padding: 25px 25px 0 25px;
+
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.middle {
+    background-color: #fff;
+}
+
+.middle h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.right {
+    background-color: #fff;
+}
+
+.right h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.right ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.right ul li {
+    margin-bottom: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    padding: 20px 0 20px 0;
+}
+
+.tabs button {
+    padding: 10px 20px;
+    background-color: var(--orangeish);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .tabs button:hover {
+    background-color: var(--darker-orange);
+  }
+
+#export-btn{
+    background-color: var(--orangeish);
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+#export-btn:hover{
+    background-color: var(--darker-orange);
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.card{
+    width: 200px;
+    background-color: #ddd;
+    border: none;
+    border-radius: 15px;
+
+}
+
+.activity-card {
+    width: 500px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+  }
+  .profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  .header-info {
+    flex-grow: 1;
+  }
+  .header-info h3 {
+    margin: 0;
+    font-size: 1rem;
+  }
+  .header-info p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    color: gray;
+  }
+  .activity-title {
+    padding: 15px;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .stats {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .stats div {
+    text-align: center;
+  }
+  .stats div p {
+    margin: 5px 0;
+  }
+  .map {
+    width: 100%;
+    height: 200px;
+    background-color: #e3e3e3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: gray;
+  }
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-top: 1px solid #f0f0f0;
+  }
+  .actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: gray;
+  }
+  .actions button:hover {
+    color: #007bff;
+  }
