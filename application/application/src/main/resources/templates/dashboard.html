@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <script th:src="@{/script/graph.js}" defer></script>
+    <script th:src="@{/script/pdfExport.js}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+<body>
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
+
+    
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left">
+            <div class="profile">
+                <!-- <img src="your-image.jpg" alt="Profile Picture" class="profile-img"> -->
+                <h2>Shawn Jonathan Chandra</h2>
+                <p>Following: 0 | Followers: 0 | Activities: 15</p>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li>Dashboard</li>
+                    <li>Training</li>
+                    <li>Maps</li>
+                    <li>Challenges</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Middle Section -->
+        <div class="middle">
+            
+            <div class="latest-activity">
+                <h3>Latest Activity</h3>
+                <p>Afternoon Walk • Jan 29, 2022</p>
+            </div>
+
+            <!-- <div class="card-container">
+                <div class="card">
+                    <img src="" alt="">
+                </div>    
+            </div> -->
+            <div class="activity-card">
+                <div class="header">
+                  <!-- <img class="profile-img" src="profile.jpg" alt="Profile"> -->
+                  <div class="header-info">
+                    <h3>Shawn Jonathan Chandra</h3>
+                    <p>January 29, 2022 at 5:47 PM - West Java</p>
+                  </div>
+                </div>
+                <div class="activity-title">Afternoon Walk</div>
+                <div class="stats">
+                  <div>
+                    <p>Distance</p>
+                    <strong>1.94 km</strong>
+                  </div>
+                  <div>
+                    <p>Time</p>
+                    <strong>16m 35s</strong>
+                  </div>
+                  <div>
+                    <p>Elev Gain</p>
+                    <strong>0 m</strong>
+                  </div>
+                </div>
+                <div class="map">
+                  <p>Map Placeholder</p>
+                </div>
+                <div class="actions">
+                  <button>👍</button>
+                  <button>💬</button>
+                </div>
+              </div>
+
+        </div>
+
+        <!-- Right Section -->
+        <div class="right">
+            <div class="graph">
+                <h3>Activity Graph</h3>
+                <p> this is how well you do for the last :</p>
+                <div class="tabs">
+                    <button> Week</button>
+                    <button> Month</button>
+                    <button> Year</button>
+                </div>
+
+                <canvas id="myChart"></canvas>
+                <div class="button-container">
+                    <button id="export-btn"> Export To PDF</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+</body>
+</html>
