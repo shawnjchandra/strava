@@ -28,6 +28,7 @@ CREATE TABLE Activity(
 	judul varchar(255) NOT NULL,
 	durasi TIME NULL,
 	jarak int null,
+	elevasi int null
 	createdAt DATE DEFAULT CURRENT_DATE,
 	urlPath VARCHAR(255) NULL,
 	id_training int UNIQUE null,
