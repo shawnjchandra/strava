@@ -41,11 +41,14 @@ public class MainController {
 
         return "dashboard";
     }
-    
-
     @GetMapping("/dashboard")
     @RequiredRole({"*"})
     public String getDashboardView(){
         return "/dashboard";
+    }
+
+    @GetMapping("/maps")
+    public String showMap(){
+        return "mapmap";
     }
 }

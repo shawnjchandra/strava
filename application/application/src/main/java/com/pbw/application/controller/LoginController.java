@@ -1,4 +1,4 @@
-package com.pbw.application.controller;
+/* package com.pbw.application.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -66,3 +66,4 @@ public class LoginController {
         return "/dashboard";
     }
 }
+ */
