@@ -22,14 +22,14 @@ CREATE TABLE Admins(
 	password VARCHAR(255) NOT NULL
 );
 
-CREATE TYPE tipeAct as ENUM ('swim', 'bike', 'run')
+CREATE TYPE tipeAct as ENUM ('swim', 'bike', 'run');
 
 CREATE TABLE Activity(
 	id_activity INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	judul varchar(255) NOT NULL,
 	durasi TIME NULL,
 	jarak int null,
-	elevasi int null
+	elevasi int null,
 	createdAt DATE DEFAULT CURRENT_DATE,
 	urlPath VARCHAR(255) NULL,
 	id_training int UNIQUE null,
@@ -44,7 +44,7 @@ CREATE TABLE Activity(
 
 CREATE TABLE RaceParticipants(
 	id_runner int references Runners(id_runner) not null,
-	id_race int references Activity(id_training) not null
+	id_race int references Activity(id_race) not null
 	
 );
 
