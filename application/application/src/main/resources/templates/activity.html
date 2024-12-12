@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Activities</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -75,7 +75,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            margin-left: 10px; /* Added margin for spacing */
+            margin-left: 10px;
             margin-bottom: 10px;
         }
 
@@ -90,6 +90,7 @@
     </style>
 </head>
 <body>
+    <div th:replace="layout/navbar :: navbar"></div>
     <div class="container">
         <header>
             <h1>My Activities</h1>
