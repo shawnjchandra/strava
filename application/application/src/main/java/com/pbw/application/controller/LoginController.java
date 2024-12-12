@@ -23,11 +23,7 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
-    
-    @GetMapping("/")
-    public String homepageView(){
-        return "index";
-    }
+
 
     @GetMapping("/login")
     public String getLoginView(
@@ -60,9 +56,10 @@ public class LoginController {
         return "redirect:/dashboard";
     }
 
-    @GetMapping("/dashboard")
-    @RequiredRole({"*"})
-    public String getDashboardView(){
-        return "/dashboard";
-    }
+    // @GetMapping("/dashboard")
+    // @RequiredRole({"*"})
+    // public String getDashboardView(){
+    //     return "/dashboard";
+    // }
 }
+ 

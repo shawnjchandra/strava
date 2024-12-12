@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strava Together Strong uu aa</title>
+    <link rel="icon" href="img/favicon.png">
+    <link rel="stylesheet" th:href="@{css/navbar.css}">
+    <link rel="stylesheet" th:href="@{css/index.css}">
+</head>
+<body>
+    <div th:replace="layout/navbar :: navbar3"></div>
+    
+
+    <div class="ss-container">
+        <div class="tagline">
+            <p>Your journey, your progress, your Strava.</p>
+        </div>
+
+        <div class="mySlides fade">
+            <img th:src="@{/img/sepeda.jpg}" style="width:100%">
+            <div class="text">
+                <span class="highlight">Pedal your way to freedom.</span>
+            </div>
+        </div>
+    
+        <div class="mySlides fade">
+            <img th:src="@{/img/q.jpg}" style="width:100%">
+            <div class="text">
+                <span class="highlight">Step into the wild.</span>
+            </div>
+        </div>
+    
+        <div class="mySlides fade">
+            <img th:src="@{/img/qq.jpg}" style="width:100%">
+            <div class="text">
+                <span class="highlight">Every journey begins with a single step.</span>
+            </div>
+        </div>
+    
+        <div class="mySlides fade">
+            <img th:src="@{/img/v.jpg}" style="width:100%">
+            <div class="text">
+                <span class="highlight">Every step counts.</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+    <div class="cta">
+        <p class="ctaText">Join our community and start tracking your progress today!</p>
+        <a href="/signup" class="ctaBut">Sign Up Now</a>
+    </div>
+
+    <div class ="keyFeature">
+        <h2>Key Features</h2>
+        <div class="feature">
+            <h3>Automatic Activity Tracking</h3>
+            <p>Track all your activities without needing to start it manually</p>
+        </div>
+        <div class="feature">
+            <h3>Record Performance</h3>
+            <p>Received  detailed an accurate insight about your activity (speed,distance,calories burned)</p>
+        </div>
+        <div class="feature">
+            <h3>Fun Race</h3>
+            <p>Join exciting races and challenges with others in the community</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footerAbout">
+            <h3>About Us</h3>
+            <p>We are a community-driven platform that helps you tracks your fitness journey and connect with others.</p>
+        </div>
+
+        <div class="footerContact">
+            <h3>Contact Us</h3>
+            <p> Email : <a href="6182201033@student.unpar.ac.id">Junfa</a></p>
+            <p> Phone : +62 820 144 145 </p>
+            <p> Address : Ciumbeluit 1 , Bandung, Indonesia </p>
+        </div>
+
+        <div class="footerSosmed">
+            <h3>Follow Us</h3>
+            <a href="https://www.instagram.com/life_isroblox420/" target="_blank">Instagram</a>
+            <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" target="_blank">Youtube</a>
+
+
+        <p>&copy; 2024 Strava Inc. All Rights Reserved.</p>
+    </footer>
+
+
+    <script>
+    let slideIndex = 0;
+    showSlides();
+    
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none"; // Sembunyikan semua slide
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { // Reset ke slide pertama jika mencapai akhir
+            slideIndex = 1;
+        }
+        slides[slideIndex - 1].style.display = "block"; // Tampilkan slide aktif
+        setTimeout(showSlides, 2000); // Ganti slide setiap 2 detik
+    }
+</script>
+
+</body>
+</html>
