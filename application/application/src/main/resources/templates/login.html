@@ -9,16 +9,16 @@
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
 </head>
 <body>
-    <th:block th:replace="~{/layout/navbar :: navbar2}"></th:block>
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
 
-    <div class="container">
+    <div class="container" th:style="|height : 100vh;background: url('@{/img/login_background.jpg}') no-repeat center center/cover ;|"  >
 
         <div class="login-container">
             <h1>Log In</h1>
             <!-- <div class="divider">
                 <span>or</span>
             </div> -->
-            <form>
+            <form action="/login-form" method="post">
                 <label for="email">Email</label>
                 <input name="email" type="email" placeholder="Email" required>
 
