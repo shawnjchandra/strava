@@ -12,8 +12,7 @@ CREATE TABLE Runners(
 	nama varchar(255) NOT NULL,
 	tanggal_lahir DATE NOT NULL,
 	lokasi varchar(255) NOT NULL,
-	gender VARCHAR(1) CHECK(gender IN ('p','l') )
-	
+	gender VARCHAR(16) 
 );
 
 CREATE TABLE Admins(
@@ -22,6 +21,8 @@ CREATE TABLE Admins(
 	username VARCHAR(255) NOT NULL UNIQUE,
 	password VARCHAR(255) NOT NULL
 );
+
+CREATE TYPE tipeAct as ENUM ('swim', 'bike', 'run')
 
 CREATE TABLE Activity(
 	id_activity INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -33,8 +34,10 @@ CREATE TABLE Activity(
 	urlPath VARCHAR(255) NULL,
 	id_training int UNIQUE null,
 	id_runner int REFERENCES Runners(id_runner) null,
+	tipe_training tipeAct null,
 	id_race int UNIQUE null,
 	kuota_max int null,
+	tipe_race tipeAct null,
 	id_admin int REFERENCES Admins(id_admin) null
 	
 );
