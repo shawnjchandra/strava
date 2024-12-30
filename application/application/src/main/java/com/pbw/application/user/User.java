@@ -1,5 +1,7 @@
 package com.pbw.application.user;
 
+import java.time.LocalDate;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -14,7 +16,7 @@ import lombok.Setter;
 public class User {
     @NotNull
     @Size(min=4,max=30)
-    private String username;
+    private String email;    //email
     
     @NotNull
     @Size(min=4,max=60)
@@ -29,7 +31,7 @@ public class User {
     private String nama;
     
     @NotNull
-    private String tanggal_lahir;
+    private LocalDate tanggal_lahir;
     
     @NotNull
     private String lokasi;

@@ -19,15 +19,14 @@
                     <option value="run">Running</option>
                     <option value="bike">Cycling</option>
                     <option value="swim">Swimming</option>
-                    <!-- Add more sport types here -->
                 </select>
-                <button>Search</button> 
+                <button>Search</button>
             </div>
         </header>
 
         <main>
-            <h2 style="display: inline;">0 Activitiqes</h2>
-            <button id="add" onclick="window.location.href='add'">Add Training Activity</button>
+            <h2 th:text="${activities.size()} + ' Activities'">0 Activities</h2>
+            <button id="add" th:onclick="|window.location.href='@{/activity/add}'|">Add Training Activity</button>
             <table>
                 <thead>
                     <tr>
@@ -41,7 +40,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Data rows will go here -->
+                    <tr th:each="activity : ${activities}">
+                        <td th:text="${activity.judul}">Morning Run</td>
+                        <td th:text="${activity.tipeTraining}">Run</td>
+                        <td th:text="${activity.createdAt}">2023-01-01</td>
+                        <td th:text="${activity.durasi}">00:30:00</td>
+                        <td th:text="${activity.jarak} + ' km'">5 km</td>
+                        <td th:text="${activity.durasi}">00:30:00</td>
+                        <td th:text="${activity.elevasi} + ' ft'">100 ft</td>
+                    </tr>
                 </tbody>
             </table>
         </main>
