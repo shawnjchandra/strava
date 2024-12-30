@@ -4,110 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/register.css}">
     <title>Sign Up for Free</title>
-    <style>
-        .container {
-            margin: 0px;
-            font-family: Arial, sans-serif;
-            background: url('background-image.jpg') no-repeat center center fixed;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        
-        body{
-            margin: 0pxs;
-        }
 
-        .signup-container {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 350px;
-        }
-
-        h1 {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        label {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 5px;
-            color: #555;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 10px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 10px;
-            background-color: #28a745;
-            color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .submit-btn:hover {
-            background-color: #218838;
-        }
-
-        .terms {
-            font-size: 12px;
-            color: #555;
-            margin-top: 10px;
-        }
-
-        .terms a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .terms a:hover {
-            text-decoration: underline;
-        }
-
-        #part2 {
-            display: none;
-        }
-
-        .separator {
-            margin: 20px 0;
-            border-top: 1px solid #ccc;
-            text-align: center;
-            position: relative;
-        }
-
-        .separator span {
-            background-color: #fff;
-            padding: 0 10px;
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #777;
-        }
-    </style>
     <script>
         function showPart2() {
             const email = document.getElementById('email').value;
@@ -128,15 +27,19 @@
 
         <div class="signup-container">
             <h1>Sign Up for Free</h1>
-            <form action="/login" method="post">
+            <form action="/register" method="post" th:object="${user}">
                 <!-- Part 1 -->
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter your email" required>
+                    <input type="email" id="email" placeholder="Enter your email" name="email" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Create a password" required>
+                    <input type="password" id="password" placeholder="Create a password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmpassword">Confirm Password</label>
+                    <input type="password" id="password" placeholder="Confirm password" name="confirmpassword" required>
                 </div>
     
                 <button type="button" class="submit-btn" onclick="showPart2()">Continue</button>
@@ -146,22 +49,22 @@
                     <div class="separator"><span>PART 2</span></div>
                     <div class="form-group">
                         <label for="nama">Nama</label>
-                        <input type="text" id="nama" placeholder="Enter your name" required>
+                        <input type="text" id="nama" placeholder="Enter your name" name="nama" required>
                     </div>
                     <div class="form-group">
                         <label for="tanggal-lahir">Tanggal Lahir</label>
-                        <input type="date" id="tanggal-lahir" required>
+                        <input type="date" id="tanggal-lahir" name="tanggal_lahir" required>
                     </div>
                     <div class="form-group">
                         <label for="lokasi">Lokasi</label>
-                        <input type="text" id="lokasi" placeholder="Enter your location" required>
+                        <input type="text" id="lokasi" placeholder="Enter your location" name="lokasi" required>
                     </div>
                     <div class="form-group">
                         <label for="gender">Gender</label>
-                        <select id="gender" required>
+                        <select id="gender" name="gender" required>
                             <option value="">Select your gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                            <option value="m">Male</option>
+                            <option value="f">Female</option>
                             <option value="other">Other</option>
                         </select>
                     </div>
