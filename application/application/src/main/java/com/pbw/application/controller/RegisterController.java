@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pbw.application.user.User;
+import com.pbw.application.user.UserRepository;
 import com.pbw.application.user.UserService;
 
 import jakarta.validation.Valid;
+
+
 
 @Controller
 public class RegisterController {
@@ -35,10 +38,10 @@ public class RegisterController {
     
         Model model) throws Exception{
 
-            if(user.getUsername() == null || user.getUsername().length() < 4){
-                bindungResult.rejectValue("username",
-                 "usernameNotAllowed",
-                  "Username doesn't fulfilled the requirements");
+            if(user.getEmail() == null || user.getEmail().length() < 4){
+                bindungResult.rejectValue("email",
+                 "emailNotAllowed",
+                  "Email doesn't fulfilled the requirements");
 
             }
             if(user.getPassword() == null || user.getPassword().length() < 4){
