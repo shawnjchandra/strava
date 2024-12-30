@@ -15,7 +15,7 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public boolean register(User user) throws Exception {
-        Optional<User> res = userRepository.findByUsername(user.getUsername());
+        Optional<User> res = userRepository.findByEmail(user.getEmail());
         
 
         if(res.isPresent()){
@@ -27,8 +27,8 @@ public class UserService {
         return true;
     }
 
-    public User login(String username, String password) {
-        Optional<User> res = userRepository.findByUsername(username);
+    public User login(String Email, String password) {
+        Optional<User> res = userRepository.findByEmail(Email);
         
 
         return passwordEncoder.matches(password, res.get().getPassword()) ? res.get() : null;
