@@ -17,7 +17,6 @@ public class UserService {
     public boolean register(User user) throws Exception {
         Optional<User> res = userRepository.findByEmail(user.getEmail());
         
-
         if(res.isPresent()){
             return false;
         }

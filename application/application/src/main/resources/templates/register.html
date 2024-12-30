@@ -27,19 +27,22 @@
 
         <div class="signup-container">
             <h1>Sign Up for Free</h1>
-            <form action="/register" method="post" th:object="${user}">
+            <form th:action="@{/register}" method="post" th:object="${user}">
                 <!-- Part 1 -->
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter your email" name="email" required>
+                    <input type="email" id="email" placeholder="Enter your email" name="email" th:field="*{email}" required>
+                    <div th:errors="*{email}"></div>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Create a password" name="password" required>
+                    <input type="password" id="password" placeholder="Create a password" name="password" th:field="*{password}" required>
+                    <div th:errors="*{password}"></div>
                 </div>
                 <div class="form-group">
                     <label for="confirmpassword">Confirm Password</label>
-                    <input type="password" id="password" placeholder="Confirm password" name="confirmpassword" required>
+                    <input type="password" id="password" placeholder="Confirm password" name="confirmpassword" th:field="*{confirmpassword}" required>
+                    <div th:errors="*{confirmpassword}"></div>
                 </div>
     
                 <button type="button" class="submit-btn" onclick="showPart2()">Continue</button>
@@ -49,24 +52,30 @@
                     <div class="separator"><span>PART 2</span></div>
                     <div class="form-group">
                         <label for="nama">Nama</label>
-                        <input type="text" id="nama" placeholder="Enter your name" name="nama" required>
+                        <input type="text" id="nama" placeholder="Enter your name" name="nama" th:field="*{nama}" required>
+                        <div th:errors="*{nama}"></div>
                     </div>
                     <div class="form-group">
                         <label for="tanggal-lahir">Tanggal Lahir</label>
-                        <input type="date" id="tanggal-lahir" name="tanggal_lahir" required>
+                        <input type="date" id="tanggal-lahir" name="tanggal_lahir" th:field="*{tanggal_lahir}" required>
+                        <div th:errors="*{tanggal_lahir}"></div>
                     </div>
                     <div class="form-group">
                         <label for="lokasi">Lokasi</label>
-                        <input type="text" id="lokasi" placeholder="Enter your location" name="lokasi" required>
+                        <input type="text" id="lokasi" placeholder="Enter your location" name="lokasi" th:field="*{lokasi}" required>
+                        <div th:errors="*{lokasi}"></div>
                     </div>
                     <div class="form-group">
                         <label for="gender">Gender</label>
-                        <select id="gender" name="gender" required>
+                        <select id="gender" name="gender" th:field="*{gender}" required>
                             <option value="">Select your gender</option>
                             <option value="m">Male</option>
                             <option value="f">Female</option>
                             <option value="other">Other</option>
                         </select>
+                        <div th:errors="*{gender}"></div>
+                        <div th:errors="*{gender}"></div>
+
                     </div>
     
                     <button type="submit" class="submit-btn">Sign Up</button>

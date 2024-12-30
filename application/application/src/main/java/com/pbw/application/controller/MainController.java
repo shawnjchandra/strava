@@ -22,7 +22,6 @@ public class MainController {
     }
 
     @GetMapping("/dashboard")
-    @RequiredRole({"*"})
     public String getDashboardView(){
         return "/dashboard";
     }
