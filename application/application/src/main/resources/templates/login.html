@@ -11,6 +11,8 @@
 <body>
     <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
 
+    <div th:replace="~{fragments/error-popup :: errorPopup(${error})}"></div>
+    
     <div class="container" th:style="|height : 100vh;background: url('@{/img/login_background.jpg}') no-repeat center center/cover ;|"  >
 
         <div class="login-container">
@@ -18,7 +20,7 @@
             <!-- <div class="divider">
                 <span>or</span>
             </div> -->
-            <form action="/login-form" method="post">
+            <form action="/login" method="post">
                 <label for="email">Email</label>
                 <input name="email" type="email" placeholder="Email" required>
 
@@ -29,7 +31,7 @@
                 <button class="login-btn" type="submit">Log In</button>
             </form>
             <div class="links">
-                <p><a href="#">Create a New Account</a></p>
+                <p><a th:href="@{/register}" class="register-btn">Reg">Create a New Account</a></p>
             </div>
         </div>
     </div>
