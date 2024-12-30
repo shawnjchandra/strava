@@ -25,7 +25,9 @@ public class JdbcUserRepository implements UserRepository {
 
     public Optional<User> findByEmail(String Email) {
         String sql = "SELECT * FROM Runners WHERE email = ?";
+
         List<User> results = jdbcTemplate.query(sql, this::mapRowToUser, Email);
+
         return results.size() == 0 ? Optional.empty() : Optional.of(results.get(0));
     }
 
