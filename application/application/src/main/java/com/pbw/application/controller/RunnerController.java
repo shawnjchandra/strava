@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class RunnerController {
     
-    @GetMapping("/manual")
+    @GetMapping("/add")
     public String manualView(){
         return "add";
     }
