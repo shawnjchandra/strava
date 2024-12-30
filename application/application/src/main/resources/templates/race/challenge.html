@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Race Details - Mountain Trail Challenge</title>
+    <style>
+        body {
+            font-family: 'Helvetica', Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .left-sidebar {
+            width: 250px;
+            background-color: #fc4c02;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            display: flex;
+            justify-content: center;
+            width: calc(100% - 250px);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .race-details-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 900px;
+            padding: 30px;
+        }
+
+        .race-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #fc4c02;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .race-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .race-stats {
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .file-upload {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .upload-btn {
+            background-color: #fc4c02;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .menu ul li {
+            padding: 12px 15px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .race-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .left-sidebar, .main-content {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="left-sidebar">
+        <div class="profile">
+            <h2>Shawn Jonathan Chandra</h2>
+            <p>Following: 0 | Followers: 0 | Activities: 15</p>
+        </div>
+        <div class="menu">
+            <ul>
+                <li>Dashboard</li>
+                <li>Training</li>
+                <li>Maps</li>
+                <li>Challenges</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="race-details-container">
+            <div class="race-header">
+                <h1>Mountain Trail Challenge</h1>
+                <span style="color: #4CAF50; font-weight: bold;">Active</span>
+            </div>
+
+            <div class="race-description">
+                <p>An exhilarating mountain trail run through the scenic alpine landscapes. Challenge yourself on this 21km route with breathtaking views and challenging terrain.</p>
+            </div>
+
+            <div class="race-info">
+                <div class="race-stats">
+                    <h3>Race Details</h3>
+                    <p><strong>Distance:</strong> 21 km</p>
+                    <p><strong>Date:</strong> July 15, 2023</p>
+                    <p><strong>Location:</strong> Alpine Mountains</p>
+                    <p><strong>Participants:</strong> 145/200</p>
+                </div>
+                <div class="race-stats">
+                    <h3>Registration</h3>
+                    <p><strong>Entry Fee:</strong> $50</p>
+                    <p><strong>Deadline:</strong> June 30, 2023</p>
+                    <p><strong>Category:</strong> Trail Running</p>
+                    <p><strong>Difficulty:</strong> Advanced</p>
+                </div>
+            </div>
+
+            <div class="file-upload">
+                <h3>Submit Race Evidence</h3>
+                <form>
+                    <input type="file" 
+                           accept=".gpx,.tcx,.fit" 
+                           name="race-file" 
+                           required>
+                    <button type="submit" class="upload-btn">
+                        Upload Race File
+                    </button>
+                </form>
+                <small>Accepted file types: .gpx, .tcx, .fit</small>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
