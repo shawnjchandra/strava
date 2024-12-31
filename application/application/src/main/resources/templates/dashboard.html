@@ -19,7 +19,7 @@
     
     <div class="container">
         <!-- Left Section -->
-        <div class="left">
+        <div class="left" style="max-width: 400px;">
             <div class="profile">
                 <!-- <img src="your-image.jpg" alt="Profile Picture" class="profile-img"> -->
                 <h2>Shawn Jonathan Chandra</h2>
@@ -42,15 +42,16 @@
                 <h3>Latest Activity</h3>
                 <p>Afternoon Walk • Jan 29, 2022</p>
               </div>
-              <div th:each="activity : ${activities}">
-                <div th:replace="~{fragments/activityCard :: activityCard(
-                    name=${activity.name},
-                    date=${activity.date},
-                    location=${activity.location},
-                    title=${activity.title},
-                    distance=${activity.distance},
-                    time=${activity.time},
-                    elevGain=${activity.elevGain}
+
+              <div th:each="activity : ${activities}" style="max-width: 300px;">
+                <div th:replace="~{fragments/activity-card :: activityCard(
+                    name=${nama},
+                    date=${activity.createdAt},
+                    location='Bandung',
+                    title=${activity.judul},
+                    distance=${activity.jarak},
+                    time=${activity.durasi},
+                    elevGain=${activity.elevasi}
                 )}">
               </div>
             </div>

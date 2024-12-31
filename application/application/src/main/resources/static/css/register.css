@@ -1,4 +1,107 @@
 .container {
+<<<<<<< HEAD
+=======
+    background: url('background-image.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.signup-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 350px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    background-color: #218838;
+}
+
+.terms {
+    font-size: 12px;
+    color: #555;
+    margin-top: 10px;
+}
+
+.terms a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.terms a:hover {
+    text-decoration: underline;
+}
+
+#part2 {
+    display: none;
+}
+
+.separator {
+    margin: 20px 0;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    position: relative;
+}
+
+.separator span {
+    background-color: #fff;
+    padding: 0 10px;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #777;
+}
+.container {
+>>>>>>> d71cd9c5ea6995fd104724c3f33598926385a2fa
     margin: 0px;
     font-family: Arial, sans-serif;
     background: url('background-image.jpg') no-repeat center center fixed;
