@@ -22,9 +22,13 @@ public class MainController {
     }
 
     @GetMapping("/dashboard")
-    public String getDashboardView(){
+    public String getDashboardView(
+        Model model,
+        HttpSession httpSession
+    ){
         
-
+        
+        // model.addAttribute(null, httpSession)
         return "/dashboard";
     }
 
