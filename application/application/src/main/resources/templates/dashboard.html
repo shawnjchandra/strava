@@ -41,6 +41,18 @@
             <div class="latest-activity">
                 <h3>Latest Activity</h3>
                 <p>Afternoon Walk • Jan 29, 2022</p>
+              </div>
+              <div th:each="activity : ${activities}">
+                <div th:replace="~{fragments/activityCard :: activityCard(
+                    name=${activity.name},
+                    date=${activity.date},
+                    location=${activity.location},
+                    title=${activity.title},
+                    distance=${activity.distance},
+                    time=${activity.time},
+                    elevGain=${activity.elevGain}
+                )}">
+              </div>
             </div>
 
             <!-- <div class="card-container">
@@ -48,59 +60,26 @@
                     <img src="" alt="">
                 </div>    
             </div> -->
-            <div class="activity-card">
-                <div class="header">
-                  <!-- <img class="profile-img" src="profile.jpg" alt="Profile"> -->
-                  <div class="header-info">
-                    <h3>Shawn Jonathan Chandra</h3>
-                    <p>January 29, 2022 at 5:47 PM - West Java</p>
+
+            <!-- Right Section -->
+          </div>
+          <div class="right">
+              <div class="graph">
+                  <h3>Activity Graph</h3>
+                  <p> this is how well you do for the last :</p>
+                  <div class="tabs">
+                      <button> Week</button>
+                      <button> Month</button>
+                      <button> Year</button>
                   </div>
-                </div>
-                <div class="activity-title">Afternoon Walk</div>
-                <div class="stats">
-                  <div>
-                    <p>Distance</p>
-                    <strong>1.94 km</strong>
+  
+                  <canvas id="myChart"></canvas>
+                  <div class="button-container">
+                      <button id="export-btn"> Export To PDF</button>
                   </div>
-                  <div>
-                    <p>Time</p>
-                    <strong>16m 35s</strong>
-                  </div>
-                  <div>
-                    <p>Elev Gain</p>
-                    <strong>0 m</strong>
-                  </div>
-                </div>
-                <div class="map">
-                  <p>Map Placeholder</p>
-                </div>
-                <div class="actions">
-                  <button>👍</button>
-                  <button>💬</button>
-                </div>
               </div>
-
-        </div>
-
-        <!-- Right Section -->
-        <div class="right">
-            <div class="graph">
-                <h3>Activity Graph</h3>
-                <p> this is how well you do for the last :</p>
-                <div class="tabs">
-                    <button> Week</button>
-                    <button> Month</button>
-                    <button> Year</button>
-                </div>
-
-                <canvas id="myChart"></canvas>
-                <div class="button-container">
-                    <button id="export-btn"> Export To PDF</button>
-                </div>
-            </div>
-            
-        </div>
-    </div>
+              
+          </div>
 
 </body>
 </html>
