@@ -31,6 +31,15 @@ public class JdbcUserRepository implements UserRepository {
         return results.size() == 0 ? Optional.empty() : Optional.of(results.get(0));
     }
 
+    @Override
+    public int getIdUsersByEmail(String email) {
+        String sql = "Select id_users FROM runners WHERE email = ?";
+
+        List<Integer> res = jdbcTemplate.query(sql, this::mapIdUserToUser, email);
+    
+        return res.size() == 0 ? -1 : res.get(0);
+    }
+
     private User mapRowToUser(ResultSet resultSet, int rowNum) throws SQLException {
         return new User(
             resultSet.getString("email"),
@@ -42,5 +51,11 @@ public class JdbcUserRepository implements UserRepository {
             resultSet.getString("gender")
         );
     }
+
+    private int mapIdUserToUser(ResultSet rSet, int rowNum) throws SQLException {
+        return rSet.getInt("id_users");
+    }
+
+    
 
 }
