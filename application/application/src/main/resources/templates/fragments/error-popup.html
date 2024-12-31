@@ -97,9 +97,11 @@
 
         <div class="popup" th:classappend="${errorMessage != null} ? 'show' : ''">
             <div class="popup-content">
+
                 <div class="error-icon">
                     <img th:src="@{/img/exclamation_mark.png}" alt=""> 
                 </div>
+                
                 <div class="error-message" th:text="${errorMessage}">Error message goes here</div>
                 <button class="close-btn" onclick="closeErrorPopup()">Close</button>
             </div>
