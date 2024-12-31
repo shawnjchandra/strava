@@ -1,0 +1,33 @@
+<!-- fragments/activityCard.html -->
+<div th:fragment="activityCard(name, date, location, title, distance, time, elevGain)" class="activity-card">
+    
+    <div class="header">
+        <!-- <img class="profile-img" src="profile.jpg" alt="Profile"> -->
+        <div class="header-info">
+            <h3 th:text="${name}">Shawn Jonathan Chandra</h3>
+            <p><span th:text="${date}">January 29, 2022</span> at <span th:text="${location}">West Java</span></p>
+        </div>
+    </div>
+    <div class="activity-title" th:text="${title}">Afternoon Walk</div>
+    <div class="stats">
+        <div>
+            <p>Distance</p>
+            <strong th:text="${distance}">1.94 km</strong>
+        </div>
+        <div>
+            <p>Time</p>
+            <strong th:text="${time}">16m 35s</strong>
+        </div>
+        <div>
+            <p>Elev Gain</p>
+            <strong th:text="${elevGain}">0 m</strong>
+        </div>
+    </div>
+    <div class="map">
+        <p>Map Placeholder</p>
+    </div>
+    <div class="actions">
+        <button>👍</button>
+        <button>💬</button>
+    </div>
+</div>
