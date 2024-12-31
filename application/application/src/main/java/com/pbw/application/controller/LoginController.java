@@ -80,7 +80,12 @@ public class LoginController {
             return "login";
         }
         
-        httpSession.setAttribute("status", user);
+        // Hanya di jalanin kalau 
+        int id_user = userService.getIdUsersByEmail(email);
+        
+
+        httpSession.setAttribute("status", user.getData());
+        httpSession.setAttribute("id_user", id_user);
         httpSession.setAttribute("email", email);
 
         return "redirect:/dashboard";
