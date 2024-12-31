@@ -23,6 +23,8 @@ public class MainController {
 
     @GetMapping("/dashboard")
     public String getDashboardView(){
+        
+
         return "/dashboard";
     }
 

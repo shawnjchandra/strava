@@ -40,6 +40,11 @@ public class UserService {
         new CustomResponse<User>(HttpStatus.ACCEPTED,true, "USER FOUND", res.get() ) : new CustomResponse<>(HttpStatus.UNAUTHORIZED,false, "PASSWORD MISMATCH" , null );
     }
 
+    // Ga perlu custom response seharusnya, karena bakal disatuin di login????? 
+    public int getIdUsersByEmail(String email){
+        return userRepository.getIdUsersByEmail(email);
+    } 
+
     public boolean validatePassword (User user){
         return user.getPassword().equals(user.getConfirmpassword()) ? true : false;
     }
