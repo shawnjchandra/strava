@@ -29,6 +29,7 @@ public class RegisterController {
     @GetMapping("/register")
     public String registerView(User user, Model model ){
         model.addAttribute("user", user);
+
         return "register";
     }
 
@@ -75,7 +76,8 @@ public class RegisterController {
             }
 
             if(user.getGender() == null){
-                bindungResult.addError(new ObjectError("genderError", "gender error"));;
+                bindungResult.addError(new ObjectError("genderError", "gender error"));
+                
                 bindungResult.rejectValue("gender", "genderEmpty",
                 "gender can't be empty");
             }
