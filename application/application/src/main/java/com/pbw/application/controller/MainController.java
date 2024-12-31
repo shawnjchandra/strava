@@ -30,4 +30,11 @@ public class MainController {
     public String showMap(){
         return "mapmap";
     }
+
+    @GetMapping("/uploadform")
+    public String uploadForm(){
+        return "uploadForm";
+    }
+
+
 }
