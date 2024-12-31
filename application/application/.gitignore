@@ -39,3 +39,4 @@ out/
 /src/main/resources/application.properties
 
 build.gradle
+upload-dir/

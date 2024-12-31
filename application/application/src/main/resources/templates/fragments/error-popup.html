@@ -1,0 +1,116 @@
+<!-- fragments/error-popup.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error Popup Fragment</title>
+    <link rel="manifest" href="/site.webmanifest">
+
+</head>
+<body>
+    <!-- Define the fragment -->
+    <div th:fragment="errorPopup(errorMessage)">
+        <style>
+            /* Basic styling for body */
+            body {
+                font-family: Arial, sans-serif;
+            }
+    
+            /* Overlay (background dimming effect) */
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                transition: opacity 0.3s ease;
+            }
+    
+            /* Popup box styling */
+            .popup {
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                width: 90%;
+                max-width: 400px;
+            }
+    
+            /* Show popup and overlay */
+            .popup.show,
+            .overlay.show {
+                display: block;
+                opacity: 1;
+            }
+    
+            /* Popup content */
+            .popup-content {
+                text-align: center;
+            }
+    
+            /* Error message styling */
+            .error-message {
+                color: #dc3545;
+                font-size: 18px;
+                margin-bottom: 15px;
+                font-weight: bold;
+            }
+    
+            /* Icon styling */
+            .error-icon {
+                color: #dc3545;
+                font-size: 40px;
+                margin-bottom: 15px;
+            }
+    
+            /* Close button styling */
+            .close-btn {
+                background-color: #dc3545;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.3s ease;
+            }
+    
+            .close-btn:hover {
+                background-color: #c82333;
+            }
+    
+    
+        </style>
+
+       
+        <div class="overlay" th:classappend="${errorMessage != null} ? 'show' : ''"></div>
+
+        <div class="popup" th:classappend="${errorMessage != null} ? 'show' : ''">
+            <div class="popup-content">
+                <div class="error-icon">
+                    <img th:src="@{/img/exclamation_mark.png}" alt=""> 
+                </div>
+                <div class="error-message" th:text="${errorMessage}">Error message goes here</div>
+                <button class="close-btn" onclick="closeErrorPopup()">Close</button>
+            </div>
+        </div>
+
+        <script>
+            function closeErrorPopup() {
+                document.querySelector('.popup').classList.remove('show');
+                document.querySelector('.overlay').classList.remove('show');
+            }
+        </script>
+    </div>
+</body>
+</html>
