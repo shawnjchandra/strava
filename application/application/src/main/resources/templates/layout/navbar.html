@@ -1,62 +1,71 @@
-<div class="navbar-container" th:fragment="navbar">
-    <nav class="navbar">
-        <div class="logo">LOGO</div>
-        <ul class="nav-links">
-            <li class="dropdown">
-                <a th:href="@{/activity}"> Activities</a>
-            </li>
-            <li>
-                <a th:href="@{/race}">Race</a>
-            </li>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Bars</title>
+    <!-- Add your CSS links -->
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
 
-        </ul>
-        <div class="auth-links">
-            <a th:if="${session.status} == null" th:href="@{/login}" class="login-btn">Login</a>
-            <a th:if="${session.status} == null" th:href="@{/register}" class="register-btn">Register</a>
-            <a th:if="${session.status} != null" href="" class="signout-btn">Sign out</a>
-        </div>
+    <!-- First Navbar -->
+    <div th:fragment="navbar" class="navbar-container">
+        <nav class="navbar">
+            <div class="logo">LOGO</div>
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a th:href="@{/activity}">Activities</a>
+                </li>
+                <li>
+                    <a th:href="@{/race}">Race</a>
+                </li>
+            </ul>
+            <div class="auth-links">
+                <a th:if="${session.status} == null" th:href="@{/login}" class="login-btn">Login</a>
+                <a th:if="${session.status} == null" th:href="@{/register}" class="register-btn">Register</a>
+                <a th:if="${session.status} != null" href="" class="signout-btn">Sign out</a>
+            </div>
+        </nav>
+    </div>
 
-    </nav>
+    <!-- Second Navbar -->
+    <div th:fragment="navbar2" class="navbar-container">
+        <nav class="navbar">
+            <div class="logo">LOGO</div>
+            <div class="auth-links">
+                <a href="" class="login-btn">Login</a>
+                <a href="" class="register-btn">Register</a>
+                <a href="" class="signout-btn">Sign out</a>
+            </div>
+        </nav>
+    </div>
 
-</div>
+    <!-- Third Navbar -->
+    <div th:fragment="navbar3" class="navbar-container">
+        <nav class="navbar3">
+            <div class="logo">LOGO</div>
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a class="dropbtn">Activities</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">Running</a></li>
+                        <li><a href="">Cycling</a></li>
+                        <li><a href="">Walking</a></li>
+                        <li><a href="">Hiking</a></li>
+                    </ul>
+                </li>
+                <li><a href="">Features</a></li>
+                <li><a th:href="@{/maps}">Maps</a></li>
+                <li><a href="">Challenges</a></li>
+                <li><a href="">Subscription</a></li>
+            </ul>
+            <div class="auth-linksHome">
+                <a href="" class="login-btn">Login</a>
+            </div>
+        </nav>
+    </div>
 
-
-<div class="navbar-container" th:fragment="navbar2">
-    <nav class="navbar">
-        <div class="logo">LOGO</div>
-        
-        <div class="auth-links">
-            <a href="" class="login-btn">Login</a>
-            <a href="" class="register-btn">Register</a>
-            <a href="" class="signout-btn">Sign out</a>
-        </div>
-
-    </nav>
-
-</div>
-<div class="navbar-container" th:fragment="navbar3">
-    <nav class="navbar3">
-        <div class="logo">LOGO</div>
-        <ul class="nav-links">
-            <li class="dropdown">
-                <a class="dropbtn">Activities</a>
-                <ul class="dropdown-menu">
-                    <li><a href="">Running</a></li>
-                    <li><a href="">Cycling</a></li>
-                    <li><a href="">Walking</a></li>
-                    <li><a href="">Hiking</a></li>
-                </ul>
-            </li>
-
-            <li><a href="">Features</a></li>
-            <li><a th:href="@{/maps}">Maps</a></li>
-            <li><a href="">Challenges</a></li>
-            <li><a href="">Subscription</a></li>
-
-        </ul>
-
-        <div class="auth-linksHome">
-            <a href="" class="login-btn">Login</a>
-        </div>
-    </nav>
-</div>
+</body>
+</html>
