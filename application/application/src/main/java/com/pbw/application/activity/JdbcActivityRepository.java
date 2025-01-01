@@ -60,7 +60,8 @@ public class JdbcActivityRepository implements ActivityRepository {
 
         List<Integer> res = jdbcTemplate.query(sql, this::mapIdActivity);
 
-        return res.get(0);
+        // kalau pertama masih kosong 0, return index nilai 0, tapi kalau bukan, return nilai pada index paling atas
+        return res.size() == 0 ? 0 : res.get(0) ;
     }
 
     private int mapIdActivity(ResultSet rSet, int rowNum) throws SQLException {
