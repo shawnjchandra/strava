@@ -76,4 +76,4 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER set_activity_ids
 BEFORE INSERT ON Activity
 FOR EACH ROW
-EXECUTE FUNCTION handle_activity_ids();
+EXECUTE FUNCTION handle_activity_ids();								
