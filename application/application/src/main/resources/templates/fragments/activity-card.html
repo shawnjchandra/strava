@@ -26,7 +26,8 @@
     <div class="map">
         <img th:src="${gambar != null} ? ${gambar} : @{/images/default-activity.jpg}"
              th:alt="${title}"
-             class="img-fluid"/>
+             class="img-fluid"
+             style="max-width: 400px;"/>
     </div>
     <div class="actions">
         <button>👍</button>
