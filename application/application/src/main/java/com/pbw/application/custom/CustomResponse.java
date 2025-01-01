@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 
+import lombok.Getter;
 
+@Getter
 public class CustomResponse<T> {
 
 
@@ -38,21 +40,6 @@ public class CustomResponse<T> {
 
     }
 
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public HttpStatus getStatusCode() {
-        return statusCode;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public T getData() {
-        return data;
-    }
 
 
     

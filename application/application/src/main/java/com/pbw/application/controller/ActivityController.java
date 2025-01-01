@@ -8,6 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.pbw.application.activity.Activity;
 import com.pbw.application.activity.ActivityRepository;
+import com.pbw.application.activity.ActivityService;
+import com.pbw.application.custom.CustomResponse;
+import com.pbw.application.image.ImageService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -26,14 +29,15 @@ import java.util.List;
 @RequestMapping("/activity")
 public class ActivityController {
 
-    public static String UPLOAD_DIRECTORY;
+    @Autowired
+    private ActivityService activityService;
 
     @Autowired
-    private ActivityRepository activityRepository;
+    private ImageService imageService;
 
     @GetMapping
     public String getAllActivities(Model model) {
-        List<Activity> activities = activityRepository.findAll();
+        List<Activity> activities = activityService.findAll();
         model.addAttribute("activities", activities);
         return "/activity/activity";
     }
@@ -44,29 +48,7 @@ public class ActivityController {
         HttpSession httpSession
     ) throws IOException {
 
-        int id = (int)httpSession.getAttribute("id_user");
-        List<String> images = new ArrayList<>();
-
-        UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads" + "/"+id;
-
-            File dirs = new File(UPLOAD_DIRECTORY);
-
-            if(!dirs.exists()){
-                dirs.mkdirs();
-                dirs.setExecutable(true,false);
-                dirs.setWritable(true,false);
-                dirs.setReadable(true,false);
-            }
-            Path directory = Paths.get(UPLOAD_DIRECTORY);
-
-            try(DirectoryStream<Path> stream = Files.newDirectoryStream(directory)){
-                for(Path file : stream){
-
-                    String pathName = "/uploads/" + id + "/" + file.getFileName().toString();
-                    images.add(pathName);
-
-                }
-            }
+        
         return "/activity/add";
     }
 
@@ -86,34 +68,22 @@ public class ActivityController {
                                 HttpSession httpSession) throws IOException {
 
                         
-
-                                    // System.out.println("sampeeeeeeeeeeeeeeeeeeeee==================");
         if(file.isEmpty()){
             // Sementara kalau ga ada input gambar di balikin ke halaman add
             return "redirect:/activity/add";
         }
-      
+
         int id_runner = (int)httpSession.getAttribute("id_user");
+        int nextIdActivity = activityService.getIdActivity() + 1;
+
+        // tipe training
+        CustomResponse<String> isAdded = imageService.addImage(file, id_runner, nextIdActivity,"T");
         
-        StringBuilder fileNames = new StringBuilder();
-        
-        // TODO: nanti harus ganti si nama filenya jadi sesuai si
-        int nextIdActivity = activityRepository.getIdActivity() + 1;
-        String pathName = nextIdActivity+"."+file.getOriginalFilename().split("\\.")[1];
+        if(!isAdded.isSuccess()){
 
+            System.out.println(isAdded.getMessage());
+        }
 
-        fileNames.append(pathName);
-
-        
-        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, pathName);
-
-
-        Files.write(fileNameAndPath, file.getBytes());
-        File uploadedFile = fileNameAndPath.toFile();
-        uploadedFile.setReadable(true,false);    
-        uploadedFile.setWritable(true,false);    
-
-        
         // ====================================================
         // Format durasi sebagai hh:mm:ss
         String durasi = String.format("%02d:%02d:%02d", hours, minutes, seconds);
@@ -130,17 +100,23 @@ public class ActivityController {
         activity.setDescription(description);
         activity.setIdRunner(id_runner);
 
-        System.out.println("Parameters: " + 
-        activity.getJudul() + ", " + 
-        activity.getTipeTraining() + ", " +
-        activity.getCreatedAt() + ", " +
-        activity.getDurasi() + ", " +
-        activity.getJarak() + ", " +
-        activity.getElevasi() + ", " +
-        activity.getDescription() + ", " +
-        activity.getIdRunner());
+        // set url path dengan yang sebelumnya telah dibuat
+        String path = imageService.getActualImagePath(id_runner, isAdded.getData());
+        activity.setUrlpath(isAdded.getData());
 
-        activityRepository.save(activity);
+        activity.setUrlpath(path);
+
+        // System.out.println("Parameters: " + 
+        // activity.getJudul() + ", " + 
+        // activity.getTipeTraining() + ", " +
+        // activity.getCreatedAt() + ", " +
+        // activity.getDurasi() + ", " +
+        // activity.getJarak() + ", " +
+        // activity.getElevasi() + ", " +
+        // activity.getDescription() + ", " +
+        // activity.getIdRunner());
+
+        activityService.save(activity);
         return "redirect:/activity";
     }
 }

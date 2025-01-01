@@ -1,5 +1,6 @@
 package com.pbw.application.activity;
 
+import org.aspectj.internal.lang.annotation.ajcDeclareAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,7 +17,7 @@ public class JdbcActivityRepository implements ActivityRepository {
 
     private static final String FIND_ALL_QUERY = "SELECT * FROM Activity";
 
-    private static final String INSERT_QUERY = "INSERT INTO activity (judul, tipe_training, createdAt, durasi, jarak, elevasi, description, id_runner) VALUES (?, ?::tipeAct, ?::date, ?, ?, ?, ?, ?)";
+    private static final String INSERT_QUERY = "INSERT INTO activity (judul, tipe_training, createdAt, durasi, jarak, elevasi, description, id_runner, urlpath) VALUES (?, ?::tipeAct, ?::date, ?, ?, ?, ?, ?,?)";
 
     @Override
     public List<Activity> findAll() {
@@ -33,7 +34,8 @@ public class JdbcActivityRepository implements ActivityRepository {
             activity.getJarak(),
             activity.getElevasi(),
             activity.getDescription(),
-            activity.getIdRunner()
+            activity.getIdRunner(),
+            activity.getUrlpath()
         );
     }
 
@@ -50,6 +52,9 @@ public class JdbcActivityRepository implements ActivityRepository {
             activity.setElevasi(rs.getInt("elevasi"));
             activity.setDescription(rs.getString("description"));
             activity.setIdRunner(rs.getInt("id_runner"));
+            
+            // urlpath
+            activity.setUrlpath(rs.getString("urlpath"));
             return activity;
         }
     }
