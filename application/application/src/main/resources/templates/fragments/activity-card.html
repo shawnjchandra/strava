@@ -1,5 +1,5 @@
 <!-- fragments/activityCard.html -->
-<div th:fragment="activityCard(name, date, location, title, distance, time, elevGain)" class="activity-card">
+<div th:fragment="activityCard(name, date, location, title, distance, time, elevGain, gambar)" class="activity-card">
     
     <div class="header">
         <!-- <img class="profile-img" src="profile.jpg" alt="Profile"> -->
@@ -24,7 +24,9 @@
         </div>
     </div>
     <div class="map">
-        <p>Map Placeholder</p>
+        <img th:src="${gambar != null} ? ${gambar} : @{/images/default-activity.jpg}"
+             th:alt="${title}"
+             class="img-fluid"/>
     </div>
     <div class="actions">
         <button>👍</button>
