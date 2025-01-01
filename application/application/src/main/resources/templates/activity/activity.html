@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Activities</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/activity.css}">
+</head>
+<body>
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
+    <div class="container">
+        <header>
+            <h1>My Activities</h1>
+            <div class="search-container">
+                <input type="text" placeholder="Keywords" />
+                <select>
+                    <option>All Sport Types</option>
+                    <option value="run">Running</option>
+                    <option value="bike">Cycling</option>
+                    <option value="swim">Swimming</option>
+                </select>
+                <button>Search</button>
+            </div>
+        </header>
+
+        <main>
+            <h2 th:text="${activities.size()} + ' Activities'">0 Activities</h2>
+            <button id="add" th:onclick="|window.location.href='@{/activity/add}'|">Add Training Activity</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Sport</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Distance</th>
+                        <th>Duration</th>
+                        <th>Elevation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="activity : ${activities}">
+                        <td th:text="${activity.judul}">Morning Run</td>
+                        <td th:text="${activity.tipeTraining}">Run</td>
+                        <td th:text="${activity.createdAt}">2023-01-01</td>
+                        <td th:text="${activity.durasi}">00:30:00</td>
+                        <td th:text="${activity.jarak} + ' km'">5 km</td>
+                        <td th:text="${activity.durasi}">00:30:00</td>
+                        <td th:text="${activity.elevasi} + ' ft'">100 ft</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+        <footer>
+            <p>© Lari boss</p>
+            <nav>
+                <a href="#">About</a>
+                <a href="#">Features</a>
+                <a href="#">Mobile</a>
+                <a href="#">Subscription</a>
+                <a href="#">Help</a>
+                <a href="#">More</a>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Entry - Strava</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/add.css}">
+</head>
+<body>
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
+
+    <div class="container">
+        <main>
+            <h1>Manual Entry</h1>
+            <form th:action="@{/activity/add}" method="post" enctype="multipart/form-data">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="judul" placeholder="Morning Run" required>
+
+                <label for="sport">Sport</label>
+                <select id="sport" name="tipe_training" required>
+                    <option value="run">Run</option>
+                    <option value="bike">Bike</option>
+                    <option value="swim">Swim</option>
+                </select>
+
+                <label for="date-time">Date</label>
+                <input type="date" id="date-time" name="createdAt" required>
+
+                <label for="duration">Duration</label>
+                <div class="duration-input">
+                    <input type="number" id="hours" name="hours" placeholder="hh" min="0" max="23" required> hours
+                    <input type="number" id="minutes" name="minutes" placeholder="mm" min="0" max="59" required> minutes
+                    <input type="number" id="seconds" name="seconds" placeholder="ss" min="0" max="59" required> seconds
+                </div>
+
+                <label for="distance">Distance (km)</label>
+                <input type="number" id="distance" name="jarak" placeholder="Enter distance in km" min="0" step="1" required>
+
+                <label for="elevation">Elevation (feet)</label>
+                <input type="number" id="elevation" name="elevasi" placeholder="Enter elevation in meters" min="0" step="1">
+
+                <label for="description">Description</label>
+                <textarea id="description" name="description" placeholder="Share more about this activity." rows="4" style="resize: none;"></textarea>
+                
+                <label for="">Gambar</label>
+                <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
+
+                    <!-- <form method="post" th:action="@{/upload}" enctype="multipart/form-data"> -->
+                <div class="form-group">
+                    <input type="file" name="image" accept="image/*" class="form-control-file">
+                </div>
+                        <!-- <button type="submit" class="btn btn-primary">Upload image</button> -->
+
+                    <!-- </form> -->
+
+                <!-- Menambahkan input untuk runner ID jika diperlukan -->
+                <!-- <input type="hidden" name="id_runner" th:value="${idRunner != null ? idRunner : 1}" /> -->
+
+                <button type="submit">Add Activity</button>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
