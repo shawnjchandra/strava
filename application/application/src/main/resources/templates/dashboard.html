@@ -43,7 +43,7 @@
                 <p>Afternoon Walk • Jan 29, 2022</p>
               </div>
 
-              <div th:each="activity : ${activities}" style="max-width: 300px;">
+              <div th:each="activity : ${activities}">
                 <div th:replace="~{fragments/activity-card :: activityCard(
                     name=${nama},
                     date=${activity.createdAt},
@@ -56,15 +56,9 @@
                 )}">
               </div>
             </div>
-
-            <!-- <div class="card-container">
-                <div class="card">
-                    <img src="" alt="">
-                </div>    
-            </div> -->
-
-            <!-- Right Section -->
           </div>
+
+          
           <div class="right">
               <div class="graph">
                   <h3>Activity Graph</h3>
