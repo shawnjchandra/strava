@@ -87,20 +87,20 @@ public class ActivityController {
 
                         
 
+                                    // System.out.println("sampeeeeeeeeeeeeeeeeeeeee==================");
         if(file.isEmpty()){
             // Sementara kalau ga ada input gambar di balikin ke halaman add
             return "redirect:/activity/add";
         }
       
         int id_runner = (int)httpSession.getAttribute("id_user");
-
+        
         StringBuilder fileNames = new StringBuilder();
         
         // TODO: nanti harus ganti si nama filenya jadi sesuai si
         int nextIdActivity = activityRepository.getIdActivity() + 1;
         String pathName = nextIdActivity+"."+file.getOriginalFilename().split("\\.")[1];
 
-        
 
         fileNames.append(pathName);
 
