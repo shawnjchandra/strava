@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navigation Bars</title>
     <!-- Add your CSS links -->
-    <link rel="stylesheet" th:href="@{/css/navbar.css}">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <!-- <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}"> -->
 </head>
 <body>
 
@@ -14,12 +14,12 @@
     <div th:fragment="navbar" class="navbar-container">
         <nav class="navbar">
             <div class="logo">LOGO</div>
-            <ul class="nav-links">
+            <ul th:if="${session.status} != null" class="nav-links">
                 <li class="dropdown">
                     <a th:href="@{/activity}">Activities</a>
                 </li>
                 <li>
-                    <a th:href="@{/race}">Race</a>
+                    <a th:href="@{/race/}">Race</a>
                 </li>
             </ul>
             <div class="auth-links">
