@@ -1,14 +1,19 @@
-// Global chart variable
+
 let myChart = null;
 
 function processActivitiesData(activities, period) {
     const currentDate = new Date();
     let filteredActivities;
     
-    // Ubah activities dari objek jadi array
+    // ubah dari tipe objek ke array untuk di proses selanjutnya
     let activitiesArray = [];
     if (activities && typeof activities === 'object') {
-        activitiesArray = Object.keys(activities).map(key => activities[key]);
+        activitiesArray = Object.keys(activities).map(key => {
+            const activity = activities[key];
+
+            activity.jarak = activity.jarak === null ? 0.0 : parseFloat(activity.jarak);
+            return activity;
+        });
     }
 
 
@@ -54,8 +59,10 @@ function processActivitiesData(activities, period) {
                 break;
         }
         
-        const currentTotal = groupedData.get(key) || 0;
-        groupedData.set(key, currentTotal + parseFloat(activity.jarak || 0));
+        const currentTotal = groupedData.get(key) || 0.0;
+
+        const jarakValue = activity.jarak || 0.0;
+        groupedData.set(key, currentTotal + jarakValue);
     });
 
 
@@ -75,7 +82,11 @@ function processActivitiesData(activities, period) {
             break;
     }
 
-    const distances = sortedLabels.map(label => groupedData.get(label) || 0);
+    const distances = sortedLabels.map(label => {
+        const value = groupedData.get(label) || 0.0;
+
+        return Number(value.toFixed(2));
+    });
 
     return {
         labels: sortedLabels,
@@ -117,7 +128,7 @@ function updateChart(period) {
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            return `Distance: ${context.parsed.y.toFixed(1)} km`;
+                            return `Distance: ${context.parsed.y.toFixed(2)} km`;
                         }
                     }
                 }
