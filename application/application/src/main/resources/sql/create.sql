@@ -27,8 +27,8 @@
 		id_activity INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 		judul varchar(255) NOT NULL,
 		durasi TIME NULL,
-		jarak int null,
-		elevasi int null,
+		jarak FLOAT null,
+		elevasi FLOAT null,
 		createdAt DATE DEFAULT CURRENT_DATE,
 		urlPath VARCHAR(255) NULL,
 		id_training int UNIQUE null,
@@ -77,3 +77,4 @@ CREATE TRIGGER set_activity_ids
 BEFORE INSERT ON Activity
 FOR EACH ROW
 EXECUTE FUNCTION handle_activity_ids();								
+
