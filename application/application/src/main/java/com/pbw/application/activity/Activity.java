@@ -16,8 +16,8 @@ public class Activity {
     private String tipeTraining;
     private LocalDate createdAt;
     private LocalTime durasi;
-    private int jarak;
-    private int elevasi;
+    private float jarak;
+    private float elevasi;
     private String description;
     private Integer idRunner;
     private String urlpath;
