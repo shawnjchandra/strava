@@ -15,8 +15,10 @@ public class JdbcActivityRepository implements ActivityRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    // tipe training dan race disatuin
     private static final String FIND_ALL_QUERY = "SELECT * FROM Activity";
 
+    // hanya untuk tipe training
     private static final String INSERT_QUERY = "INSERT INTO activity (judul, tipe_training, createdAt, durasi, jarak, elevasi, description, id_runner, urlpath) VALUES (?, ?::tipeAct, ?::date, ?, ?, ?, ?, ?,?)";
 
     @Override
