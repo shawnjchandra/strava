@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strava Together Strong</title>
+    <link rel="icon" href="img/favicon.png">
+    <link rel="stylesheet" th:href="@{css/homeActivity.css}">
+    <link rel="stylesheet" th:href="@{css/navbar.css}">
+    <link rel="stylesheet" th:href="@{css/index.css}">
+</head>
+<body>
+    <div th:replace="layout/navbar :: navbar3"></div>
+
+    <div class="run-container">
+        <img th:src="@{/img/swim.jpg}" style="width: 100%;">
+        <div class="text-con">
+            <h1>Track all your swimming adventures with us</h1>
+            <h2>Track and share swims. Analyze your performance. Stay swimming with us. We help you achieve all that and more.</h2> 
+            <a href="/signup" class="ctaBut">Join For Free</a>
+        </div>
+    </div>
+
+    <div id="runTitle"> 
+        <h1>Beyond a Swimming Tracker</h1>
+        <h2>Track your progress with detailed stats like laps, distance, and stroke rate.</h2>
+    </div>
+
+    <div th:replace="layout/feat :: feat3"></div>
+
+    <div th:replace="layout/footer :: footer"></div>
+</body>
+</html>

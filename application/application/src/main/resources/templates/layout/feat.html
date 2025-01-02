@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Bars</title>
+    <!-- Add your CSS links -->
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/homeActivity.css}">
+</head>
+<body>
+    <div th:fragment="feat1" class "feat">
+        <div class ="RunFeature">
+            <div class="rFeature">
+                <img th:src="@{/img/medal.png}">
+                <h3>Share Your Achievements </h3>
+                <p>Celebrate and share your running milestones with your friends</p>
+            </div>
+            <div class="rFeature">
+                <img th:src="@{/img/run.jpg}">
+                <h3>Detailed progress on your every run</h3>
+                <p>Track and analyze your comprehensive statistics for each of your runs</p>
+            </div>
+            <div class="rFeature">
+                <img th:src="@{/img/route.png}">
+                <h3>explore routes on your choice</h3>
+                <p>Discover and select running routes on your choice</p>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="feat2" class "feat">
+        <div class ="RunFeature">
+            <div class="rFeature">
+                <img th:src="@{/img/medal.png}">
+                <h3>Share Your Achievements </h3>
+                <p>Celebrate and share your running milestones with your friends</p>
+            </div>
+            <div class="rFeature">
+                <img th:src="@{/img/stats.png}">
+                <h3>Detailed progress on your every cycling</h3>
+                <p>Track and analyze your comprehensive statistics for each of your cycling activities</p>
+            </div>
+            <div class="rFeature">
+                <img th:src="@{/img/route.png}">
+                <h3>explore routes on your choice</h3>
+                <p>Discover and select running routes on your choice</p>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="feat3" class "feat">
+        <div class ="RunFeature">
+            <div class="rFeature">
+                <img th:src="@{/img/medal.png}">
+                <h3>Share Your Achievements </h3>
+                <p>Celebrate and share your running milestones with your friends</p>
+            </div>
+            <div class="rFeature">
+                <img th:src="@{/img/swimtrack.jpeg}">
+                <h3>Track Your Swim Performance</h3>
+                <p>Record laps, speed, and distance to monitor your swim like a pro.</p>
+            </div>
+            <div class="rFeature">
+                <img th:src="@{/img/medalz.jpg}">
+                <h3>Set and Achieve Swim Goals</h3>
+                <p>Stay motivated by setting and crushing personalized swim targets.</p>
+            </div>
+        </div>
+    </div>
+</body>
