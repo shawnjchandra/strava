@@ -1,0 +1,4 @@
+ALTER TABLE activity 
+ALTER COLUMN jarak TYPE FLOAT;
+ALTER TABLE activity 
+ALTER COLUMN elevasi TYPE FLOAT;
