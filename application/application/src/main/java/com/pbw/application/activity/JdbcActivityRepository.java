@@ -15,7 +15,7 @@ public class JdbcActivityRepository implements ActivityRepository {
     private JdbcTemplate jdbcTemplate;
 
     private static final String FIND_ALL_QUERY = "SELECT * FROM Activity";
-    private static final String INSERT_QUERY = "INSERT INTO activity (judul, tipe_training, createdAt, durasi, jarak, elevasi, description, id_runner) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT_QUERY = "INSERT INTO activity (judul, tipe_training, createdAt, durasi, jarak, elevasi, description, id_runner) VALUES (?, ?::tipeAct, ?, ?, ?, ?, ?, ?)";
 
     @Override
     public List<Activity> findAll() {
