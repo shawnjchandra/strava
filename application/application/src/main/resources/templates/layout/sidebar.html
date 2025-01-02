@@ -1,0 +1,26 @@
+<!-- Create a new file called sidebar.html in your templates/layout folder -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="sidebar" class="left-sidebar">
+        <div class="profile">
+            <!-- Uncomment and replace with actual image path when needed -->
+            <!-- <img src="your-image.jpg" alt="Profile Picture" class="profile-img"> -->
+            <h2>Shawn Jonathan Chandra</h2>
+        </div>
+        <div class="menu">
+            <ul>
+                <li>Dashboard</li>
+                <li>Training</li>
+                <li>Maps</li>
+                <li>Challenges</li>
+            </ul>
+            <ul>
+                <li>
+                    <a th:href="@{/race/create}">Create a Race</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
