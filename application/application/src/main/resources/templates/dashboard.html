@@ -9,8 +9,8 @@
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <script th:src="@{/script/graph.js}" defer></script>
     <script th:src="@{/script/pdfExport.js}" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 
 </head>
 <body>
@@ -38,11 +38,12 @@
         <!-- Middle Section -->
         <div class="middle">
             
-            <div class="latest-activity">
+            <div class="latest-activity" >
                 <h3>Latest Activity</h3>
                 <p>Afternoon Walk • Jan 29, 2022</p>
               </div>
 
+              
               <div th:each="activity : ${activities}">
                 <div th:replace="~{fragments/activity-card :: activityCard(
                     name=${nama},
@@ -76,6 +77,10 @@
               </div>
               
           </div>
-
+          <script th:inline="javascript">
+            window.activitiesData = /*[[${activities}]]*/ [];
+            console.log('Activities data type:', typeof window.activitiesData);
+            console.log('Activities data:', window.activitiesData);
+        </script>
 </body>
 </html>
