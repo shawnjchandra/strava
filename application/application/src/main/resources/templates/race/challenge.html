@@ -3,126 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Race Details - Mountain Trail Challenge</title>
-    <style>
-        body {
-            font-family: 'Helvetica', Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            min-height: 100vh;
-        }
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
 
-        .left-sidebar {
-            width: 250px;
-            background-color: #fc4c02;
-            color: white;
-            height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
-            position: fixed;
-            left: 0;
-            top: 0;
-        }
-
-        .main-content {
-            margin-left: 250px;
-            display: flex;
-            justify-content: center;
-            width: calc(100% - 250px);
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .race-details-container {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 900px;
-            padding: 30px;
-        }
-
-        .race-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #fc4c02;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        .race-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .race-stats {
-            background-color: #f8f8f8;
-            padding: 15px;
-            border-radius: 8px;
-        }
-
-        .file-upload {
-            background-color: #f4f4f4;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        .upload-btn {
-            background-color: #fc4c02;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .menu ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .menu ul li {
-            padding: 12px 15px;
-            cursor: pointer;
-            color: white;
-        }
-
-        .race-description {
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-            .left-sidebar, .main-content {
-                width: 100%;
-                margin-left: 0;
-            }
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/race/challenge.css}">
 </head>
 <body>
-    <div class="left-sidebar">
-        <div class="profile">
-            <h2>Shawn Jonathan Chandra</h2>
-            <p>Following: 0 | Followers: 0 | Activities: 15</p>
-        </div>
-        <div class="menu">
-            <ul>
-                <li>Dashboard</li>
-                <li>Training</li>
-                <li>Maps</li>
-                <li>Challenges</li>
-            </ul>
-        </div>
-    </div>
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
+    <th:block th:replace="~{/layout/sidebar :: sidebar}"></th:block>
 
     <div class="main-content">
         <div class="race-details-container">
