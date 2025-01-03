@@ -1,179 +1,377 @@
-:root {
-    --primary-color: #fc5200;
-    --secondary-color: #242428;
-    --background-color: #f7f7fa;
-    --text-color: #242428;
-    --sidebar-width: 250px;
-    --border-radius: 8px;
-    --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f7;
+    color: #333;
     display: flex;
+    flex-direction: column;
     min-height: 100vh;
 }
 
-.left-sidebar {
-    width: var(--sidebar-width);
-    background-color: white;
-    padding: 24px;
-    box-shadow: var(--shadow);
-    position: fixed;
-    height: 100vh;
-    box-sizing: border-box;
+.logo {
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
-.menu ul {
+.nav-links {
+    display: flex;
     list-style: none;
+    gap: 2rem;
+    margin: 0;
     padding: 0;
-    margin: 24px 0;
 }
 
-.menu ul li {
-    padding: 12px 16px;
-    margin: 4px 0;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: all 0.2s ease;
+.nav-links a {
+    text-decoration: none;
+    color: #333;
     font-weight: 500;
-    color: var(--secondary-color);
+    transition: color 0.3s;
 }
 
-.menu ul li:hover {
-    background-color: rgba(252, 82, 0, 0.1);
-    color: var(--primary-color);
+.nav-links a:hover {
+    color: #fc5200;
+}
+
+
+.login-btn {
+    color: #333;
+}
+
+.login-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.register-btn {
+    background-color: #fc5200;
+    color: white;
+}
+
+.register-btn:hover {
+    background-color: #e64a00;
+}
+
+.signout-btn {
+    color: #666;
+}
+
+.signout-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.page-container {
+    display: flex;
+    min-height: calc(100vh - 60px); /* Adjust based on navbar height */
+    margin-top: 60px; /* Should match navbar height */
 }
 
 .main-content {
-    margin-left: var(--sidebar-width);
     flex: 1;
-    padding: 32px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
+    padding: 2rem;
+    margin-left: 250px; /* Match sidebar width */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
 }
 
-.race-details-container {
-    background-color: white;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    width: 100%;
-    max-width: 900px;
-    padding: 32px;
-}
 
-.race-header {
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 20px;
-    margin-bottom: 24px;
-    border-bottom: 2px solid rgba(252, 82, 0, 0.2);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
 }
 
-.race-header h1 {
+.header h1 {
     font-size: 1.8rem;
-    color: var(--secondary-color);
-    margin: 0;
+    color: #333;
 }
 
-.race-info {
+.status-badge {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.description {
+    margin-bottom: 2rem;
+    color: #666;
+}
+
+.info-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 24px;
-    margin-bottom: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
 }
 
-.race-stats {
-    background-color: var(--background-color);
-    padding: 20px;
-    border-radius: var(--border-radius);
-    transition: transform 0.2s ease;
+.info-card {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    transition: transform 0.2s;
 }
 
-.race-stats:hover {
+.info-card:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow);
 }
 
-.race-stats h3 {
-    margin: 0 0 12px 0;
-    color: var(--secondary-color);
-    font-size: 1.1rem;
+.info-card h2 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #333;
 }
 
-.race-description {
-    margin-bottom: 32px;
-    line-height: 1.6;
-    color: var(--text-color);
-    font-size: 0.95rem;
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
 }
 
-.file-upload {
-    background-color: var(--background-color);
-    padding: 24px;
-    border-radius: var(--border-radius);
-    margin-top: 24px;
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.label {
+    font-weight: 500;
+    color: #555;
+}
+
+.upload-section {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
     text-align: center;
 }
 
-.upload-btn {
-    background-color: var(--primary-color);
+.upload-section h2 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.file-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+input[type="file"] {
+    max-width: 300px;
+    padding: 0.5rem;
+}
+
+.upload-button {
+    background-color: #fc5200;
     color: white;
     border: none;
-    padding: 12px 24px;
-    border-radius: var(--border-radius);
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
+    font-size: 1rem;
+    transition: background-color 0.3s;
 }
 
-.upload-btn:hover {
-    background-color: #e64000;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(252, 82, 0, 0.2);
+.upload-button:hover {
+    background-color: #e64a00;
 }
 
-.upload-btn:active {
-    transform: translateY(0);
-    box-shadow: none;
+.file-types {
+    font-size: 0.9rem;
+    color: #666;
 }
 
+/* =================== */
+
+
+.take-from-available-activity {
+    margin: 2rem auto;
+    max-width: 600px;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.take-from-available-activity h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+
+.take-from-available-activity .dropdown-container {
+    margin-bottom: 1.5rem;
+}
+
+.take-from-available-activity label {
+    display: block;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.take-from-available-activity select {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+.take-from-available-activity select:focus {
+    border-color: #fc5200;
+    outline: none;
+    background-color: #fff;
+}
+
+.take-from-available-activity .select-button {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    background-color: #fc5200;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.take-from-available-activity .select-button:hover {
+    background-color: #e64a00;
+}
+.upload-section {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.upload-grid {
+    display: grid;
+    grid-template-columns: 1fr 0.1fr 1fr; /* Two columns with a small gap for the "OR" */
+    gap: 2rem; /* Space between the forms and "OR" */
+    justify-items: center; /* Centers the items horizontally */
+}
+
+.upload-form, .take-from-available-activity {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensures the form takes full width within its grid cell */
+    max-width: 500px; /* Optionally limit the width */
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.file-input-container,
+.dropdown-container {
+    margin-bottom: 1rem;
+}
+
+.upload-button,
+.select-button {
+    background-color: #fc5200;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.upload-button:hover,
+.select-button:hover {
+    background-color: #e64a00;
+}
+
+.file-types {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.or-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.or-text p {
+    margin: 0;
+    font-weight: 600;
+}
+
+
+/* =================== */
 @media (max-width: 768px) {
-    body {
-        flex-direction: column;
+    .navbar {
+        padding: 1rem;
+        flex-wrap: wrap;
     }
 
-    .left-sidebar {
+    .nav-links {
+        order: 3;
         width: 100%;
-        height: auto;
-        position: relative;
+        justify-content: center;
+        margin-top: 1rem;
+        gap: 1rem;
+    }
+
+    .auth-links {
+        flex-wrap: wrap;
     }
 
     .main-content {
         margin-left: 0;
-        width: 100%;
-        padding: 20px;
+        padding: 1rem;
     }
-
-    .race-details-container {
-        padding: 24px;
+    
+    .container {
+        padding: 1rem;
     }
-
-    .race-info {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-
-    .race-header {
+    
+    .header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 16px;
+        gap: 1rem;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .file-input-container {
+        width: 100%;
+    }
+    
+    input[type="file"] {
+        width: 100%;
+        max-width: none;
     }
 }
