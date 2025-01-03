@@ -7,6 +7,8 @@
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/sidebar.css}">
     <link rel="stylesheet" th:href="@{/css/race/racelist.css}">
+    <script th:src="@{/js/raceAction.js}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     
@@ -32,15 +34,22 @@
                                         <th>Distance</th>
                                         <th>Date</th>
                                         <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="av: ${joined}">
-                                        <td th:text="${av.jarak}">Coastal Run</td>
+                                    <tr th:each="av: ${joined}" >
+                                        <td th:text="${av.judul}">Coastal Run</td>
                                         <td th:text="${av.jarak}">10 km</td>
                                         <td th:text="${av.createdAt}">June 22, 2023</td>
                                         <td th:text="${av.kuota_max}">87/100</td>
-                                        <td><button class="join-btn">Join Race</button></td>
+                                        <td>
+                                            <button class="go-challenge" th:data-id="${av.idActivity}">
+                                                <a th:href="@{/race/challenge/{id}(id=${av.idActivity})}">
+
+                                                    Go To Challenge
+                                                </a>
+                                            </button></td>
                                     </tr>
                                     
                                 </tbody>
@@ -68,12 +77,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="av: ${available}">
-                                        <td th:text="${av.jarak}">Coastal Run</td>
+                                    <tr th:each="av: ${available}" >
+                                        <td th:text="${av.judul}">Coastal Run</td>
                                         <td th:text="${av.jarak}">10 km</td>
                                         <td th:text="${av.createdAt}">June 22, 2023</td>
                                         <td th:text="${av.kuota_max}">87/100</td>
-                                        <td><button class="join-btn">Join Race</button></td>
+                                        <td><button class="join-btn" th:data-id="${av.idActivity}">Join Race</button></td>
                                     </tr>
                                     
                                 </tbody>
