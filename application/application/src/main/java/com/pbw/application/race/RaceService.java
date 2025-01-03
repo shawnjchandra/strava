@@ -64,13 +64,15 @@ public class RaceService {
         List<Integer> listOfJoinedRace = getFromRaceParticipants(id_runner);
 
         if(listOfJoinedRace == null || listOfJoinedRace.isEmpty()){
-            return new CustomResponse<>(false , "No Joined Race", null);
+            return new CustomResponse<>(false , "You haven't joined any race yet", null);
         }
 
         for(int id_race: listOfJoinedRace){
+            System.out.println("id race :"+id_race);
             Activity act = getActivityByIdRace(id_race);
             result.add(act);
         }
+        System.out.println(result.size()+" "+result.get(0));
 
         return result.size()>0 ? 
         new CustomResponse<>(true, "Joined Races Found", result) 
@@ -84,11 +86,25 @@ public class RaceService {
     }
 
 
-    public CustomResponse<Null> joinRace(int id_runner, int id_race) {
+    public CustomResponse<Null> joinRace(int id_runner, int id_activity) {
+        int id_race = getIdRaceByIdActivity(id_activity);
+
+        System.out.println(id_runner+" id runner dan id race dari join "+id_race);
+
         return raceRepository.joinRace(id_runner, id_race) == true ?
         new CustomResponse<>(true, "You have join the race", null) :
         new CustomResponse<>(false, "Failed to join the race", null) ;
         
+    }
+
+    public Activity getActivityByIdActivity(int id_activity) {
+        Optional<Activity> result = raceRepository.getActivityByIdActivity(id_activity);
+ 
+        return result.isPresent() == true ? result.get() : null; 
+     }
+
+    private int getIdRaceByIdActivity(int id_activity){
+        return raceRepository.getIdRaceByIdActivity(id_activity);
     }
     
     private Activity getActivityByIdRace(int id_race) {

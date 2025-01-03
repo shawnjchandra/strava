@@ -8,6 +8,7 @@ import com.pbw.application.activity.Activity;
 public interface RaceRepository {
 
     public Optional<Activity> getActivityByIdRace(int id_race);
+    public Optional<Activity> getActivityByIdActivity(int id_activity);
     public List<Integer> getFromRaceParticipants(int id_runner);
     public boolean joinRace(int id_runner, int id_race);
     public boolean addRace(Activity activity, int id_admin);

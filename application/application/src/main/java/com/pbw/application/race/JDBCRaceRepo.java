@@ -81,6 +81,15 @@ public class JDBCRaceRepo implements RaceRepository {
     
     }
 
+    @Override
+    public Optional<Activity> getActivityByIdActivity(int id_activity) {
+        String sql = "Select * FROM activity WHERE id_activity = ?";
+
+        List<Activity> result = jdbcTemplate.query(sql, this::mapIdToActivityRace, id_activity);
+    
+       return result.size()  == 0 ? Optional.empty(): Optional.of(result.get(0));
+    }
+
     private int mapIdRunnerToRP(ResultSet rSet, int rowNum) throws SQLException {
         return rSet.getInt("id_race");
     }
@@ -99,6 +108,8 @@ public class JDBCRaceRepo implements RaceRepository {
         
         return act;
     }
+
+    
 
 
 
