@@ -2,7 +2,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-    <div th:fragment="sidebar" class="left-sidebar">
+    <div th:fragment="sidebar" class="left-sidebar sidebar-hidden">
+        <div>
+            <button id="sidebarToggle" class="sidebar-toggle">
+                <span class="toggle-icon">☰</span>
+            </button>
+
+        </div>
         <div class="profile">
             <!-- Uncomment and replace with actual image path when needed -->
             <!-- <img src="your-image.jpg" alt="Profile Picture" class="profile-img"> -->
@@ -21,6 +27,17 @@
                 </li>
             </ul>
         </div>
+        <script>
+            document.getElementById('sidebarToggle').addEventListener('click', function() {
+                const sidebar = document.querySelector('.left-sidebar');
+                const mainContent = document.querySelector('.main-content');
+                const button = document.getElementById('sidebarToggle');
+                
+                sidebar.classList.toggle('sidebar-hidden');
+                mainContent.classList.toggle('content-expanded');
+                button.classList.toggle('toggle-active');
+            });
+        </script>
     </div>
 </body>
 </html>
