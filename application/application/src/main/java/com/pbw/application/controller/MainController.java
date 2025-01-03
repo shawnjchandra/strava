@@ -75,5 +75,13 @@ public class MainController {
     public String swimActivity(){
         return "swimActivity";
     }
+    @GetMapping("/homeFeature")
+    public String homeFeature(){
+        return "homeFeature";
+    }
+    @GetMapping("/homeChallenge")
+    public String homeChallenge(){
+        return "homeChallenge";
+    }
 
 }

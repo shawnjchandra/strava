@@ -49,24 +49,9 @@
 </div>
     <div class="cta">
         <p class="ctaText">Join our community and start tracking your progress today!</p>
-        <a href="/signup" class="ctaBut">Join Now</a>
+        <a th:if="${session.status} == null" th:href="@{/register}" class="ctaBut">join Now</a>
     </div>
 
-    <div class ="keyFeature">
-        <h2>Key Features</h2>
-        <div class="feature">
-            <h3>Automatic Activity Tracking</h3>
-            <p>Track all your activities without needing to start it manually</p>
-        </div>
-        <div class="feature">
-            <h3>Record Performance</h3>
-            <p>Received  detailed an accurate insight about your activity (speed,distance,calories burned)</p>
-        </div>
-        <div class="feature">
-            <h3>Fun Race</h3>
-            <p>Join exciting races and challenges with others in the community</p>
-        </div>
-    </div>
 
     <div th:replace="layout/footer :: footer"></div>
 

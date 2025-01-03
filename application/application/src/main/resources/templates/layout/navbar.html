@@ -61,17 +61,15 @@
                     </ul>
                 </li>
     
-                <li><a href="">Features</a></li>
+                <li><a th:href="@{/homeFeature}">Features</a></li>
                 <li><a th:href="@{/maps}">Maps</a></li>
-                <li><a href="">Challenges</a></li>
-                <li><a href="">Subscription</a></li>
+                <li><a th:href="@{/homeChallenge}">Challenges</a></li>
     
             </ul>
     
             <div class="auth-linksHome">
-                <a href="" class="login-btn">Login</a>
-                <a href="" class="register-btn">Register</a>
-                <a href="" class="signout-btn">Sign out</a>
+                <a th:if="${session.status} == null" th:href="@{/login}" class="login-btn">Login</a>
+                <a th:if="${session.status} == null" th:href="@{/register}" class="register-btn">Register</a>
             </div>
         </nav>
     </div>

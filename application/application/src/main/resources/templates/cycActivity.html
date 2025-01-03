@@ -17,7 +17,7 @@
         <div class="text-con">
         <h1>Track all your cycling adventures with us</h1>
         <h2>Track and share rides. Analyze your performance. Stay cycling with us. We help you achieve all that and more.</h2>
-        <a href="/signup" class="ctaBut">Join For Free</a>
+        <a th:if="${session.status} == null" th:href="@{/register}" class="ctaBut">join For Free</a>
         </div>
     </div>
 
