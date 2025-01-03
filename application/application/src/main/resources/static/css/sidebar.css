@@ -1,12 +1,4 @@
 /* Left Sidebar */
-.left-sidebar {
-    width: var(--sidebar-width);
-    background-color: white;
-    padding: 24px;
-    box-shadow: var(--shadow);
-    position: fixed;
-    height: 100vh;
-}
 
 .profile {
     text-align: center;
@@ -52,4 +44,76 @@ a {
     text-decoration: none;
     color: var(--text-color);
     font-size: 1em;
+}
+
+/* Sidebar toggle button */
+.sidebar-toggle {
+    position: fixed;
+    left: 20px;
+    top: 15px;
+    z-index: 1001;
+    background: transparent;
+    border: none;
+    color: #333;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    color: #fc5200;
+}
+
+.toggle-active {
+    left: 270px; /* sidebar width + 20px */
+}
+
+/* Sidebar styling */
+.left-sidebar {
+    position: fixed;
+    left: 0;
+    top: 60px;
+    width: 250px;
+    height: calc(100vh - 60px);
+    background-color: white;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+    z-index: 900;
+    transition: transform 0.3s ease-in-out;
+    overflow-y: auto;
+}
+
+/* Hidden state for sidebar */
+.sidebar-hidden {
+    transform: translateX(-100%);
+}
+
+/* Main content */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    margin-left: 250px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+/* Expanded state for main content */
+.content-expanded {
+    margin-left: 0;
+}
+
+/* Your existing styles remain the same */
+
+/* Update media queries */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .left-sidebar {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .toggle-active {
+        left: 20px;
+    }
 }
