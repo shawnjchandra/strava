@@ -3,201 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <title>Strava Race Dashboard</title>
-    <style>
-        body {
-            font-family: 'Helvetica', Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            min-height: 100vh;
-        }
-
-        .left-sidebar {
-            width: 250px;
-            background-color: #fc4c02;
-            color: white;
-            height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
-            position: fixed;
-            left: 0;
-            top: 0;
-        }
-
-        .main-content {
-            margin-left: 250px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: calc(100% - 250px);
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .profile {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid white;
-        }
-
-        .menu ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .menu ul li {
-            padding: 12px 15px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .menu ul li:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
-
-        .race-container {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 900px;
-        }
-
-        .race-header {
-            background-color: #fc4c02;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        th {
-            background-color: #f8f8f8;
-            font-weight: bold;
-        }
-
-        .race-status {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8em;
-        }
-
-        .active {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .upcoming {
-            background-color: #2196F3;
-            color: white;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-
-            .left-sidebar {
-                width: 100%;
-                height: auto;
-                position: static;
-            }
-
-            .main-content {
-                margin-left: 0;
-                width: 100%;
-            }
-        }
-    </style>
+    <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/race/racelist.css}">
+    <script th:src="@{/js/raceAction.js}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div class="left-sidebar">
-        <div class="profile">
-            <!-- Uncomment and replace with actual image path when needed -->
-            <!-- <img src="your-image.jpg" alt="Profile Picture" class="profile-img"> -->
-            <h2>Shawn Jonathan Chandra</h2>
-            <p>Following: 0 | Followers: 0 | Activities: 15</p>
-        </div>
-        <div class="menu">
-            <ul>
-                <li>Dashboard</li>
-                <li>Training</li>
-                <li>Maps</li>
-                <li>Challenges</li>
-            </ul>
-        </div>
-    </div>
+    
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
 
-    <div class="main-content">
-        <div class="race-container">
-            <div class="race-header">
-                <h1>Active Races</h1>
+    <div class="page-container">
+        <th:block th:replace="~{/layout/sidebar :: sidebar}"></th:block>
+
+        <!-- Rest of your page content -->
+            <div class="main-content">
+                <div class="race-grid">
+                    <!-- Left Side - Joined Races -->
+                    <div class="race-container">
+                        <div class="race-header">
+                            <h1>My Races</h1>
+                        </div>
+                        
+                        <div th:if="${joined_obj.success}">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Race Name</th>
+                                        <th>Distance</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="av: ${joined}" >
+                                        <td th:text="${av.judul}">Coastal Run</td>
+                                        <td th:text="${av.jarak}">10 km</td>
+                                        <td th:text="${av.createdAt}">June 22, 2023</td>
+                                        <td th:text="${av.kuota_max}">87/100</td>
+                                        <td>
+                                            <button class="go-challenge" th:data-id="${av.idActivity}">
+                                                <a th:href="@{/race/challenge/{id}(id=${av.idActivity})}">
+
+                                                    Go To Challenge
+                                                </a>
+                                            </button></td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                        <span th:unless="${joined_obj.success}" th:text="${joined_obj.message}" style=""></span>
+                    </div>
+        
+                    <!-- Right Side - Available Races -->
+                    <div class="race-container">
+                        <div class="race-header">
+                            <h1>Available Races</h1>
+                        </div>
+                        
+                        <div th:if="${available_obj.success}">
+                            <table>
+                                <thead>
+                                    <tr >
+                                        <th>Race Name</th>
+                                        <th>Distance</th>
+                                        <th>Date</th>
+                                        <th>Capacity</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="av: ${available}" >
+                                        <td th:text="${av.judul}">Coastal Run</td>
+                                        <td th:text="${av.jarak}">10 km</td>
+                                        <td th:text="${av.createdAt}">June 22, 2023</td>
+                                        <td th:text="${av.kuota_max}">87/100</td>
+                                        <td><button class="join-btn" th:data-id="${av.idActivity}">Join Race</button></td>
+                                    </tr>
+                                    
+                                </tbody>
+        
+                            </table>
+                        </div>
+                        <span th:unless="${available_obj.success}" th:text="${available_obj.message}" style=""></span>
+                    </div>
+                </div>
             </div>
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th>Race Name</th>
-                        <th>Distance</th>
-                        <th>Date</th>
-                        <th>Participants</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Mountain Trail Challenge</td>
-                        <td>21 km</td>
-                        <td>June 15, 2023</td>
-                        <td>145</td>
-                        <td><span class="race-status active">Active</span></td>
-                    </tr>
-                    <tr>
-                        <td>City Marathon</td>
-                        <td>42 km</td>
-                        <td>July 2, 2023</td>
-                        <td>320</td>
-                        <td><span class="race-status upcoming">Upcoming</span></td>
-                    </tr>
-                    <tr>
-                        <td>Coastal Run</td>
-                        <td>10 km</td>
-                        <td>June 22, 2023</td>
-                        <td>87</td>
-                        <td><span class="race-status active">Active</span></td>
-                    </tr>
-                    <tr>
-                        <td>Urban Cycling Race</td>
-                        <td>50 km</td>
-                        <td>August 10, 2023</td>
-                        <td>210</td>
-                        <td><span class="race-status upcoming">Upcoming</span></td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
     </div>
+    
 </body>
 </html>

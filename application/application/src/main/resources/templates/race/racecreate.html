@@ -3,177 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>Create New Race - Strava Style</title>
-    <style>
-        body {
-            font-family: 'Helvetica', Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            min-height: 100vh;
-        }
-
-        .left-sidebar {
-            width: 250px;
-            background-color: #fc4c02;
-            color: white;
-            height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
-            position: fixed;
-            left: 0;
-            top: 0;
-        }
-
-        .main-content {
-            margin-left: 250px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: calc(100% - 250px);
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .create-race-container {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 600px;
-            padding: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .create-race-btn {
-            background-color: #fc4c02;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-
-        .create-race-btn:hover {
-            background-color: #e64000;
-        }
-
-        .profile, .menu {
-            /* Styles from previous page */
-            text-align: center;
-        }
-
-        .menu ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .menu ul li {
-            padding: 12px 15px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .menu ul li:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
-
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-
-            .left-sidebar {
-                width: 100%;
-                height: auto;
-                position: static;
-            }
-
-            .main-content {
-                margin-left: 0;
-                width: 100%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/race/create.css}">
 </head>
 <body>
-    <div class="left-sidebar">
-        <div class="profile">
-            <h2>Shawn Jonathan Chandra</h2>
-            <p>Following: 0 | Followers: 0 | Activities: 15</p>
-        </div>
-        <div class="menu">
-            <ul>
-                <li>Dashboard</li>
-                <li>Training</li>
-                <li>Maps</li>
-                <li>Challenges</li>
-            </ul>
-        </div>
-    </div>
-
+    <!-- <th:block th:replace="~{/layout/navbar :: navbar}"></th:block> -->
+    <th:block th:replace="~{/layout/sidebar :: sidebar}"></th:block>
     <div class="main-content">
         <div class="create-race-container">
             <h2 style="color: #fc4c02; text-align: center;">Create New Race</h2>
-            <form>
+
+            <form th:action="@{/race/add}" method="post">
+                
                 <div class="form-group">
                     <label>Race Name</label>
-                    <input type="text" placeholder="Enter race name" required>
+                    <input type="text" id="title" name="judul" placeholder="Enter race name" required>
                 </div>
 
                 <div class="form-group">
                     <label>Race Type</label>
-                    <select required>
+                    <select id="sport" name="tipe_race" required>
                         <option value="">Select Race Type</option>
-                        <option value="running">Running</option>
-                        <option value="cycling">Cycling</option>
-                        <option value="swimming">Swimming</option>
-                        <option value="triathlon">Triathlon</option>
+                        <option value="run">Running</option>
+                        <option value="bike">Cycling</option>
+                        <option value="swim">Swimming</option>
                     </select>
                 </div>
-
+                
                 <div class="form-group">
-                    <label>Distance</label>
-                    <input type="number" placeholder="Enter race distance" required>
+                    <label>Max Distance</label>
+                    <input type="number"  id="distance" name="jarak"  placeholder="Enter race distance" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Date Start</label>
+                    <input type="date" id="date-time" name="createdAt" required>
                 </div>
 
-                <div class="form-group">
-                    <label>Date</label>
-                    <input type="date" required>
-                </div>
+                <label for="duration">Duration</label>
+                <div class="duration-input">
+                    <input type="number" id="days" name="days" placeholder="0" min="0" max="30" required> days
+                    <input type="number" id="hours" name="hours" placeholder="0" min="0" max="23" required> hours
+                    <input type="number" id="minutes" name="minutes" placeholder="0" min="0" max="59" required> minutes
 
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea placeholder="Enter race description" rows="4"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label>Maximum Participants</label>
-                    <input type="number" placeholder="Enter max participants">
+                    <input type="number" name="kuota" placeholder="Enter max participants">
                 </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea placeholder="Enter race description" id="description" name="description" rows="4" style="resize: none;"></textarea>
+                </div>
+
 
                 <button type="submit" class="create-race-btn">Create Race</button>
             </form>

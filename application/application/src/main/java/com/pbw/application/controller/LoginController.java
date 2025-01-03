@@ -38,7 +38,7 @@ public class LoginController {
                 return "dashboard";
             }
             
-            model.addAttribute("error", "test message");
+            // model.addAttribute("error", "test message");
 
         return "login";
     }
