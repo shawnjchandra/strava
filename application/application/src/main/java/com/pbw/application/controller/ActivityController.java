@@ -36,8 +36,13 @@ public class ActivityController {
     private ImageService imageService;
 
     @GetMapping
-    public String getAllActivities(Model model) {
-        List<Activity> activities = activityService.findAll();
+    public String getAllActivities(
+        Model model,
+        HttpSession httpSession
+        ) {
+        int id_runner = (int)httpSession.getAttribute("id_user");
+
+        List<Activity> activities = activityService.findAll(id_runner);
         model.addAttribute("activities", activities);
         return "/activity/activity";
     }
