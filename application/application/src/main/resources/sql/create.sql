@@ -45,6 +45,7 @@
 	CREATE TABLE RaceParticipants(
 		id_runner int references Runners(id_runner) not null,
 		id_race int references Activity(id_race) not null
+		id_training int NULL;
 		
 	);
 
