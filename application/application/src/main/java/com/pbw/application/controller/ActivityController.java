@@ -84,10 +84,10 @@ public class ActivityController {
         // tipe training
         CustomResponse<String> isAdded = imageService.addImage(file, id_runner, nextIdActivity,"T");
         
-        if(!isAdded.isSuccess()){
+        // if(!isAdded.isSuccess()){
 
-            System.out.println(isAdded.getMessage());
-        }
+        //     System.out.println(isAdded.getMessage());
+        // }
 
         // ====================================================
         // Format durasi sebagai hh:mm:ss

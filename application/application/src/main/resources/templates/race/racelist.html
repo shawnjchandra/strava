@@ -11,90 +11,108 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+    <!-- Navbar -->
+    <!-- <th:block th:replace="~{/layout/navbar :: navbar}"></th:block> -->
+
+    <!-- Main Layout -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="profile">
+                <!-- Uncomment and replace with actual image path if needed -->
+                <!-- <img src="your-image.jpg" alt="Profile Picture" class="profile-img"> -->
+                <h2>Shawn Jonathan Chandra</h2>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li>Dashboard</li>
+                    <li>Training</li>
+                    <li>Maps</li>
+                    <li>Challenges</li>
+                </ul>
+                <ul>
+                    <li>
+                        <a th:href="@{/race/create}">Create a Race</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- <div class="page-container"> -->
+                <div class="main-content">
+                    <div class="race-grid">
+              
+                        <div class="race-container">
+                            <div class="race-header">
+                                <h1>My Races</h1>
+                            </div>
     
-    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
-
-    <div class="page-container">
-        <th:block th:replace="~{/layout/sidebar :: sidebar}"></th:block>
-
-        <!-- Rest of your page content -->
-            <div class="main-content">
-                <div class="race-grid">
-                    <!-- Left Side - Joined Races -->
-                    <div class="race-container">
-                        <div class="race-header">
-                            <h1>My Races</h1>
-                        </div>
-                        
-                        <div th:if="${joined_obj.success}">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Race Name</th>
-                                        <th>Distance</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr th:each="av: ${joined}" >
-                                        <td th:text="${av.judul}">Coastal Run</td>
-                                        <td th:text="${av.jarak}">10 km</td>
-                                        <td th:text="${av.createdAt}">June 22, 2023</td>
-                                        <td th:text="${av.kuota_max}">87/100</td>
-                                        <td>
-                                            <button class="go-challenge" th:data-id="${av.idActivity}">
-                                                <a th:href="@{/race/challenge/{id}(id=${av.idActivity})}">
-
-                                                    Go To Challenge
+                            <div th:if="${joined_obj.success}">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Race Name</th>
+                                            <th>Distance</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="av: ${joined}">
+                                            <td th:text="${av.judul}">Coastal Run</td>
+                                            <td th:text="${av.jarak}">10 km</td>
+                                            <td th:text="${av.createdAt}">June 22, 2023</td>
+                                            <td th:text="${av.kuota_max}">87/100</td>
+                                            <td>
+                                                <a th:href="@{/race/challenge/{id}(id=${av.idActivity})}" class="btn go-challenge">
+                                                    Check
                                                 </a>
-                                            </button></td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>
-                            
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <span th:unless="${joined_obj.success}" th:text="${joined_obj.message}"></span>
                         </div>
-                        <span th:unless="${joined_obj.success}" th:text="${joined_obj.message}" style=""></span>
-                    </div>
-        
-                    <!-- Right Side - Available Races -->
-                    <div class="race-container">
-                        <div class="race-header">
-                            <h1>Available Races</h1>
+    
+                        <!-- Right Side - Available Races -->
+                        <div class="race-container">
+                            <div class="race-header">
+                                <h1>Available Races</h1>
+                            </div>
+    
+                            <div th:if="${available_obj.success}">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Race Name</th>
+                                            <th>Distance</th>
+                                            <th>Date</th>
+                                            <th>Capacity</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="av: ${available}">
+                                            <td th:text="${av.judul}">Coastal Run</td>
+                                            <td th:text="${av.jarak}">10 km</td>
+                                            <td th:text="${av.createdAt}">June 22, 2023</td>
+                                            <td th:text="${av.kuota_max}">87/100</td>
+                                            <td>
+                                                <button class="join-btn" th:data-id="${av.idActivity}">Join</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <span th:unless="${available_obj.success}" th:text="${available_obj.message}"></span>
                         </div>
-                        
-                        <div th:if="${available_obj.success}">
-                            <table>
-                                <thead>
-                                    <tr >
-                                        <th>Race Name</th>
-                                        <th>Distance</th>
-                                        <th>Date</th>
-                                        <th>Capacity</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr th:each="av: ${available}" >
-                                        <td th:text="${av.judul}">Coastal Run</td>
-                                        <td th:text="${av.jarak}">10 km</td>
-                                        <td th:text="${av.createdAt}">June 22, 2023</td>
-                                        <td th:text="${av.kuota_max}">87/100</td>
-                                        <td><button class="join-btn" th:data-id="${av.idActivity}">Join Race</button></td>
-                                    </tr>
-                                    
-                                </tbody>
-        
-                            </table>
-                        </div>
-                        <span th:unless="${available_obj.success}" th:text="${available_obj.message}" style=""></span>
                     </div>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
+
+        
     </div>
-    
 </body>
 </html>

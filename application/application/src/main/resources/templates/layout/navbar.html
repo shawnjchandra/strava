@@ -25,7 +25,7 @@
             <div class="auth-links">
                 <a th:if="${session.status} == null" th:href="@{/login}" class="login-btn">Login</a>
                 <a th:if="${session.status} == null" th:href="@{/register}" class="register-btn">Register</a>
-                <a th:if="${session.status} != null" href="" class="signout-btn">Sign out</a>
+                <a th:if="${session.status} != null" th:href="@{/logout}" class="signout-btn">Sign out</a>
             </div>
         </nav>
     </div>
