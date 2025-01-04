@@ -11,10 +11,48 @@
 <body>
     <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
 
-    
     <div class="page-container">
+        <div class="participants-sidebar">
+            <div class="participants-header">
+                <h2>Race Participants</h2>
+
+                <span class="participant-count" th:text="${numberOfParticipants} + '/' + ${race.kuota_max}">145/200</span>
+            </div>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Search participants..." id="participantSearch">
+            </div>
+            
+            <div class="participants-list">
+             
+                <div class="participant-card" th:each="participant : ${participants.data}">
+
+                    <!-- <div class="participant-avatar">
+                        <img th:src="${participant.profileImage}" alt="Profile" 
+                             onerror="this.src='/images/default-avatar.png'">
+                    </div> -->
+                    <div class="participant-info">
+                        <h3 th:text="${participant.user.nama}">John Doe</h3>
+                        
+                        <div th:if="${participant.activity.success}">
+                                
+                            <span class="distance-info">
+                                <span th:text="${participant.activity.data.jarak}">21</span>
+                                <span class="unit">km</span>
+                            </span>
+                        </div>
+                    <div th:unless="${participant.activity.success}">
+                    
+                        <span class="no-submission" th:text="${participant.activity.message}"> </span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
         
-        <th:block th:replace="~{/layout/sidebar :: sidebar}"></th:block>
+        <!-- <th:block th:replace="~{/layout/sidebar :: sidebar}"></th:block> -->
 
         
         
@@ -66,8 +104,8 @@
                 </div>
 
                 <div class="upload-section">
-                    <div class="upload-grid">
-                        <!-- Submit Race Evidence Form -->
+                    <!-- <div class="upload-grid">
+                        
                         <div class="upload-form">
                             <h2>Submit Race Evidence</h2>
                             <form th:action="@{/race/upload}" method="post" enctype="multipart/form-data">
@@ -79,20 +117,27 @@
                             </form>
                         </div>
                 
-                        <!-- "OR" Text -->
+                       
                         <div class="or-text">
                             <p>OR</p>
-                        </div>
+                        </div> -->
                 
                         <!-- Choose from Available Activities Form -->
-                        <div class="take-from-available-activity">
+                        <div th:if="${submission.activity.success}">
+                            <span>You have submitted an activity for this race / challenge</span>
+                            <div>
+                                <span th:text="'Title Of Submitted Activity: '+${submission.activity.data.judul}"></span><br>
+                                <span th:text="'Distance :'+${submission.activity.data.jarak}+' km'"></span>
+                            </div>
+                        </div>
+                        <div class="take-from-available-activity" th:unless="${submission.activity.success}" >
                             <h2>Choose from Available Activities</h2>
-                            <form th:action="@{/race/selectActivity}" method="post">
+                            <form th:action="@{/race/challenge/{id}/selectActivity(id=${id})}" method="post">
                                 <div class="dropdown-container">
                                     <label for="activity">Select an activity:</label>
                                     <select name="activityId" id="activity" required>
                                         <option value="" disabled selected>Select an activity</option>
-                                        <option th:each="activity : ${availableActivities}" 
+                                        <option th:if="${availableActivities.success}" th:each="activity : ${availableActivities.data}"  
                                                 th:value="${activity.idActivity}" 
                                                 th:text="${activity.judul + ' - ' + activity.jarak + ' km'}">
                                             Activity Name
@@ -102,13 +147,15 @@
                                 <button type="submit" class="select-button">Submit</button>
                             </form>
                         </div>
+
+                        
                     </div>
                 </div>
                 
                 
             </div>
-        </div>
-    </div>
+        
+    
 
 </body>
 </html>
