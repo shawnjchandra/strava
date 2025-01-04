@@ -49,5 +49,8 @@ public class UserService {
         return user.getPassword().equals(user.getConfirmpassword()) ? true : false;
     }
 
+    public User getUserByIdRunner(int id_runner){
+        return userRepository.getUserByIdRunner(id_runner);
+    }
     
 }

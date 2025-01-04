@@ -2,6 +2,7 @@ package com.pbw.application.race;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +40,13 @@ public class JDBCRaceRepo implements RaceRepository {
         String sql = "INSERT INTO raceparticipants (id_runner, id_race) VALUES (?,?)";
 
         return jdbcTemplate.update(sql, id_runner,id_race) > 0 ? true: false;
+    }
+
+    @Override
+    public boolean addSubmissionToRace(int id_runner, int id_race, int id_training) {
+        String sql = "UPDATE raceparticipants SET id_training = ? WHERE id_runner = ? AND id_race = ?";
+
+        return jdbcTemplate.update(sql, id_training, id_runner, id_race)>0 ? true: false;
     }
 
     @Override
@@ -82,6 +90,19 @@ public class JDBCRaceRepo implements RaceRepository {
     }
 
     @Override
+    public int getIdTrainingByIdActivity(int id_activity) {
+        String sql = "Select id_training FROM activity WHERE id_activity = ?";
+
+        try {
+            return jdbcTemplate.queryForObject(sql, Integer.class, id_activity);
+        } catch (EmptyResultDataAccessException e) {
+            return -1; 
+        }
+    
+    }
+
+
+    @Override
     public Optional<Activity> getActivityByIdActivity(int id_activity) {
         String sql = "Select * FROM activity WHERE id_activity = ?";
 
@@ -90,8 +111,22 @@ public class JDBCRaceRepo implements RaceRepository {
        return result.size()  == 0 ? Optional.empty(): Optional.of(result.get(0));
     }
 
+    @Override
+    public List<Integer> getAllParticipantsOfSpecificRace(int id_race) {
+        String sql = "SELECT id_runner FROM raceparticipants WHERE id_race = ?";
+
+        List<Integer> result = jdbcTemplate.query(sql, this::mapIdRaceToRP, id_race);
+
+        return result.size()>0 ? result : null;
+
+    }
+
     private int mapIdRunnerToRP(ResultSet rSet, int rowNum) throws SQLException {
         return rSet.getInt("id_race");
+    }
+
+    private int mapIdRaceToRP(ResultSet rSet, int rowNum) throws SQLException {
+        return rSet.getInt("id_runner");
     }
     
     private Activity mapIdToActivityRace(ResultSet rSet, int rowNum) throws SQLException{
@@ -110,8 +145,6 @@ public class JDBCRaceRepo implements RaceRepository {
     }
 
     
-
-
 
 
 

@@ -24,9 +24,13 @@ import com.pbw.application.activity.ActivityService;
 import com.pbw.application.custom.CustomResponse;
 import com.pbw.application.hash.HashService;
 import com.pbw.application.race.RaceService;
+import com.pbw.application.user.User;
+import com.pbw.application.user.UserService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.Null;
+import lombok.Getter;
+import lombok.Setter;
 
 @Controller
 @RequestMapping("/race")
@@ -37,6 +41,10 @@ public class RaceController {
 
     @Autowired
     private RaceService raceService;
+
+    @Autowired
+        private UserService userService;
+
 
     @Autowired
     private HashService hashService;
@@ -140,18 +148,84 @@ public class RaceController {
         Activity race = raceService.getActivityByIdActivity(id_activity);
         
 
-
+        int id_runner = (int)httpSession.getAttribute("id_user");
+        
         // TODO: nanti harus buat yang training nya sendiri
-        List<Activity> activities = activityService.findAll();
+        CustomResponse<List<Activity>> activities = activityService.findTrainingOnlyByIdRunner(id_runner);
 
+        List<Integer> participants = raceService.getParticipantsOfSpecificRace(id_activity);
 
+        List<Participant> raceParticipants = new ArrayList<>();
+        
+        // TODO: belum tau kalau harus dicek si racenya kosong atau ga
+        // Seharusnya ga, karena untuk nge cek racenya harus join, jadi selalu minimal 1
+        // Kecuali kalau baru dibikin sama admin sih
 
+        // Bungkus pake customResponse
+        CustomResponse<List<Participant>> wrappedRaceParticipants;
+        
+        if (participants.size()>0) {
+            
+            for(Integer participant : participants){
+                int participant_id = participant.intValue();
+    
+                Participant prt = new Participant().userOfThisRace(participant_id, id_activity);
+    
+                raceParticipants.add(prt);
+            }
 
+            wrappedRaceParticipants = new CustomResponse<>(true, "Capacity: "+raceParticipants.size(), raceParticipants);
+        
+        }else{
+            wrappedRaceParticipants = new CustomResponse<>(false,  "Capacity: "+raceParticipants.size(), raceParticipants);
+        }
+
+        // Untuk cek submission dari user ini
+        Participant sumbission = new Participant().userOfThisRace(id_runner, id_activity);
+        System.out.println("submission: "+sumbission.getActivity().isSuccess());
+        
+        
+        model.addAttribute("participants", wrappedRaceParticipants);
+        model.addAttribute("numberOfParticipants", wrappedRaceParticipants.getData().size());
+        
+        // nanti harus di cek kalo udah pernah submit, ga boleh nambah
+        model.addAttribute("submission", sumbission);
+
+        // Buat nambahin submission
+        model.addAttribute("id", id);
 
         model.addAttribute("availableActivities", activities);
         model.addAttribute("race", race);
 
         return "race/challenge";
+    }
+
+    @Getter
+    @Setter
+    class Participant{
+
+        
+
+        private CustomResponse<Activity> activity;
+        private User user;
+
+        protected Participant userOfThisRace(int id_runner, int id_activity){
+            Participant participant = new Participant();
+
+            User user = userService.getUserByIdRunner(id_runner);
+
+            int id_race = raceService.getIdRaceByIdActivity(id_activity);
+
+            CustomResponse<Activity> activity = activityService.getSubmitedActivityOnRace(id_runner, id_race);
+
+            // System.out.println(activity.isSuccess());
+
+            participant.setUser(user);
+            participant.setActivity(activity);
+
+            return participant;
+        }
+        
     }
 
     @PostMapping("/join/{id}")
@@ -171,4 +245,30 @@ public class RaceController {
 
         return ResponseEntity.ok(result.getMessage());
     }
+
+    @PostMapping("/challenge/{id}/selectActivity")
+    public String addSubmission(
+        @PathVariable("id") String id,
+        @RequestParam("activityId") String activityId,
+        Model model,
+        HttpSession httpSession
+    ) throws NumberFormatException, IOException{
+
+        int id_runner = (int)httpSession.getAttribute("id_user");
+
+        // id activity dari race
+        int id_activity_race = Integer.valueOf(hashService.getIdByHashedId(id));
+
+        // id activity dari training yang disubmit
+        int id_activity_training = Integer.valueOf(activityId);
+
+        boolean res = raceService.addSubmissionToRace(id_runner, id_activity_race, id_activity_training);
+
+        // if(!res){
+        //     return
+        // }
+
+        return "redirect:/race/challenge/"+id;
+    }
+
 }

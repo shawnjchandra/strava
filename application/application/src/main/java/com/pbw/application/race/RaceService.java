@@ -101,9 +101,17 @@ public class RaceService {
         Optional<Activity> result = raceRepository.getActivityByIdActivity(id_activity);
  
         return result.isPresent() == true ? result.get() : null; 
-     }
+    }
 
-    private int getIdRaceByIdActivity(int id_activity){
+    public List<Integer> getParticipantsOfSpecificRace(int id_activity){
+        int id_race = getIdRaceByIdActivity(id_activity);
+
+        List<Integer> participantIds = raceRepository.getAllParticipantsOfSpecificRace(id_race);
+        
+        return participantIds;
+    }
+
+    public int getIdRaceByIdActivity(int id_activity){
         return raceRepository.getIdRaceByIdActivity(id_activity);
     }
     
@@ -116,5 +124,17 @@ public class RaceService {
     private List<Integer> getFromRaceParticipants(int id_runner){
         return raceRepository.getFromRaceParticipants(id_runner);
     }
+
+    public int getIdTrainingByIdActivity(int id_activity){
+        return raceRepository.getIdTrainingByIdActivity(id_activity);
+    }
+
+    public boolean addSubmissionToRace(int id_runner, int id_activity_race, int id_activity_training){
+        int id_race = getIdRaceByIdActivity(id_activity_race);
+
+        int id_training = getIdTrainingByIdActivity(id_activity_training);
+        
+        return raceRepository.addSubmissionToRace(id_runner, id_race, id_training);
+    } 
 
 }

@@ -40,8 +40,9 @@ public class MainController {
         
    
         String nama = ((User)httpSession.getAttribute("status")).getNama();
+        int id_runner = (int)httpSession.getAttribute("id_user");
 
-        List<Activity> activities = activityService.findAll();
+        List<Activity> activities = activityService.findAll(id_runner);
 
         int id = (int)httpSession.getAttribute("id_user");
         

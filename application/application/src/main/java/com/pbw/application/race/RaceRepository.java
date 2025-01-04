@@ -9,12 +9,18 @@ public interface RaceRepository {
 
     public Optional<Activity> getActivityByIdRace(int id_race);
     public Optional<Activity> getActivityByIdActivity(int id_activity);
-    public List<Integer> getFromRaceParticipants(int id_runner);
+    public List<Integer> getAllParticipantsOfSpecificRace(int id_race);
+    public List<Activity> getAllRace();
+    
     public boolean joinRace(int id_runner, int id_race);
     public boolean addRace(Activity activity, int id_admin);
+    public boolean addSubmissionToRace(int id_runner, int id_race, int id_training);
     
-    public List<Activity> getAllRace();
     public int getIdRaceByIdActivity(int id_activity);
+    public int getIdTrainingByIdActivity(int id_activity);
     
-    
+    // Lupa buat dispesifikin
+    public List<Integer> getFromRaceParticipants(int id_runner);
+
+
 }
