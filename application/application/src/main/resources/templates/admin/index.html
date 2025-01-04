@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
+
+    <!-- Main Layout -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="profile">
+                <!-- Uncomment and replace with actual image path if needed -->
+                <!-- <img src="your-image.jpg" alt="Profile Picture" class="profile-img"> -->
+                <h2>Shawn Jonathan Chandra</h2>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li>Dashboard</li>
+                    <li>Training</li>
+                    <li>Maps</li>
+                    <li>Challenges</li>
+                </ul>
+                <ul>
+                    <li>
+                        <a th:href="@{/race/create}">Create a Race</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+    <span th:text="${admin}"></span>
+</body>
+</html>
