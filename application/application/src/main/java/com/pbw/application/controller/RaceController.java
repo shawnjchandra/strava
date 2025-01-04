@@ -76,9 +76,10 @@ public class RaceController {
     }
 
     @GetMapping("/create")
-    // @RequiredRole("admin")
+    @RequiredRole("admin")
     public String getCreateRace(){
-        return "race/racecreate";
+
+        return "race/create";
     }
 
     @PostMapping("/add")
