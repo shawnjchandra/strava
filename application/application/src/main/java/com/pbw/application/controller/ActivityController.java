@@ -45,7 +45,7 @@ public class ActivityController {
         List<Activity> act = activityService.findAll(id_runner);
 
         CustomResponse<List<Activity>> activities;
-        if(act.size()>0){
+        if(act != null||act.size()>0){
             activities = new CustomResponse<>(true,"Found Activities", act);
         }else{
             activities = new CustomResponse<>(false,"No Activities Available",null);
