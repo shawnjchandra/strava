@@ -7,5 +7,7 @@ public interface UserRepository {
     Optional<User> findByEmail(String Email);
 
     int getIdUsersByEmail(String email);
+
+    User getUserByIdRunner(int id_runner);
     
 } 
