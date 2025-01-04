@@ -42,7 +42,15 @@ public class ActivityController {
         ) {
         int id_runner = (int)httpSession.getAttribute("id_user");
 
-        List<Activity> activities = activityService.findAll(id_runner);
+        List<Activity> act = activityService.findAll(id_runner);
+
+        CustomResponse<List<Activity>> activities;
+        if(act.size()>0){
+            activities = new CustomResponse<>(true,"Found Activities", act);
+        }else{
+            activities = new CustomResponse<>(false,"No Activities Available",null);
+        }
+
         model.addAttribute("activities", activities);
         return "/activity/activity";
     }

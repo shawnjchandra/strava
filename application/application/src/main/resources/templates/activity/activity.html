@@ -25,32 +25,39 @@
         </header>
 
         <main>
-            <h2 th:text="${activities.size()} + ' Activities'">0 Activities</h2>
-            <button id="add" th:onclick="|window.location.href='@{/activity/add}'|">Add Training Activity</button>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Sport</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Distance</th>
-                        <th>Duration</th>
-                        <th>Elevation</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="activity : ${activities}">
-                        <td th:text="${activity.judul}">Morning Run</td>
-                        <td th:text="${activity.tipeTraining}">Run</td>
-                        <td th:text="${activity.createdAt}">2023-01-01</td>
-                        <td th:text="${activity.durasi}">00:30:00</td>
-                        <td th:text="${activity.jarak} + ' km'">5 km</td>
-                        <td th:text="${activity.durasi}">00:30:00</td>
-                        <td th:text="${activity.elevasi} + ' ft'">100 ft</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div th:if="${activities.success}">
+                <h2 th:text="${activities.data.size()} + ' Activities'">0 Activities</h2>
+                <button id="add" th:onclick="|window.location.href='@{/activity/add}'|">Add Training Activity</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Sport</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Distance</th>
+                            <th>Duration</th>
+                            <th>Elevation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="activity : ${activities.data}">
+                            <td th:text="${activity.judul}">Morning Run</td>
+                            <td th:text="${activity.tipeTraining}">Run</td>
+                            <td th:text="${activity.createdAt}">2023-01-01</td>
+                            <td th:text="${activity.durasi}">00:30:00</td>
+                            <td th:text="${activity.jarak} + ' km'">5 km</td>
+                            <td th:text="${activity.durasi}">00:30:00</td>
+                            <td th:text="${activity.elevasi} + ' ft'">100 ft</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div th:unless="${activities.success}">
+                <span th:text="${activities.message}"></span>
+
+            </div>
         </main>
 
         <footer>
