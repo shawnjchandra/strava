@@ -1,18 +1,23 @@
-<!-- Create a new file called sidebar.html in your templates/layout folder -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+    <title>Document</title>
 </head>
 <body>
-    <div th:fragment="sidebar" class="sidebar">
-        
-       <!-- Main Layout -->
-    <div class="container-bar">
+    <!-- Navbar -->
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
+
+    <!-- Main Layout -->
+    <div class="container">
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="profile">
-
+                <!-- Uncomment and replace with actual image path if needed -->
+                <!-- <img src="your-image.jpg" alt="Profile Picture" class="profile-img"> -->
                 <h2>Shawn Jonathan Chandra</h2>
             </div>
             <div class="menu">
@@ -29,7 +34,7 @@
                 </ul>
             </div>
         </div>
- 
-    </div>
+    
+    <span th:text="${admin}"></span>
 </body>
 </html>

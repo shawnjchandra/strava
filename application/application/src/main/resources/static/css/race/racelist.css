@@ -1,4 +1,3 @@
-/* Global Styles */
 :root {
     --primary-color: #fc5200;
     --secondary-color: #242428;
@@ -9,52 +8,49 @@
     --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-}
-
-/* Page Layout */
+/* Layout */
 .page-container {
-    display: flex;
-    min-height: 100vh;
+    flex: 1;
+    padding: 20px;
+    overflow-x: auto;
+}
+.main-content {
+    margin: 20px;
 }
 
-
-
-/* Main Content */
-.main-content {
-    flex: 1;
-    margin-left: var(--sidebar-width);
-    padding: 24px;
+/* Race Grid Layout */
+.race-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
 }
 
 .race-container {
-    background-color: white;
+    background: white;
     border-radius: var(--border-radius);
-    padding: 24px;
     box-shadow: var(--shadow);
-    margin-left: 32px;
+    padding: 1.5rem;
 }
 
+/* Header Styling */
 .race-header {
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--background-color);
 }
 
 .race-header h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: var(--secondary-color);
     margin: 0;
 }
 
-/* Table Styles */
+/* Table Styling */
 table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 16px;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1rem;
 }
 
 thead {
@@ -63,7 +59,7 @@ thead {
 
 th {
     text-align: left;
-    padding: 16px;
+    padding: 1rem;
     font-weight: 600;
     color: var(--secondary-color);
     font-size: 0.9rem;
@@ -72,98 +68,155 @@ th {
 }
 
 td {
-    padding: 16px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+    border-bottom: 1px solid var(--background-color);
+    color: var(--text-color);
 }
 
-tbody tr:hover {
-    background-color: var(--background-color);
+tr:last-child td {
+    border-bottom: none;
 }
 
-/* Status Badges */
-.race-status {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 500;
-}
-
-.active {
-    background-color: #e6f7ed;
-    color: #0a7b3d;
-}
-
-.upcoming {
-    background-color: #fff4e6;
-    color: #b95000;
-}
-
-/* Add these styles to your existing CSS */
-
-.race-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    width: 100%;
-}
-
-.race-container {
-    background-color: white;
+/* Button Styling */
+.join-btn, .go-challenge {
+    padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
-    padding: 24px;
-    box-shadow: var(--shadow);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
 }
 
 .join-btn {
     background-color: var(--primary-color);
     color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
 }
 
 .join-btn:hover {
-    background-color: #e64000;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(252, 82, 0, 0.2);
+    background-color: #e64a00;
 }
 
-.join-btn:active {
-    transform: translateY(0);
-    box-shadow: none;
+.go-challenge {
+    background-color: var(--background-color);
+    border: 1px solid var(--primary-color);
 }
 
+.go-challenge a {
+    color: var(--primary-color);
+    text-decoration: none;
+    display: block;
+}
 
-/* Responsive adjustments */
+.go-challenge:hover {
+    background-color: var(--primary-color);
+}
+
+.go-challenge:hover a {
+    color: white;
+}
+
+/* Status Messages */
+span:not([class]) {
+    display: block;
+    padding: 1rem;
+    text-align: center;
+    color: var(--secondary-color);
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    margin-top: 1rem;
+}
+
+/* Add layout styles */
+        .container {
+            display: flex;
+            flex-direction: row;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #f4f4f4;
+            flex-shrink: 0;
+            padding: 20px;
+            border-right: 1px solid #ddd;
+        }
+        .page-container {
+            flex: 1;
+            padding: 20px;
+        }
+        .main-content {
+            margin: 20px;
+        }
+        .profile {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile h2 {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+        .menu ul {
+            list-style: none;
+            padding: 0;
+        }
+        .menu ul li {
+            margin: 10px 0;
+        }
+        .menu ul li a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        .menu ul li a:hover {
+            text-decoration: underline;
+        }
+
+/* Responsive Design */
 @media (max-width: 1200px) {
     .race-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 1.5rem;
     }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
-    .left-sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
-
-    .main-content {
-        margin-left: 0;
-    }
-
     .page-container {
-        flex-direction: column;
+        margin-left: 0;
+        padding: 1rem;
     }
 
     table {
         display: block;
         overflow-x: auto;
+        white-space: nowrap;
     }
+
+    th, td {
+        padding: 0.75rem;
+    }
+
+    .race-container {
+        padding: 1rem;
+    }
+
+    .race-header h1 {
+        font-size: 1.25rem;
+    }
+}
+
+/* Additional Enhancements */
+tr {
+    transition: background-color 0.2s ease;
+}
+
+tr:hover {
+    background-color: var(--background-color);
+}
+
+/* Empty State Styling */
+.race-container:empty::after {
+    content: 'No races available';
+    display: block;
+    text-align: center;
+    padding: 2rem;
+    color: var(--secondary-color);
+    font-style: italic;
 }
