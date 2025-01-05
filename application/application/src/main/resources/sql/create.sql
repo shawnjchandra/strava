@@ -49,6 +49,11 @@
 		
 	);
 
+	CREATE TABLE Kota(
+		id_kota INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+		nama VARCHAR(255)
+	);
+
 -- Create sequences for training and race IDs
 CREATE SEQUENCE training_id_seq START 1;
 CREATE SEQUENCE race_id_seq START 1;
