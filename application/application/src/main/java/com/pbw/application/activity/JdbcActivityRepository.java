@@ -1,5 +1,6 @@
 package com.pbw.application.activity;
 
+import org.aspectj.internal.lang.annotation.ajcDeclareAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,12 +16,21 @@ public class JdbcActivityRepository implements ActivityRepository {
     private JdbcTemplate jdbcTemplate;
 
     private static final String FIND_ALL_QUERY = "SELECT * FROM Activity";
-    private static final String INSERT_QUERY = "INSERT INTO activity (judul, tipe_training, createdAt, durasi, jarak, elevasi, description, id_runner) VALUES (?, ?::tipeAct, ?, ?, ?, ?, ?, ?)";
+
+    private static final String FIND_ALL_BY_USER_QUERY = "SELECT * FROM Activity WHERE id_runner = ?";
+
+    private static final String INSERT_QUERY = "INSERT INTO activity (judul, tipe_training, createdAt, durasi, jarak, elevasi, description, id_runner, urlpath) VALUES (?, ?::tipeAct, ?::date, ?, ?, ?, ?, ?,?)";
 
     @Override
     public List<Activity> findAll() {
         return jdbcTemplate.query(FIND_ALL_QUERY, new ActivityRowMapper());
     }
+
+    @Override
+    public List<Activity> findAllByUserId(int idRunner) {
+        return jdbcTemplate.query(FIND_ALL_BY_USER_QUERY, new ActivityRowMapper(), idRunner);
+    }
+
 
     @Override
     public void save(Activity activity) {
@@ -32,7 +42,8 @@ public class JdbcActivityRepository implements ActivityRepository {
             activity.getJarak(),
             activity.getElevasi(),
             activity.getDescription(),
-            activity.getIdRunner()
+            activity.getIdRunner(),
+            activity.getUrlpath()
         );
     }
 
@@ -49,7 +60,27 @@ public class JdbcActivityRepository implements ActivityRepository {
             activity.setElevasi(rs.getInt("elevasi"));
             activity.setDescription(rs.getString("description"));
             activity.setIdRunner(rs.getInt("id_runner"));
+            
+            // urlpath
+            activity.setUrlpath(rs.getString("urlpath"));
             return activity;
         }
     }
+
+    @Override
+    public int getIdActivity() {
+        String sql = "Select id_activity from activity ORDER BY id_activity DESC;";
+
+        List<Integer> res = jdbcTemplate.query(sql, this::mapIdActivity);
+
+        // kalau pertama masih kosong 0, return index nilai 0, tapi kalau bukan, return nilai pada index paling atas
+        return res.size() == 0 ? 0 : res.get(0) ;
+    }
+
+    private int mapIdActivity(ResultSet rSet, int rowNum) throws SQLException {
+        return rSet.getInt("id_activity");
+    }
+
+
+    
 }
