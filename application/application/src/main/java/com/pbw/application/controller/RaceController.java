@@ -3,6 +3,7 @@ package com.pbw.application.controller;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.pbw.application.RequiredRole;
 import com.pbw.application.activity.Activity;
 import com.pbw.application.activity.ActivityService;
+import com.pbw.application.activityWithEndDate.ActivityEndDateCalculator;
+import com.pbw.application.activityWithEndDate.ActivityWithEndDate;
+import com.pbw.application.admin.Admin;
 import com.pbw.application.custom.CustomResponse;
 import com.pbw.application.hash.HashService;
 import com.pbw.application.race.RaceService;
@@ -43,7 +47,10 @@ public class RaceController {
     private RaceService raceService;
 
     @Autowired
-        private UserService userService;
+    private UserService userService;
+    
+    @Autowired
+    private ActivityWithEndDate activityWithEndDate;
 
 
     @Autowired
@@ -111,15 +118,16 @@ public class RaceController {
 
         // int id_dmin = (int)httpSession.getAttribute("admin").getId_Admin();
 
-
-        String durasi = String.format("%d:%02d:%02d", days, hours, minutes);
+        // hardcode untuk menjadi jam
+        hours += days * 24;
+        String durasi = String.format("%02d:%02d:%02d", hours, minutes,0);
 
 
         Activity act = new Activity();
         act.setJudul(judul);
         act.setTipeRace(tipe_race);
-        act.setCreatedAt(LocalDate.parse(createdAt));
-        act.setDurasi(LocalTime.parse(durasi));
+        act.setCreatedAt(LocalDateTime.parse(createdAt + "T00:00:00"));
+        act.setDurasi(durasi);
         act.setKuota_max(kuota);
         act.setJarak(jarak);
         act.setDescription(description);
@@ -127,7 +135,8 @@ public class RaceController {
         CustomResponse<Null> res= raceService.addRace(act, id_admin);
 
         if(res.isSuccess()){
-            return "redirect:/race/";
+
+            return "redirect:/admin/index";
         }else{
             return "redirect:/race/create";
         }
@@ -142,21 +151,28 @@ public class RaceController {
         HttpSession httpSession
         ) throws NumberFormatException, IOException{
         
-
+        int id_runner = (int)httpSession.getAttribute("id_user");
         int id_activity = Integer.valueOf(hashService.getIdByHashedId(id));
 
-        Activity race = raceService.getActivityByIdActivity(id_activity);
+        // Race yang diambil
+        // Activity race = raceService.getActivityByIdActivity(id_activity);
         
+        
+        // TODO: Daftar training
+        CustomResponse<List<Activity>> listOfActivities = activityService.findTrainingOnlyByIdRunner(id_runner);
+        System.out.println("id activity buat race "+id_activity);
 
-        int id_runner = (int)httpSession.getAttribute("id_user");
+        ActivityWithEndDate race = activityWithEndDate.getSingleActWithEndDate(id_activity);
+            
+
+        // Ada error handling di dalam service nya apabila listOfActivities Null / tidak ada
+        CustomResponse<List<Activity>> availableActivities = activityService.filterTrainingAccordingDate(listOfActivities.getData(), race);
         
-        // TODO: nanti harus buat yang training nya sendiri
-        CustomResponse<List<Activity>> activities = activityService.findTrainingOnlyByIdRunner(id_runner);
 
         List<Integer> participants = raceService.getParticipantsOfSpecificRace(id_activity);
 
         List<Participant> raceParticipants = new ArrayList<>();
-        
+
         // TODO: belum tau kalau harus dicek si racenya kosong atau ga
         // Seharusnya ga, karena untuk nge cek racenya harus join, jadi selalu minimal 1
         // Kecuali kalau baru dibikin sama admin sih
@@ -194,7 +210,7 @@ public class RaceController {
         // Buat nambahin submission
         model.addAttribute("id", id);
 
-        model.addAttribute("availableActivities", activities);
+        model.addAttribute("availableActivities", availableActivities);
         model.addAttribute("race", race);
 
         return "race/challenge";
@@ -227,6 +243,8 @@ public class RaceController {
         }
         
     }
+
+    
 
     @PostMapping("/join/{id}")
     @ResponseBody

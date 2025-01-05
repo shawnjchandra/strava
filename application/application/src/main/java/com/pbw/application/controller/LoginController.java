@@ -40,7 +40,7 @@ public class LoginController {
         HttpSession httpSession,
         Model model ){
             if(httpSession.getAttribute("status") != null){
-                return "dashboard";
+                return "redirect:/dashboard";
             }
             
             // model.addAttribute("error", "test message");
