@@ -37,6 +37,7 @@ public class ActivityController {
 
     @GetMapping
     public String getAllActivities(
+        @RequestParam(defaultValue = "0") int page,
         Model model,
         HttpSession httpSession
         ) {
@@ -51,6 +52,8 @@ public class ActivityController {
             activities = new CustomResponse<>(false,"No Activities Available",null);
         }
 
+
+        model.addAttribute("currentPage", page);
         model.addAttribute("activities", activities);
         return "/activity/activity";
     }
