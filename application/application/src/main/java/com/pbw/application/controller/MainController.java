@@ -63,4 +63,26 @@ public class MainController {
     public String showMap(){
         return "mapmap";
     }
+    
+    @GetMapping("/homeRun")
+    public String runActivity(){
+        return "homeActivity";
+    }
+    @GetMapping("/homeCycle")
+    public String dashActivity(){
+        return "cycActivity";
+    }
+    @GetMapping("/homeSwim")
+    public String swimActivity(){
+        return "swimActivity";
+    }
+    @GetMapping("/homeFeature")
+    public String homeFeature(){
+        return "homeFeature";
+    }
+    @GetMapping("/homeChallenge")
+    public String homeChallenge(){
+        return "homeChallenge";
+    }
+
 }

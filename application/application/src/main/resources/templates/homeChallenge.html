@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strava Together Strong</title>
+    <link rel="icon" href="img/favicon.png">
+    <link rel="stylesheet" th:href="@{css/navbar.css}">
+    <link rel="stylesheet" th:href="@{css/index.css}">
+    <link rel="stylesheet" th:href="@{css/homeChallenge.css}">
+</head>
+<body>
+    <div th:replace="layout/navbar :: navbar3"></div>
+
+    <div class="challenges">
+        <h1>All Challenges</h1>
+        <ul class="chal-grid">
+            <li class="chal-content">
+                <img th:src="@{/img/chal.jpg}">
+                <div class="content-text">
+                    <h2>10K Challenge run</h2>
+                    <p>Complete 10km this week!</p>
+                    <a th:if="${session.status} == null" th:href="@{/register}" class="ctaBut">join Challenge</a>
+                </div>
+            </li>
+
+            <li class="chal-content">
+                <img th:src="@{/img/homeCy.jpg}">
+                <div class="content-text">
+                    <h2>Weekend 50k cycling challenge </h2>
+                    <p>Cycle 50 km this weekend!</p>
+                    <a th:if="${session.status} == null" th:href="@{/register}" class="ctaBut">join Challenge</a>
+                </div>
+            </li>
+
+            <li class="chal-content">
+                <img th:src="@{/img/swim.jpg}">
+                <div class="content-text">
+                    <h2>30minutes Non-stop swimming Challenge</h2>
+                    <p>Swim for 30 minutes Non-stop</p>
+                    <a th:if="${session.status} == null" th:href="@{/register}" class="ctaBut">join Challenge</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="challenges">
+        <h1>Swim Challenges</h1>
+        <ul class="chal-grid">
+            <li class="chal-content">
+                <img th:src="@{/img/swim.jpg}">
+                <div class="content-text">
+                    <h2>30minutes Non-stop swimming Challenge</h2>
+                    <p>Swim for 30 minutes Non-stop</p>
+                    <a th:if="${session.status} == null" th:href="@{/register}" class="ctaBut">join Challenge</a>
+                </div>
+            </li>
+
+            <li class="chal-content">
+                <img th:src="@{/img/swimChal.jpg}" style="filter:grayscale(100%);">
+                <div class="content-text">
+                    <h2>Ready to Challenge Yourself?</h2>
+                    <p class="chal-description">See other challenges and find the one that pushes you to the next level.</p>
+                    <a th:if="${session.status} == null" th:href="@{/register}" class="ctaBut">join With Us</a>
+                </div>
+            </li>
+            
+            
+        </ul>
+    </div>
+
+    <div class="challenges">
+        <h1>Run Challenges</h1>
+        <ul class="chal-grid">
+            <li class="chal-content">
+                <img th:src="@{/img/chal.jpg}">
+                <div class="content-text">
+                    <h2>10K Challenge run</h2>
+                    <p>Complete 10km this week!</p>
+                    <a th:if="${session.status} == null" th:href="@{/register}" class="ctaBut">join Challenge</a>
+                </div>
+            </li>
+
+            <li class="chal-content">
+                <img th:src="@{/img/runChal.jpg}" style="filter:grayscale(100%);">
+                <div class="content-text">
+                    <h2>Ready to Challenge Yourself?</h2>
+                    <p class="chal-description">See other challenges and find the one that pushes you to the next level.</p>
+                    <a th:if="${session.status} == null" th:href="@{/register}" class="ctaBut">join With Us</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="challenges">
+        <h1>ride Challenges</h1>
+        <ul class="chal-grid">
+            <li class="chal-content">
+                <img th:src="@{/img/homeCy.jpg}">
+                <div class="content-text">
+                    <h2>Weekend 50k cycling challenge </h2>
+                    <p>Cycle 50 km this weekend!</p>
+                    <a th:if="${session.status} == null" th:href="@{/register}" class="ctaBut">join Challenge</a>
+                </div>
+            </li>
+
+            <li class="chal-content">
+                <img th:src="@{/img/cyChal.jpg}" style="filter:grayscale(100%);">
+                <div class="content-text">
+                    <h2>Ready to Challenge Yourself?</h2>
+                    <p class="chal-description">See other challenges and find the one that pushes you to the next level.</p>
+                    <a th:if="${session.status} == null" th:href="@{/register}" class="ctaBut">join With Us</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div th:replace="layout/footer :: footer"></div>
+</body>

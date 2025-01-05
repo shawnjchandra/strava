@@ -1,0 +1,69 @@
+/* General Reset */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    text-align: left;
+    margin: 32px;
+}
+
+.challenges {
+    padding: 16px;
+    background-color:#ddd;
+    border: 1px solid white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    margin:20px;
+}
+
+.chal-grid{
+    display: grid;
+    grid-auto-flow:column;
+    grid-template-rows:1fr;
+    list-style-type: none;
+    padding: 0;
+    justify-content:start;
+}
+
+.chal-content{
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    width:400px;
+}
+
+.chal-content:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.chal-content img {
+    width: 100%;
+    height: auto;
+}
+
+.content-text{
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.content-text h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.content-text p {
+    margin: 0;
+    font-size: 16px;
+    color: #555;
+}
