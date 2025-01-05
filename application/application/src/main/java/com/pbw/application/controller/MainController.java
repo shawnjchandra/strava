@@ -60,7 +60,10 @@ public class MainController {
     }
 
     @GetMapping("/maps")
-    public String showMap(){
+    public String showMap(
+        Model model,
+        HttpSession httpSession
+    ){
         return "mapmap";
     }
 }
