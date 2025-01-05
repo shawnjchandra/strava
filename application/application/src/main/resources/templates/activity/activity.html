@@ -41,7 +41,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="activity : ${activities.data}">
+                        <tr th:each="activity, iterStat : ${activities.data}" 
+                            th:if="${iterStat.index >= (currentPage * 5) && iterStat.index < ((currentPage * 5) + 5)}">
                             <td th:text="${activity.judul}">Morning Run</td>
                             <td th:text="${activity.tipeTraining}">Run</td>
                             <td th:text="${activity.createdAt}">2023-01-01</td>
@@ -52,6 +53,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <div th:replace="~{layout/pagination :: pagination(${currentPage}, ${activities.data.size()}, 5, '/activity')}"></div>
 
             </div>
             <div th:unless="${activities.success}">
