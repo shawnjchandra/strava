@@ -1,6 +1,7 @@
 package com.pbw.application.activity;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import lombok.Data;
@@ -15,8 +16,8 @@ public class Activity {
     // global
     private int idActivity;
     private String judul;
-    private LocalDate createdAt;
-    private LocalTime durasi;
+    private LocalDateTime createdAt;
+    private String durasi;
     private float jarak;
     private float elevasi;
     private String description;
