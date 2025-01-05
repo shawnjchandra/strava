@@ -33,6 +33,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/css/error/");
         registry.addResourceHandler("/css/race/**")
                 .addResourceLocations("classpath:/static/css/race/");
+        registry.addResourceHandler("/script/**")
+                .addResourceLocations("classpath:/static/script/");
         registry.addResourceHandler("/js/**")
                 .addResourceLocations("classpath:/static/js/");
         registry.addResourceHandler("/img/**")
@@ -44,7 +46,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)
                .addPathPatterns("/**")
-               .excludePathPatterns("/static/**", "/css/**","/css/error/**","/css/race/**", "/js/**", "/img/**", "/assets/**", 
+               .excludePathPatterns("/static/**", "/css/**","/css/error/**","/css/race/**", "/script/**","/js/**", "/img/**", "/assets/**", 
                                   "/", "/login", "/register");
     }
 }
