@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.pbw.application.admin.Admin;
 import com.pbw.application.user.User;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,6 +25,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         "/css/**",
         "/css/error/**",
         "/css/race/**",
+        "/script/**",
         "/js/**",
         "/img/**"
             );
@@ -40,7 +42,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
         
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("status");
+
+        Object user = session.getAttribute("status");
         
         // If no user in session, redirect to login
         if (user == null) {
@@ -52,13 +55,16 @@ public class LoginInterceptor implements HandlerInterceptor {
     }
     
     private boolean isPublicPath(String requestURI) {
+        // First check exact matches
+        if (PUBLIC_PATHS.contains(requestURI)) {
+            return true;
+        }
+        
+        // Then check if the URI starts with any of our public paths
         return PUBLIC_PATHS.stream()
-            .anyMatch(path -> {
-                if (path.endsWith("/**")) {
-                    String basePath = path.substring(0, path.length() - 3);
-                    return requestURI.startsWith(basePath);
-                }
-                return requestURI.equals(path);
-            });
+            .anyMatch(path -> 
+                requestURI.startsWith(path + "/") || // Matches subdirectories
+                requestURI.startsWith(path + ".")    // Matches files with extensions
+            );
     }
 }

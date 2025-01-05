@@ -1,10 +1,13 @@
 package com.pbw.application.activity;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pbw.application.activityWithEndDate.ActivityWithEndDate;
 import com.pbw.application.custom.CustomResponse;
 
 
@@ -50,5 +53,35 @@ public class ActivityService {
             return new CustomResponse<Activity>(false, "No Submission Found", null);
         }
     }
+
+    public CustomResponse<List<Activity>> filterTrainingAccordingDate(List<Activity> activities, ActivityWithEndDate awend){
+        if(activities == null || activities.isEmpty()){
+            return new CustomResponse<>(false, "No Trainings have been found", null);
+        }
+
+
+        List<Activity> result = new ArrayList<>();
+        
+        LocalDateTime startDateTime = awend.getActivity().getCreatedAt();
+        LocalDateTime endDateTime = awend.getEndDateTime();
+
+        for(Activity act: activities){
+            LocalDateTime createdAt = act.getCreatedAt();
+
+            if(createdAt.isEqual(startDateTime) || 
+                createdAt.isEqual(endDateTime) || 
+                (createdAt.isAfter(startDateTime) && createdAt.isBefore(endDateTime))) {
+
+            result.add(act);
+}
+        }
+
+        return result.size() >0 ?
+        new CustomResponse<>(true, "Trainings have been found", result) :
+        new CustomResponse<>(false, "No Trainings have been found", null);
+    }
+
+    
+
 
 }

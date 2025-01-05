@@ -133,8 +133,8 @@ public class JDBCRaceRepo implements RaceRepository {
         Activity act = new Activity();
         act.setIdActivity(rSet.getInt("id_activity"));
         act.setJudul(rSet.getString("judul"));
-        act.setCreatedAt(rSet.getDate("createdAt").toLocalDate());
-        act.setDurasi(rSet.getTime("durasi").toLocalTime());
+        act.setCreatedAt(rSet.getTimestamp("createdAt").toLocalDateTime());
+        act.setDurasi(rSet.getString("durasi"));
         act.setJarak(rSet.getInt("jarak"));
         act.setDescription(rSet.getString("description"));
         

@@ -38,12 +38,13 @@
                 
                 <div class="form-group">
                     <label>Date Start</label>
-                    <input type="date" id="date-time" name="createdAt" required>
+                    <input type="date" id="date-time" name="createdAt" th:attr="min=${#dates.formatISO(#dates.createNow()).substring(0, 10)}" required>
+
                 </div>
 
                 <label for="duration">Duration</label>
                 <div class="duration-input">
-                    <input type="number" id="days" name="days" placeholder="0" min="0" max="30" required> days
+                    <input type="number" id="days" name="days" placeholder="0" min="0" max="365" required> days
                     <input type="number" id="hours" name="hours" placeholder="0" min="0" max="23" required> hours
                     <input type="number" id="minutes" name="minutes" placeholder="0" min="0" max="59" required> minutes
 

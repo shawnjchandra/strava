@@ -16,7 +16,7 @@
             <div class="participants-header">
                 <h2>Race Participants</h2>
 
-                <span class="participant-count" th:text="${numberOfParticipants} + '/' + ${race.kuota_max}">145/200</span>
+                <span class="participant-count" th:text="${numberOfParticipants} + '/' + ${race.activity.kuota_max}">145/200</span>
             </div>
             
             <div class="search-box">
@@ -66,15 +66,15 @@
                         </li>
                     </ul>
                 </div>
-            </div> -->
+            </div> 
         
             <main class="main-content">
                 <div class="header">
-                    <h1 th:text="${race.judul}">Mountain Trail Challenge</h1>
+                    <h1 th:text="${race.activity.judul}">Mountain Trail Challenge</h1>
                     <span class="status-badge">Active</span>
                 </div>
         
-                <div class="description" th:text="${race.description}">
+                <div class="description" th:text="${race.activity.description}">
                     <p>An exhilarating mountain trail run through the scenic alpine landscapes. Challenge yourself on this 21km route with breathtaking views and challenging terrain.</p>
                 </div>
         
@@ -83,19 +83,32 @@
                         <h2>Race Details</h2>
                         <div class="info-row">
                             <span class="label">Distance:</span>
-                            <span class="value" th:text="${race.jarak}">21 km</span>
+                            <span class="value" th:text="${race.activity.jarak}">21 km</span>
                         </div>
                         <div class="info-row">
                             <span class="label">Date:</span>
-                            <span class="value" th:text="${race.createdAt}">July 15, 2023</span>
+                            <span class="value" th:text="${race.activity.createdAt}">July 15, 2023</span>
                         </div>
                         <div class="info-row">
                             <span class="label">Max Participants:</span>
-                            <span class="value" th:text="${race.kuota_max}">145/200</span>
+                            <span class="value" th:text="${race.activity.kuota_max}">145/200</span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="label">Duration:</span>
+                            <span class="value" th:text="${race.activity.durasi}">June 30, 2023</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Deadline:</span>
+                            <span class="value" th:text="${race.endDateTime}">June 30, 2023</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Category:</span>
+                            <span class="value" th:text="${race.activity.tipeRace}">Trail Running</span>
                         </div>
                     </div>
         
-                    <div class="info-card">
+                    <!-- <div class="info-card">
                         <h2>Registration</h2>
                         <div class="info-row">
                             <span class="label">Deadline:</span>
@@ -105,7 +118,7 @@
                             <span class="label">Category:</span>
                             <span class="value" th:text="${race.tipeRace}">Trail Running</span>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
         
                 <div class="upload-section">

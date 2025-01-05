@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -19,7 +20,7 @@ public class JdbcActivityRepository implements ActivityRepository {
     private static final String FIND_ALL_QUERY = "SELECT * FROM Activity WHERE id_runner = ?";
 
     // hanya untuk tipe training
-    private static final String INSERT_QUERY = "INSERT INTO activity (judul, tipe_training, createdAt, durasi, jarak, elevasi, description, id_runner, urlpath) VALUES (?, ?::tipeAct, ?::date, ?, ?, ?, ?, ?,?)";
+    private static final String INSERT_QUERY = "INSERT INTO activity (judul, tipe_training, createdAt, durasi, jarak, elevasi, description, id_runner, urlpath) VALUES (?, ?::tipeAct, ?::timestamp, ?, ?, ?, ?, ?, ?)";
 
     @Override
     public List<Activity> findAll(int id_runner) {
@@ -50,8 +51,8 @@ public class JdbcActivityRepository implements ActivityRepository {
             activity.setIdActivity(rs.getInt("id_activity"));
             activity.setJudul(rs.getString("judul"));
             activity.setTipeTraining(rs.getString("tipe_training"));
-            activity.setCreatedAt(rs.getDate("createdAt").toLocalDate());
-            activity.setDurasi(rs.getTime("durasi").toLocalTime());
+            activity.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
+            activity.setDurasi(rs.getString("durasi"));
             activity.setJarak(rs.getInt("jarak"));
             activity.setElevasi(rs.getInt("elevasi"));
             activity.setDescription(rs.getString("description"));

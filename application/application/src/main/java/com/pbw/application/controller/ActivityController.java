@@ -9,10 +9,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.pbw.application.activity.Activity;
 import com.pbw.application.activity.ActivityRepository;
 import com.pbw.application.activity.ActivityService;
+import com.pbw.application.activityWithEndDate.ActivityEndDateCalculator;
 import com.pbw.application.custom.CustomResponse;
 import com.pbw.application.image.ImageService;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +24,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -109,8 +113,8 @@ public class ActivityController {
 
         activity.setJudul(judul);
         activity.setTipeTraining(tipe_training);
-        activity.setCreatedAt(LocalDate.parse(createdAt));
-        activity.setDurasi(LocalTime.parse(durasi));
+        activity.setCreatedAt(LocalDateTime.parse(createdAt + "T00:00:00"));
+        activity.setDurasi(durasi);
         activity.setJarak(jarak);
         activity.setElevasi(elevasi);
         activity.setDescription(description);
@@ -135,4 +139,6 @@ public class ActivityController {
         activityService.save(activity);
         return "redirect:/activity";
     }
+
+    
 }
