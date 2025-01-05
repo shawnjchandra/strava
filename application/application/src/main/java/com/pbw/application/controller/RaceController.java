@@ -64,6 +64,7 @@ public class RaceController {
 
         
         int id_runner = (int)httpSession.getAttribute("id_user");
+        String nama = ((User)httpSession.getAttribute("status")).getNama();
 
         CustomResponse<List<Activity>> available = raceService.getAllAvailableRace(id_runner);
         CustomResponse<List<Activity>> joined = raceService.getAllJoinedRace(id_runner);
@@ -80,6 +81,7 @@ public class RaceController {
 
         }
 
+        model.addAttribute("nama", nama);
         // 
         model.addAttribute("available_obj", available);
         model.addAttribute("available", available.getData());
