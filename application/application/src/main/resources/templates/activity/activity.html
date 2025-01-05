@@ -9,25 +9,26 @@
 </head>
 <body>
     <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
+    
     <div class="container">
         <header>
             <h1>My Activities</h1>
             <div class="search-container">
-                <input type="text" placeholder="Keywords" />
-                <select>
+                <input type="text" placeholder="Keywords" class="search-input" />
+                <select class="sport-select">
                     <option>All Sport Types</option>
                     <option value="run">Running</option>
                     <option value="bike">Cycling</option>
                     <option value="swim">Swimming</option>
                 </select>
-                <button>Search</button>
+                <button class="search-button">Search</button>
             </div>
         </header>
 
         <main>
+            <button id="add" th:onclick="|window.location.href='@{/activity/add}'|">Add Training Activity</button>
             <div th:if="${activities.success}">
                 <h2 th:text="${activities.data.size()} + ' Activities'">0 Activities</h2>
-                <button id="add" th:onclick="|window.location.href='@{/activity/add}'|">Add Training Activity</button>
                 <table>
                     <thead>
                         <tr>
