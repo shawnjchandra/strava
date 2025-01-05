@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/register.css}">
+    <link rel="stylesheet" th:href="@{/css/error/error-tag.css}">
     <title>Sign Up for Free</title>
     <script>
         function showPart2() {
@@ -31,17 +32,17 @@
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" placeholder="Enter your email" name="email" th:field="*{email}" required>
-                    <div th:errors="*{email}"></div>
+                    <div class="error-tag" th:errors="*{email}"></div>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" placeholder="Create a password" name="password" th:field="*{password}" required>
-                    <div th:errors="*{password}"></div>
+                    <div class="error-tag" th:errors="*{password}"></div>
                 </div>
                 <div class="form-group">
                     <label for="confirmpassword">Confirm Password</label>
                     <input type="password" id="password" placeholder="Confirm password" name="confirmpassword" th:field="*{confirmpassword}" required>
-                    <div th:errors="*{confirmpassword}"></div>
+                    <div class="error-tag" th:errors="*{confirmpassword}"></div>
                 </div>
     
                 <button type="button" class="submit-btn" onclick="showPart2()">Continue</button>
@@ -52,17 +53,21 @@
                     <div class="form-group">
                         <label for="nama">Nama</label>
                         <input type="text" id="nama" placeholder="Enter your name" name="nama" th:field="*{nama}" required>
-                        <div th:errors="*{nama}"></div>
+                        <div class="error-tag" th:errors="*{nama}"></div>
                     </div>
                     <div class="form-group">
                         <label for="tanggal-lahir">Tanggal Lahir</label>
                         <input type="date" id="tanggal-lahir" name="tanggal_lahir" th:field="*{tanggal_lahir}" required>
-                        <div th:errors="*{tanggal_lahir}"></div>
+                        <div class="error-tag" th:errors="*{tanggal_lahir}"></div>
                     </div>
                     <div class="form-group">
                         <label for="lokasi">Lokasi</label>
-                        <input type="text" id="lokasi" placeholder="Enter your location" name="lokasi" th:field="*{lokasi}" required>
-                        <div th:errors="*{lokasi}"></div>
+                        <!-- <input type="text" id="lokasi" placeholder="Enter your location" name="lokasi" th:field="*{lokasi}" required> -->
+                        <select id="lokasi" name="lokasi" th:field="*{lokasi}" required>
+                            <option value="" disabled selected>Select your location</option>
+                            <option th:each="kota: ${daftarkota}" th:value="${kota}" th:text="${kota}">Male</option>
+                        </select>
+                        <div class="error-tag" th:errors="*{lokasi}"></div>
                     </div>
                     <div class="form-group">
                         <label for="gender">Gender</label>
@@ -72,8 +77,8 @@
                             <option value="f">Female</option>
                             <option value="other">Other</option>
                         </select>
-                        <div th:errors="*{gender}"></div>
-                        <div th:errors="*{gender}"></div>
+                        <div class="error-tag" th:errors="*{gender}"></div>
+                        <div class="error-tag" th:errors="*{gender}"></div>
 
                     </div>
     

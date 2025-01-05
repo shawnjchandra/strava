@@ -66,6 +66,19 @@ public class JdbcUserRepository implements UserRepository {
         return rSet.getInt("id_users");
     }
 
+    @Override
+    public List<String> getAllKota() {
+        String sql = "Select nama from Kota";
+
+        List<String> result = jdbcTemplate.query(sql, this::mapKota);
+
+        return result;
+    }
+    private String mapKota(ResultSet rSet, int rowNum) throws SQLException {
+        return rSet.getString("nama");
+    }
+
+
    
     
 

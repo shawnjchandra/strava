@@ -28,6 +28,9 @@ public class RegisterController {
 
     @GetMapping("/register")
     public String registerView(User user, Model model ){
+        List<String> daftarkota = userService.getAllKota();
+
+        model.addAttribute("daftarkota", daftarkota);
         model.addAttribute("user", user);
         return "register";
     }
