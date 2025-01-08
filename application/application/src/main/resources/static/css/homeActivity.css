@@ -1,0 +1,102 @@
+.run-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+    gap:20px;
+}
+
+.run-container img {
+    width: 100%;
+    flex:1;
+    height: auto;
+    z-index: 1;
+    height: 800px;
+    max-height:800px;
+    object-fit:cover;
+}
+
+.run-container .text-con {
+    position: absolute;
+    top: 50%;
+    left:10%;
+    transform: translateY(-50%);
+    z-index: 2;
+    color: #fff;
+    width: 40%;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+    text-align: left;
+}
+
+.run-container h1 {
+    font-size:40px;
+    margin: 3px 0;
+    color: #ff5722;
+}
+
+.run-container h2 {
+    font-size: 24px;
+    color: #FFFF99 ;
+}
+.RunFeature {
+    text-align: center;
+    margin:40px 0;
+    display: flex;
+    justify-content: center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.feature-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    gap: 20px;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.rFeature {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.rFeature h3 {
+    font-size:28px;
+    color: #ff5722;
+    margin-bottom: 10px;
+}
+
+.rFeature p {
+    font-size: 18px;
+    color: #555;
+}
+.rFeature img {
+    width: 100%;
+    height: 240px;
+    object-fit:contain;
+}
+
+#runTitle {
+    text-align: center;
+    margin: 25px 10px;
+    padding: 10px;
+    background: linear-gradient(to right, #ffa07a, #ffd79d);
+    border-radius: 8px;
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+#runTitle h1 {
+    font-size: 36px;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+}
+
+#runTitle h2 {
+    font-size: 20px;
+    font-weight: 300;
+    margin-top: 10px;
+}

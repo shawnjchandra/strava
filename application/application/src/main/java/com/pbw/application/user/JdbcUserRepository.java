@@ -40,6 +40,16 @@ public class JdbcUserRepository implements UserRepository {
         return res.size() == 0 ? -1 : res.get(0);
     }
 
+    @Override
+    public User getUserByIdRunner(int id_runner) {
+        String sql = "Select * FROM runners WHERE id_runner = ?";
+
+        User runner = jdbcTemplate.queryForObject(sql, this::mapRowToUser,id_runner);
+    
+        return runner;
+    }
+
+
     private User mapRowToUser(ResultSet resultSet, int rowNum) throws SQLException {
         return new User(
             resultSet.getString("email"),
@@ -56,6 +66,20 @@ public class JdbcUserRepository implements UserRepository {
         return rSet.getInt("id_users");
     }
 
+    @Override
+    public List<String> getAllKota() {
+        String sql = "Select nama from Kota";
+
+        List<String> result = jdbcTemplate.query(sql, this::mapKota);
+
+        return result;
+    }
+    private String mapKota(ResultSet rSet, int rowNum) throws SQLException {
+        return rSet.getString("nama");
+    }
+
+
+   
     
 
 }

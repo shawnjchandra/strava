@@ -40,8 +40,9 @@ public class MainController {
         
    
         String nama = ((User)httpSession.getAttribute("status")).getNama();
+        int id_runner = (int)httpSession.getAttribute("id_user");
 
-        List<Activity> activities = activityService.findAll();
+        List<Activity> activities = activityService.findAll(id_runner);
 
         int id = (int)httpSession.getAttribute("id_user");
         
@@ -59,7 +60,32 @@ public class MainController {
     }
 
     @GetMapping("/maps")
-    public String showMap(){
+    public String showMap(
+        Model model,
+        HttpSession httpSession
+    ){
         return "mapmap";
     }
+    
+    @GetMapping("/homeRun")
+    public String runActivity(){
+        return "homeActivity";
+    }
+    @GetMapping("/homeCycle")
+    public String dashActivity(){
+        return "cycActivity";
+    }
+    @GetMapping("/homeSwim")
+    public String swimActivity(){
+        return "swimActivity";
+    }
+    @GetMapping("/homeFeature")
+    public String homeFeature(){
+        return "homeFeature";
+    }
+    @GetMapping("/homeChallenge")
+    public String homeChallenge(){
+        return "homeChallenge";
+    }
+
 }

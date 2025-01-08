@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strava Together Strong uu aa</title>
+    <link rel="icon" href="img/favicon.png">
+    <link rel="stylesheet" th:href="@{css/navbar.css}">
+    <link rel="stylesheet" th:href="@{css/index.css}">
+    <link rel="stylesheet" th:href="@{css/homeFeature.css}">
+</head>
+<body>
+    <div th:replace="layout/navbar :: navbar3"></div>
+    
+    <div class ="navKeyFeature">
+
+        <div class="img-container">
+        <img th:src="@{/img/rz.jpg}" style="width: 100%;">
+        <div class="imgtext-con">
+            <h1>Track. Achieve. Share. Celebrate.</h1>
+            <a th:if="${session.status} == null" th:href="@{/register}" class="ctaBut">join For Free</a>
+        </div>
+        </div>
+
+        <div class="navfeature">
+            <h3>Automatic Activity Tracking</h3>
+        </div>
+
+        <div class="navfeature">
+            <h3>Record Performance</h3>
+        </div>
+
+        <div class="navfeature">
+            <h3>Fun Race</h3>
+        </div>
+    </div>
+
+    <div class="desc-container">
+        <div class="desc">
+            <img th:src="@{/img/trackz.jpg}">
+            <div class="desc-text">
+                <h3>Automatic Activity Tracking</h3>
+                <h4>Effortlessly track your runs, rides, and adventures with our advanced activity tracking. Discover your progress, explore personalized routes, and join a vibrant community of fitness enthusiasts!</h4>
+            </div>
+        </div>
+
+        <div class="desc">
+            <div class="desc-text">
+                <h3>Record Performance</h3>
+                <h4>Keep track of your performance with precision! Record your stats, monitor your improvements, and set new personal bests!</h4>
+            </div>
+            <img th:src="@{/img/prohress.jpg}">
+        </div>
+
+        <div class="desc">
+            <img th:src="@{/img/chal.jpg}">
+            <div class="desc-text">
+                <h3>Fun Challenge</h3>
+                <h4>Compete in running, swimming, and cycling challenges. Push your limits and celebrate your victories!</h4>
+            </div>
+        </div>
+
+    </div>
+
+    <div th:replace="layout/footer :: footer"></div>
+
+</body>
+</html>

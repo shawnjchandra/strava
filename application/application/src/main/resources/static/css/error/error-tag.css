@@ -1,0 +1,10 @@
+.error-tag {
+    color: #ff4d4f; /* Bright red for visibility */
+    font-size: 0.9rem; /* Slightly smaller font size */
+    font-weight: bold; /* Bold text for emphasis */
+    margin-top: 5px; /* Spacing above the message */
+    padding: 2px 5px; /* Add some padding around the text */
+    border: 1px solid #ff4d4f; /* Red border matching the text */
+    background-color: #fff1f0; /* Light red background */
+    border-radius: 3px; /* Rounded corners */
+}

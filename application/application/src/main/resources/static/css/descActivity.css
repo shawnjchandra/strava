@@ -1,0 +1,93 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f6f6f6;
+    color: #333;
+}
+
+header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #444;
+}
+
+main {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.activity-details {
+    margin-bottom: 20px;
+}
+
+.activity-details h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.activity-details p {
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+.activity-details strong {
+    font-weight: bold;
+    color: #555;
+}
+
+.activity-image {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.activity-image img {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.actions .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #fc5200;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.actions .btn:hover {
+    background-color: #e64600;
+}
+
+footer {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+    border-top: 1px solid #e0e0e0;
+}

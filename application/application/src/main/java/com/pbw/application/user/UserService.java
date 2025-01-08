@@ -1,5 +1,6 @@
 package com.pbw.application.user;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,11 @@ public class UserService {
         return user.getPassword().equals(user.getConfirmpassword()) ? true : false;
     }
 
+    public User getUserByIdRunner(int id_runner){
+        return userRepository.getUserByIdRunner(id_runner);
+    }
     
+    public List<String> getAllKota(){
+        return userRepository.getAllKota();
+    }
 }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Race - Strava Style</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/race/create.css}">
+</head>
+<body>
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
+    <!-- <th:block th:replace="~{/layout/sidebar :: sidebar}"></th:block> -->
+    <div class="main-content">
+        <div class="create-race-container">
+            <h2 style="color: #fc4c02; text-align: center;">Create New Race</h2>
+
+            <form th:action="@{/race/add}" method="post">
+                
+                <div class="form-group">
+                    <label>Race Name</label>
+                    <input type="text" id="title" name="judul" placeholder="Enter race name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Race Type</label>
+                    <select id="sport" name="tipe_race" required>
+                        <option value="">Select Race Type</option>
+                        <option value="run">Running</option>
+                        <option value="bike">Cycling</option>
+                        <option value="swim">Swimming</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Max Distance</label>
+                    <input type="number"  id="distance" name="jarak"  placeholder="Enter race distance" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Date Start</label>
+                    <input type="date" id="date-time" name="createdAt" th:attr="min=${#dates.formatISO(#dates.createNow()).substring(0, 10)}" required>
+
+                </div>
+
+                <label for="duration">Duration</label>
+                <div class="duration-input">
+                    <input type="number" id="days" name="days" placeholder="0" min="0" max="365" required> days
+                    <input type="number" id="hours" name="hours" placeholder="0" min="0" max="23" required> hours
+                    <input type="number" id="minutes" name="minutes" placeholder="0" min="0" max="59" required> minutes
+
+                </div>
+
+                <div class="form-group">
+                    <label>Maximum Participants</label>
+                    <input type="number" name="kuota" placeholder="Enter max participants">
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea placeholder="Enter race description" id="description" name="description" rows="4" style="resize: none;"></textarea>
+                </div>
+
+
+                <button type="submit" class="create-race-btn">Create Race</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

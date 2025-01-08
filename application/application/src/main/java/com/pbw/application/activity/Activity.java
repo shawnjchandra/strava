@@ -1,6 +1,7 @@
 package com.pbw.application.activity;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import lombok.Data;
@@ -11,15 +12,24 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Activity {
+    
+    // global
     private int idActivity;
     private String judul;
-    private String tipeTraining;
-    private LocalDate createdAt;
-    private LocalTime durasi;
+    private LocalDateTime createdAt;
+    private String durasi;
     private float jarak;
     private float elevasi;
     private String description;
-    private Integer idRunner;
     private String urlpath;
+    
+    
+    // training
+    private Integer idRunner;
+    private String tipeTraining;
 
+    // race
+    private int kuota_max;
+    private String tipeRace;
+    
 }

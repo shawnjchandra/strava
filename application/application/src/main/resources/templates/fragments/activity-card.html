@@ -1,36 +1,118 @@
-<!-- fragments/activityCard.html -->
-<div th:fragment="activityCard(name, date, location, title, distance, time, elevGain, gambar)" class="activity-card">
+<!-- fragments/error-popup.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error Popup Fragment</title>
+    <link rel="manifest" href="/site.webmanifest">
+
+</head>
+<body>
+    <!-- Define the fragment -->
+    <div th:fragment="errorPopup(errorMessage)">
+        <style>
+            /* Basic styling for body */
+            body {
+                font-family: Arial, sans-serif;
+            }
     
-    <div class="header">
-        <!-- <img class="profile-img" src="profile.jpg" alt="Profile"> -->
-        <div class="header-info">
-            <h3 th:text="${name}">Shawn Jonathan Chandra</h3>
-            <p><span th:text="${date}">January 29, 2022</span> at <span th:text="${location}">West Java</span></p>
+            /* Overlay (background dimming effect) */
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                transition: opacity 0.3s ease;
+            }
+    
+            /* Popup box styling */
+            .popup {
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                width: 90%;
+                max-width: 400px;
+            }
+    
+            /* Show popup and overlay */
+            .popup.show,
+            .overlay.show {
+                display: block;
+                opacity: 1;
+            }
+    
+            /* Popup content */
+            .popup-content {
+                text-align: center;
+            }
+    
+            /* Error message styling */
+            .error-message {
+                color: #dc3545;
+                font-size: 18px;
+                margin-bottom: 15px;
+                font-weight: bold;
+            }
+    
+            /* Icon styling */
+            .error-icon {
+                color: #dc3545;
+                font-size: 40px;
+                margin-bottom: 15px;
+            }
+    
+            /* Close button styling */
+            .close-btn {
+                background-color: #dc3545;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.3s ease;
+            }
+    
+            .close-btn:hover {
+                background-color: #c82333;
+            }
+    
+    
+        </style>
+
+       
+        <div class="overlay" th:classappend="${errorMessage != null} ? 'show' : ''"></div>
+
+        <div class="popup" th:classappend="${errorMessage != null} ? 'show' : ''">
+            <div class="popup-content">
+
+                <div class="error-icon">
+                    <img th:src="@{/img/exclamation_mark.png}" alt=""> 
+                </div>
+                
+                <div class="error-message" th:text="${errorMessage}">Error message goes here</div>
+                <button class="close-btn" onclick="closeErrorPopup()">Close</button>
+            </div>
         </div>
+
+        <script>
+            function closeErrorPopup() {
+                document.querySelector('.popup').classList.remove('show');
+                document.querySelector('.overlay').classList.remove('show');
+            }
+        </script>
     </div>
-    <div class="activity-title" th:text="${title}">Afternoon Walk</div>
-    <div class="stats">
-        <div>
-            <p>Distance</p>
-            <strong th:text="${distance}">1.94 km</strong>
-        </div>
-        <div>
-            <p>Time</p>
-            <strong th:text="${time}">16m 35s</strong>
-        </div>
-        <div>
-            <p>Elev Gain</p>
-            <strong th:text="${elevGain}">0 m</strong>
-        </div>
-    </div>
-    <div class="map">
-        <img th:src="${gambar != null} ? ${gambar} : @{/images/default-activity.jpg}"
-             th:alt="${title}"
-             class="img-fluid"
-             style="max-width: 400px;"/>
-    </div>
-    <div class="actions">
-        <button>👍</button>
-        <button>💬</button>
-    </div>
-</div>
+</body>
+</html>

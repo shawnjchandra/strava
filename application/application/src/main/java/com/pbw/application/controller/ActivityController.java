@@ -9,10 +9,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.pbw.application.activity.Activity;
 import com.pbw.application.activity.ActivityRepository;
 import com.pbw.application.activity.ActivityService;
+import com.pbw.application.activityWithEndDate.ActivityEndDateCalculator;
 import com.pbw.application.custom.CustomResponse;
 import com.pbw.application.image.ImageService;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +24,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,10 +40,24 @@ public class ActivityController {
     private ImageService imageService;
 
     @GetMapping
-    public String getAllActivities(Model model, HttpSession httpSession) {
-        Integer idRunner = (Integer) httpSession.getAttribute("id_user");
-        System.out.println(idRunner);
-        List<Activity> activities = activityService.findAllByUserId(idRunner);
+    public String getAllActivities(
+        @RequestParam(defaultValue = "0") int page,
+        Model model,
+        HttpSession httpSession
+        ) {
+        int id_runner = (int)httpSession.getAttribute("id_user");
+
+        List<Activity> act = activityService.findAll(id_runner);
+
+        CustomResponse<List<Activity>> activities;
+        if(act != null){
+            activities = new CustomResponse<>(true,"Found Activities", act);
+        }else{
+            activities = new CustomResponse<>(false,"No Activities Available",null);
+        }
+
+
+        model.addAttribute("currentPage", page);
         model.addAttribute("activities", activities);
         return "/activity/activity";
     }
@@ -81,10 +99,10 @@ public class ActivityController {
         // tipe training
         CustomResponse<String> isAdded = imageService.addImage(file, id_runner, nextIdActivity,"T");
         
-        if(!isAdded.isSuccess()){
+        // if(!isAdded.isSuccess()){
 
-            System.out.println(isAdded.getMessage());
-        }
+        //     System.out.println(isAdded.getMessage());
+        // }
 
         // ====================================================
         // Format durasi sebagai hh:mm:ss
@@ -95,8 +113,8 @@ public class ActivityController {
 
         activity.setJudul(judul);
         activity.setTipeTraining(tipe_training);
-        activity.setCreatedAt(LocalDate.parse(createdAt));
-        activity.setDurasi(LocalTime.parse(durasi));
+        activity.setCreatedAt(LocalDateTime.parse(createdAt + "T00:00:00"));
+        activity.setDurasi(durasi);
         activity.setJarak(jarak);
         activity.setElevasi(elevasi);
         activity.setDescription(description);
@@ -121,4 +139,23 @@ public class ActivityController {
         activityService.save(activity);
         return "redirect:/activity";
     }
+
+    @GetMapping("/{id}")
+    public String getActivityDetails(
+            @PathVariable int id,
+            @RequestParam int id_user,
+            Model model) {
+        CustomResponse<Activity> response = activityService.findById(id);
+
+        if (response.isSuccess()) {
+            model.addAttribute("activity", response.getData());
+            return "/activity/descActivity"; // Halaman detail aktivitas
+        } else {
+            model.addAttribute("error", response.getMessage());
+            return "error"; // Halaman error jika tidak ditemukan
+        }
+    }
+
+
+    
 }

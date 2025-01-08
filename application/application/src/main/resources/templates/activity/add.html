@@ -25,7 +25,7 @@
                 </select>
 
                 <label for="date-time">Date</label>
-                <input type="date" id="date-time" name="createdAt" required>
+                <input type="date" id="date-time" name="createdAt" th:attr="max=${#dates.formatISO(#dates.createNow()).substring(0, 10)}" required>
 
                 <label for="duration">Duration</label>
                 <div class="duration-input">

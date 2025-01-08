@@ -1,0 +1,124 @@
+:root {
+    --primary-color: #fc5200;
+    --secondary-color: #242428;
+    --background-color: #f7f7fa;
+    --text-color: #242428;
+    --sidebar-width: 250px;
+    --border-radius: 8px;
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    min-height: 100vh;
+}
+
+
+.menu ul li:hover {
+    background-color: rgba(252, 82, 0, 0.1);
+    color: var(--primary-color);
+}
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    padding: 32px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.create-race-container {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 600px;
+    padding: 32px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--secondary-color);
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+    background-color: white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(252, 82, 0, 0.1);
+}
+
+.create-race-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.create-race-btn:hover {
+    background-color: #e64000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(252, 82, 0, 0.2);
+}
+
+.create-race-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .left-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .create-race-container {
+        padding: 24px;
+    }
+}

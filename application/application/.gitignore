@@ -41,3 +41,5 @@ out/
 build.gradle
 
 uploads/
+
+data.json

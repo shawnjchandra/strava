@@ -49,47 +49,11 @@
 </div>
     <div class="cta">
         <p class="ctaText">Join our community and start tracking your progress today!</p>
-        <a href="/signup" class="ctaBut">Sign Up Now</a>
+        <a th:if="${session.status} == null" th:href="@{/register}" class="ctaBut">join Now</a>
     </div>
 
-    <div class ="keyFeature">
-        <h2>Key Features</h2>
-        <div class="feature">
-            <h3>Automatic Activity Tracking</h3>
-            <p>Track all your activities without needing to start it manually</p>
-        </div>
-        <div class="feature">
-            <h3>Record Performance</h3>
-            <p>Received  detailed an accurate insight about your activity (speed,distance,calories burned)</p>
-        </div>
-        <div class="feature">
-            <h3>Fun Race</h3>
-            <p>Join exciting races and challenges with others in the community</p>
-        </div>
-    </div>
 
-    <footer>
-        <div class="footerAbout">
-            <h3>About Us</h3>
-            <p>We are a community-driven platform that helps you tracks your fitness journey and connect with others.</p>
-        </div>
-
-        <div class="footerContact">
-            <h3>Contact Us</h3>
-            <p> Email : <a href="6182201033@student.unpar.ac.id">Junfa</a></p>
-            <p> Phone : +62 820 144 145 </p>
-            <p> Address : Ciumbeluit 1 , Bandung, Indonesia </p>
-        </div>
-
-        <div class="footerSosmed">
-            <h3>Follow Us</h3>
-            <a href="https://www.instagram.com/life_isroblox420/" target="_blank">Instagram</a>
-            <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" target="_blank">Youtube</a>
-
-
-        <p>&copy; 2024 Strava Inc. All Rights Reserved.</p>
-    </footer>
-
+    <div th:replace="layout/footer :: footer"></div>
 
     <script>
     let slideIndex = 0;

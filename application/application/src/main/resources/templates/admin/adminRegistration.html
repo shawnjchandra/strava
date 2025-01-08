@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+    <title>Sign Up for Free</title>
+    <script>
+        function showPart2() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (email && password) {
+                document.getElementById('part2').style.display = 'block';
+            } else {
+                alert('Please fill out the first part of the form.');
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
+    <div class="container">
+
+        <div class="signup-container">
+            <h1>Add a new admin </h1>
+            <form th:action="@{/register/admin}" method="post" th:object="${admin}">
+               
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" name="email" th:field="*{email}" required>
+                    <div th:errors="*{email}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Create a password" name="password" th:field="*{password}" required>
+                    <div th:errors="*{password}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmpassword">Confirm Password</label>
+                    <input type="password" id="password" placeholder="Confirm password" name="confirmpassword" th:field="*{confirmpassword}" required>
+                    <div th:errors="*{confirmpassword}"></div>
+                </div>
+    
+    
+                    <button type="submit" class="submit-btn">Sign Up</button>
+                </div>
+            </form>
+            <!-- <p class="terms">By signing up, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p> -->
+        </div>
+    </div>
+
+</body>
+</html>

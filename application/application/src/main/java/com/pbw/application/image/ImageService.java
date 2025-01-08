@@ -19,15 +19,37 @@ public class ImageService {
 
     public static String UPLOAD_DIRECTORY;
 
+    public ImageService(){
+        
+    }
  
     public static void setUPLOAD_DIRECTORY(int id) {
+
+        File mainDirs = new File (System.getProperty("user.dir") + "/uploads");
+        if(!mainDirs.exists()){
+            mainDirs.mkdirs();
+            mainDirs.setExecutable(true,false);
+            mainDirs.setWritable(true,false);
+            mainDirs.setReadable(true,false);
+        }
+
         UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads" + "/"+id;
+
+        File dirs = new File(UPLOAD_DIRECTORY);
+        if(!dirs.exists()){
+            dirs.mkdirs();
+            dirs.setExecutable(true,false);
+            dirs.setWritable(true,false);
+            dirs.setReadable(true,false);
+        }
     }
 
     public Path getDirectory(int id){
         setUPLOAD_DIRECTORY(id);
 
             File dirs = new File(UPLOAD_DIRECTORY);
+            System.out.println("DIRECTORY FILE : "+UPLOAD_DIRECTORY);
+            System.out.println("folder exists: "+dirs.exists());
 
             if(!dirs.exists()){
                 dirs.mkdirs();

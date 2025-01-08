@@ -45,7 +45,13 @@
 	CREATE TABLE RaceParticipants(
 		id_runner int references Runners(id_runner) not null,
 		id_race int references Activity(id_race) not null
+		id_training int NULL;
 		
+	);
+
+	CREATE TABLE Kota(
+		id_kota INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+		nama VARCHAR(255)
 	);
 
 -- Create sequences for training and race IDs
@@ -77,4 +83,3 @@ CREATE TRIGGER set_activity_ids
 BEFORE INSERT ON Activity
 FOR EACH ROW
 EXECUTE FUNCTION handle_activity_ids();								
-
