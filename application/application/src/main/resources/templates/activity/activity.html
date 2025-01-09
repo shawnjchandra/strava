@@ -58,7 +58,27 @@
 
             </div>
             <div th:unless="${activities.success}">
-                <span th:text="${activities.message}"></span>
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Sport</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Distance</th>
+                            <th>Duration</th>
+                            <th>Elevation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="7" th:text="${activities.message}" style="text-align: center;"></td>
+    
+                        </tr>
+            
+                    </tbody>
+                </table>
 
             </div>
         </main>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.pbw.application.RequiredRole;
 import com.pbw.application.activity.Activity;
 import com.pbw.application.activity.ActivityService;
+import com.pbw.application.custom.CustomResponse;
 import com.pbw.application.image.ImageService;
 import com.pbw.application.user.User;
 
@@ -40,15 +41,22 @@ public class MainController {
         
    
         String nama = ((User)httpSession.getAttribute("status")).getNama();
-        int id_runner = (int)httpSession.getAttribute("id_user");
+        int id_user = (int)httpSession.getAttribute("id_user");
 
-        List<Activity> activities = activityService.findAll(id_runner);
+        List<Activity> act = activityService.findAllByIdUser(id_user);
 
-        int id = (int)httpSession.getAttribute("id_user");
+        System.out.println(act);
         
         //Tipe T untuk menampilkan yang training 
         // Path directory = imageService.getDirectory(id);
         // List<String> images = imageService.getAllImages(directory, id);
+
+        CustomResponse<List<Activity>> activities;
+        if(act != null && act.size()>0){
+            activities = new CustomResponse<>(true,"Found Activities", act);
+        }else{
+            activities = new CustomResponse<>(false,"No Activities Available",null);
+        }
 
         model.addAttribute("nama", nama);
 

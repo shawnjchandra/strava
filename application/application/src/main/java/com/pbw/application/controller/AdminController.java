@@ -19,7 +19,7 @@ import com.pbw.application.admin.Admin;
 import com.pbw.application.admin.AdminService;
 import com.pbw.application.user.User;
 
-
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -30,7 +30,7 @@ public class AdminController {
     private AdminService adminService;
     
     @GetMapping("/register")
-    // @RequiredRole("admin")
+    @RequiredRole("admin")
     public String adminPage( 
         Admin admin,
         Model model    
@@ -42,9 +42,11 @@ public class AdminController {
     @GetMapping("/index")
     @RequiredRole("admin")
     public String adminIndexPage( 
-        Admin admin,
-        Model model    
+        Model model,    
+        HttpSession httpSession
     ){
+        Admin admin = (Admin) httpSession.getAttribute("status"); 
+
         model.addAttribute("admin", admin);
         return "admin/index";       
     }

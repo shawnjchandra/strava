@@ -25,6 +25,7 @@ public class JdbcActivityRepository implements ActivityRepository {
     @Override
     public List<Activity> findAll(int id_runner) {
         List<Activity> result = jdbcTemplate.query(FIND_ALL_QUERY, new ActivityRowMapper(),id_runner);
+        System.out.println("result size: "+result.size());
 
         return result.size() >0 ? result : null;
     }

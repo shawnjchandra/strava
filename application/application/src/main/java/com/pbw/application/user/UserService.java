@@ -53,7 +53,11 @@ public class UserService {
     public User getUserByIdRunner(int id_runner){
         return userRepository.getUserByIdRunner(id_runner);
     }
-    
+  
+    public int getIdRunnerByIdUsers(int id_users){
+        return userRepository.getIdRunnerByIdUsers(id_users);
+    }
+
     public List<String> getAllKota(){
         return userRepository.getAllKota();
     }

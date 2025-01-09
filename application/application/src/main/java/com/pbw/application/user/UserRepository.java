@@ -8,8 +8,12 @@ public interface UserRepository {
     Optional<User> findByEmail(String Email);
 
     int getIdUsersByEmail(String email);
+    
+    int getIdRunnerByIdUsers(int id_users);
 
     User getUserByIdRunner(int id_runner);
     
     List<String> getAllKota();
+
+
 } 

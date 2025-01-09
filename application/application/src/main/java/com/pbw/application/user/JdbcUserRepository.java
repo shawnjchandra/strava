@@ -62,9 +62,7 @@ public class JdbcUserRepository implements UserRepository {
         );
     }
 
-    private int mapIdUserToUser(ResultSet rSet, int rowNum) throws SQLException {
-        return rSet.getInt("id_users");
-    }
+    
 
     @Override
     public List<String> getAllKota() {
@@ -74,11 +72,28 @@ public class JdbcUserRepository implements UserRepository {
 
         return result;
     }
+
+    @Override
+    public int getIdRunnerByIdUsers(int id_users) {
+        String sql = "Select id_runner FROM runners WHERE id_users = ?";
+
+        int result = jdbcTemplate.queryForObject(sql, this::mapIdUserToIdRunner, id_users);
+
+        return result != 0 ? result : -1;
+    }
+
     private String mapKota(ResultSet rSet, int rowNum) throws SQLException {
         return rSet.getString("nama");
     }
 
 
+    private int mapIdUserToUser(ResultSet rSet, int rowNum) throws SQLException {
+        return rSet.getInt("id_users");
+    }
+
+    private int mapIdUserToIdRunner(ResultSet rSet, int rowNum) throws SQLException {
+        return rSet.getInt("id_runner");
+    }
    
     
 

@@ -45,16 +45,19 @@ public class ActivityController {
         Model model,
         HttpSession httpSession
         ) {
-        int id_runner = (int)httpSession.getAttribute("id_user");
+        int id_user = (int)httpSession.getAttribute("id_user");
 
-        List<Activity> act = activityService.findAll(id_runner);
+        List<Activity> act = activityService.findAllByIdUser(id_user);
+        System.out.println("id_user: "+ id_user);
+        System.out.println("activities: "+ act);
 
         CustomResponse<List<Activity>> activities;
-        if(act != null||act.size()>0){
+        if(act != null&&act.size()>0){
             activities = new CustomResponse<>(true,"Found Activities", act);
         }else{
             activities = new CustomResponse<>(false,"No Activities Available",null);
         }
+
 
 
         model.addAttribute("currentPage", page);
