@@ -12,6 +12,7 @@ import com.pbw.application.activity.ActivityService;
 import com.pbw.application.activityWithEndDate.ActivityEndDateCalculator;
 import com.pbw.application.custom.CustomResponse;
 import com.pbw.application.image.ImageService;
+import com.pbw.application.user.UserService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
@@ -35,6 +36,9 @@ public class ActivityController {
 
     @Autowired
     private ActivityService activityService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private ImageService imageService;
@@ -96,7 +100,8 @@ public class ActivityController {
             return "redirect:/activity/add";
         }
 
-        int id_runner = (int)httpSession.getAttribute("id_user");
+        int id_user = (int)httpSession.getAttribute("id_user");
+        int id_runner = userService.getIdRunnerByIdUsers(id_user);
         int nextIdActivity = activityService.getIdActivity() + 1;
 
         // tipe training

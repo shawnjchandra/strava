@@ -42,7 +42,7 @@ public class ActivityService {
     public CustomResponse<List<Activity>> findTrainingOnlyByIdRunner(int id_runner){
         List<Activity> result = activityRepository.findTrainingOnlyByIdRunner(id_runner);
     
-        return result.size() >0 ?
+        return result != null ?
         new CustomResponse<>(true, "Trainings have been found", result) :
         new CustomResponse<>(false, "No Trainings have been found", null);
     }

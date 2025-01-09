@@ -14,55 +14,6 @@ body {
     min-height: 100vh;
 }
 
-.logo {
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color: #fc5200;
-}
-
-
-.login-btn {
-    color: #333;
-}
-
-.login-btn:hover {
-    background-color: #f0f0f0;
-}
-
-.register-btn {
-    background-color: #fc5200;
-    color: white;
-}
-
-.register-btn:hover {
-    background-color: #e64a00;
-}
-
-.signout-btn {
-    color: #666;
-}
-
-.signout-btn:hover {
-    background-color: #f0f0f0;
-}
 
 .page-container {
     display: flex;
