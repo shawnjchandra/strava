@@ -17,7 +17,7 @@ public interface UserRepository {
     
     List<String> getAllKota();
 
-    public List<User> getAllUsersByFilter(Map<String,String> filterMap);
+    public List<User> getAllUsersByFilter(String nama, String sortBy, String sortOrder);
     public List<User> getAllUsers();
 
     boolean switchActiveStatusByIdRunner(int id_runner, boolean status);

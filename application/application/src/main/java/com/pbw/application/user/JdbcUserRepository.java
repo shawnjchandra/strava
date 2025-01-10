@@ -2,6 +2,7 @@ package com.pbw.application.user;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -107,18 +108,32 @@ public class JdbcUserRepository implements UserRepository {
     }
 
     @Override
-    public List<User> getAllUsersByFilter(Map<String,String> filterMap) {
-        StringBuilder sql = new StringBuilder("Select * FROM runners ");
+    public List<User> getAllUsersByFilter(String nama, String sortBy, String sortOrder) {
+        StringBuilder sql = new StringBuilder("Select * FROM runners");
         
-        if(filterMap.size()>0){
-
+        
+        List<Object> params = new ArrayList<>();
+    
+        // Handle keyword search
+        if (nama != null && !nama.isEmpty()) {
+            sql.append(" WHERE nama ILIKE ?");  // Use ILIKE for case-insensitive
+            params.add("%" + nama + "%");  // Add wildcards here, not in SQL
         }
 
+        System.out.println(nama);
 
+        // Handle sorting
+        if (sortBy != null && !sortBy.isEmpty()) {
+            sql.append(" ORDER BY ").append(sortBy.toLowerCase());
+            if ("desc".equalsIgnoreCase(sortOrder)) {
+                sql.append(" DESC");
+            } else {
+                sql.append(" ASC");
+            }
+        }
+    
+        return jdbcTemplate.query(sql.toString(), this::mapRowToUser, params.toArray());
 
-        List<User> result = jdbcTemplate.query(sql.toString(), this::mapRowToUser);
-
-        return result;
     }
     @Override
     public List<User> getAllUsers() {

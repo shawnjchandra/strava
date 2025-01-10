@@ -1,5 +1,6 @@
 package com.pbw.application.user;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,18 +79,12 @@ public class UserService {
         return result;
     }
 
-    public List<User> getAllUsersByFilter(String... filters) {
-        Map<String, String> filterMap = new HashMap<>();
-
-        // NAMA-namaUser, ID-idRunner, STATUS-active
-        for(String filter : filters){
-            String[] input = filter.split("-");
-            filterMap.put(input[0], input[1]);
-        }
+    public List<User> getAllUsersByFilter(String nama, String sortBy, String sortOrder) {
+    
         
-        List<User> result = userRepository.getAllUsersByFilter(filterMap);
-
-        return result;
+        List<User> result = userRepository.getAllUsersByFilter(nama, sortBy, sortOrder);
+        return result != null && result.size() > 0 ? result : new ArrayList<>();
+ 
     }
 
     public int getIdRunnerByEmail(String email){
