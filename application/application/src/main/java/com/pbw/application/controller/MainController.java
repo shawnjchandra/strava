@@ -45,7 +45,7 @@ public class MainController {
 
         List<Activity> act = activityService.findAllByIdUser(id_user);
 
-        System.out.println(act);
+        // System.out.println(act);
         
         //Tipe T untuk menampilkan yang training 
         // Path directory = imageService.getDirectory(id);
