@@ -13,7 +13,8 @@
 		nama varchar(255) NOT NULL,
 		tanggal_lahir DATE NOT NULL,
 		lokasi varchar(255) NOT NULL,
-		gender VARCHAR(16) 
+		gender VARCHAR(16),
+		active BOOLEAN
 	);
 	
 	CREATE TABLE Admins(
