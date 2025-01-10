@@ -1,6 +1,8 @@
 $(document).ready(function(){
     function handleBanStatus(action) {
         return function() {
+
+            console.log(action);
             const id = $(this).data("id");
             
             if(!id){
@@ -21,6 +23,6 @@ $(document).ready(function(){
         };
     }
 
-    $(".btn-active").on("click", handleBanStatus("ban"));
-    $(".btn-inactive").on("click", handleBanStatus("unban"));
+    $(document).on("click",".btn-active" ,handleBanStatus("ban"));
+    $(document).on("click", ".btn-inactive", handleBanStatus("unban"));
 });
