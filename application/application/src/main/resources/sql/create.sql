@@ -14,7 +14,7 @@
 		tanggal_lahir DATE NOT NULL,
 		lokasi varchar(255) NOT NULL,
 		gender VARCHAR(16),
-		active BOOLEAN
+		active BOOLEAN DEFAULT TRUE
 	);
 	
 	CREATE TABLE Admins(
@@ -28,10 +28,10 @@
 	CREATE TABLE Activity(
 		id_activity INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 		judul varchar(255) NOT NULL,
-		durasi TIME NULL,
+		durasi VARCHAR(16) NULL,
 		jarak FLOAT null,
 		elevasi FLOAT null,
-		createdAt DATE DEFAULT CURRENT_DATE,
+		createdAt TIMESTAMP DEFAULT CURRENT_DATE,
 		urlPath VARCHAR(255) NULL,
 		id_training int UNIQUE null,
 		id_runner int REFERENCES Runners(id_runner) null,
