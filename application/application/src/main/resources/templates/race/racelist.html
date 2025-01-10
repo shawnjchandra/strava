@@ -24,9 +24,9 @@
             <div class="menu">
                 <ul>
                     <li><a th:href="@{/dashboard}">Dashboard</a></li>
-                    <li>Training</li>
+                    <li><a th:href="@{/activity}">Activity</a></li>
                     <li><a th:href="@{/maps}">Maps</a></li>
-                    <li>Challenges</li>
+
                 </ul>
                 <ul>
                     <li>
@@ -50,6 +50,7 @@
                                 <thead>
                                     <tr>
                                         <th>Race Name</th>
+                                        <th>Sport</th>
                                         <th>Distance</th>
                                         <th>Date</th>
                                         <th>Status</th>
@@ -59,6 +60,7 @@
                                 <tbody>
                                     <tr th:each="av: ${joined}">
                                         <td th:text="${av.judul}">Coastal Run</td>
+                                        <td th:text="${av.tipeRace}">Coastal Run</td>
                                         <td th:text="${av.jarak}">10 km</td>
                                         <td th:text="${av.createdAt}">June 22, 2023</td>
                                         <td th:text="${av.kuota_max}">87/100</td>
@@ -85,6 +87,7 @@
                                 <thead>
                                     <tr>
                                         <th>Race Name</th>
+                                        <th>Sport</th>
                                         <th>Distance</th>
                                         <th>Date</th>
                                         <th>Capacity</th>
@@ -94,6 +97,7 @@
                                 <tbody>
                                     <tr th:each="av: ${available}">
                                         <td th:text="${av.judul}">Coastal Run</td>
+                                        <td th:text="${av.tipeRace}">Coastal Run</td>
                                         <td th:text="${av.jarak}">10 km</td>
                                         <td th:text="${av.createdAt}">June 22, 2023</td>
                                         <td th:text="${av.kuota_max}">87/100</td>
