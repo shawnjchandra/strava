@@ -95,7 +95,7 @@ public class RegisterController {
                 return "register";
                 
             }
-            System.out.println("no reject password");
+            System.out.println("no reject password"); 
             if(bindungResult.hasErrors()){
                 
                 List<ObjectError> errors = bindungResult.getAllErrors();

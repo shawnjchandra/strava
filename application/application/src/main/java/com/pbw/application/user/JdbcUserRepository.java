@@ -3,6 +3,7 @@ package com.pbw.application.user;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -59,6 +60,7 @@ public class JdbcUserRepository implements UserRepository {
             resultSet.getDate("tanggal_lahir").toLocalDate(),
             resultSet.getString("lokasi"),
             resultSet.getString("gender")
+            
         );
     }
 
@@ -82,6 +84,51 @@ public class JdbcUserRepository implements UserRepository {
         return result != 0 ? result : -1;
     }
 
+    @Override
+    public int getIdRunnerByEmail(String email) {
+        String sql = "Select id_runner FROM runners WHERE email = ?";
+
+        List<Integer> res = jdbcTemplate.query(sql, this::mapIdUserToIdRunner, email);
+    
+        return res.size() == 0 ? -1 : res.get(0);
+    }
+
+    @Override
+    public boolean getActiveStatus(String email) {
+        String sql = "Select active FROM runners WHERE email = ?";
+
+        return jdbcTemplate.queryForObject(sql, this::mapIdUserToActive,email);    
+    }
+    @Override
+    public boolean getActiveStatus(int id_runner) {
+        String sql = "Select active FROM runners WHERE id_runner = ?";
+
+        return jdbcTemplate.queryForObject(sql, this::mapIdUserToActive,id_runner);    
+    }
+
+    @Override
+    public List<User> getAllUsersByFilter(Map<String,String> filterMap) {
+        StringBuilder sql = new StringBuilder("Select * FROM runners ");
+        
+        if(filterMap.size()>0){
+
+        }
+
+
+
+        List<User> result = jdbcTemplate.query(sql.toString(), this::mapRowToUser);
+
+        return result;
+    }
+    @Override
+    public List<User> getAllUsers() {
+        StringBuilder sql = new StringBuilder("Select * FROM runners ");
+    
+        List<User> result = jdbcTemplate.query(sql.toString(), this::mapRowToUser);
+
+        return result;
+    }
+
     private String mapKota(ResultSet rSet, int rowNum) throws SQLException {
         return rSet.getString("nama");
     }
@@ -94,6 +141,19 @@ public class JdbcUserRepository implements UserRepository {
     private int mapIdUserToIdRunner(ResultSet rSet, int rowNum) throws SQLException {
         return rSet.getInt("id_runner");
     }
+
+    private boolean mapIdUserToActive(ResultSet rSet, int rowNum) throws SQLException {
+        return rSet.getBoolean("active");
+    }
+
+    @Override
+    public boolean switchActiveStatusByIdRunner(int id_runner, boolean status) {
+        String sql = "UPDATE runners SET active = ? WHERE id_runner = ?";
+
+        return jdbcTemplate.update(sql, status, id_runner) > 0 ? true : false;
+    }
+
+    
    
     
 

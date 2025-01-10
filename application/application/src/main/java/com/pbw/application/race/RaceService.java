@@ -137,4 +137,10 @@ public class RaceService {
         return raceRepository.addSubmissionToRace(id_runner, id_race, id_training);
     } 
 
+
+    // BUAT ADMIN LIAT RACE
+    public List<Activity> getAllRace(){
+        return raceRepository.getAllRace();
+    }
+
 }

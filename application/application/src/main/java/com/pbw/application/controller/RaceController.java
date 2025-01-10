@@ -155,24 +155,41 @@ public class RaceController {
         HttpSession httpSession
         ) throws NumberFormatException, IOException{
         
-        int id_user = (int)httpSession.getAttribute("id_user");
-        int id_activity = Integer.valueOf(hashService.getIdByHashedId(id));
-        int id_runner = userService.getIdRunnerByIdUsers(id_user);
-        // Race yang diambil
-        // Activity race = raceService.getActivityByIdActivity(id_activity);
         
-        
-        // TODO: Daftar training
-        CustomResponse<List<Activity>> listOfActivities = activityService.findTrainingOnlyByIdRunner(id_runner);
 
-        
-        System.out.println("id activity buat race "+id_activity);
+            int id_user = (int)httpSession.getAttribute("id_user");
+            int id_activity = Integer.valueOf(hashService.getIdByHashedId(id));
 
-        ActivityWithEndDate race = activityWithEndDate.getSingleActWithEndDate(id_activity);
+            boolean isAdmin = httpSession.getAttribute("role").equals("admin");
+
+            ActivityWithEndDate race = activityWithEndDate.getSingleActWithEndDate(id_activity);
             
+        
+        // Kalau dia runner aja
+        if(!isAdmin){
+            int id_runner = userService.getIdRunnerByIdUsers(id_user);
+            
+            CustomResponse<List<Activity>> listOfActivities = activityService.findTrainingOnlyByIdRunner(id_runner);
+    
+            
+            
+    
+            
+                
+    
+            // Ada error handling di dalam service nya apabila listOfActivities Null / tidak ada
+            CustomResponse<List<Activity>> availableActivities = activityService.filterTrainingAccordingDate(listOfActivities.getData(), race);
 
-        // Ada error handling di dalam service nya apabila listOfActivities Null / tidak ada
-        CustomResponse<List<Activity>> availableActivities = activityService.filterTrainingAccordingDate(listOfActivities.getData(), race);
+                    // Untuk cek submission dari user ini
+            Participant sumbission = new Participant().userOfThisRace(id_runner, id_activity);
+            System.out.println("submission: "+sumbission.getActivity().isSuccess());
+
+            model.addAttribute("availableActivities", availableActivities);
+
+            // nanti harus di cek kalo udah pernah submit, ga boleh nambah
+            model.addAttribute("submission", sumbission);
+        }
+
         
 
         List<Integer> participants = raceService.getParticipantsOfSpecificRace(id_activity);
@@ -202,21 +219,14 @@ public class RaceController {
             wrappedRaceParticipants = new CustomResponse<>(false,  "Capacity: "+raceParticipants.size(), raceParticipants);
         }
 
-        // Untuk cek submission dari user ini
-        Participant sumbission = new Participant().userOfThisRace(id_runner, id_activity);
-        System.out.println("submission: "+sumbission.getActivity().isSuccess());
-        
-        
         model.addAttribute("participants", wrappedRaceParticipants);
         model.addAttribute("numberOfParticipants", wrappedRaceParticipants.getData().size());
-        
-        // nanti harus di cek kalo udah pernah submit, ga boleh nambah
-        model.addAttribute("submission", sumbission);
 
         // Buat nambahin submission
         model.addAttribute("id", id);
 
-        model.addAttribute("availableActivities", availableActivities);
+        model.addAttribute("isAdmin", isAdmin);
+        
         model.addAttribute("race", race);
 
         return "race/challenge";
@@ -225,8 +235,6 @@ public class RaceController {
     @Getter
     @Setter
     class Participant{
-
-        
 
         private CustomResponse<Activity> activity;
         private User user;

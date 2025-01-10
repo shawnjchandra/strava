@@ -15,6 +15,7 @@
 		lokasi varchar(255) NOT NULL,
 		gender VARCHAR(16) 
 	);
+	
 	CREATE TABLE Admins(
 		id_users INT PRIMARY KEY DEFAULT nextval('seq_id_user'),
 		id_admin INT UNIQUE NOT NULL GENERATED ALWAYS AS IDENTITY,
