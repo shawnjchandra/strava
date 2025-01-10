@@ -82,13 +82,15 @@ public class ActivityService {
                 (createdAt.isAfter(startDateTime) && createdAt.isBefore(endDateTime))) {
 
             result.add(act);
-}
+            }
         }
 
         return result.size() >0 ?
         new CustomResponse<>(true, "Trainings have been found", result) :
         new CustomResponse<>(false, "No Trainings have been found", null);
     }
+
+    
 
     
 
