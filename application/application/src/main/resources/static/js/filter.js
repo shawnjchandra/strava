@@ -2,12 +2,37 @@ let sortBy = "createdat";
 let sortOrder = "asc";    
 
 function sortTable(column) {
+
+    console.log(column);
     if (sortBy === column) {
         sortOrder = sortOrder === "asc" ? "desc" : "asc";
     } else {
         sortBy = column;
         sortOrder = "asc";
     }
+
+    const heads = {
+        'judul': document.getElementById('judul'),
+        'createdAt': document.getElementById('createdAt'),
+        'durasi': document.getElementById('durasi'),
+        'jarak': document.getElementById('jarak'),
+        'elevasi': document.getElementById('elevasi')
+    };
+
+    console.table(heads);
+
+    Object.keys(heads).forEach(key => {
+        const head = heads[key];
+        if (key === column) {
+            // Set active column icon based on sort order
+            head.className = sortOrder === 'asc' 
+                ? 'fas fa-sort-up sort-icon sort-icon-asc' 
+                : 'fas fa-sort-down sort-icon sort-icon-desc';
+        } else {
+            // Reset other columns to default
+            head.className = 'fas fa-sort sort-icon';
+        }
+    });
 
     fetchActivities();
 }
