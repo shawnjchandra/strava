@@ -11,6 +11,7 @@ public interface RaceRepository {
     public Optional<Activity> getActivityByIdActivity(int id_activity);
     public List<Integer> getAllParticipantsOfSpecificRace(int id_race);
     public List<Activity> getAllRace();
+    public List<Activity> getAllRaceFiltered(String nama, String sortBy, String sortOrder);
     
     public boolean joinRace(int id_runner, int id_race);
     public boolean addRace(Activity activity, int id_admin);

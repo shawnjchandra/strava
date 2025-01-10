@@ -163,20 +163,21 @@ public class RaceController {
             boolean isAdmin = httpSession.getAttribute("role").equals("admin");
 
             ActivityWithEndDate race = activityWithEndDate.getSingleActWithEndDate(id_activity);
+
+            CustomResponse<Boolean> isValid = activityService.isRaceEnded(race);
+
+            // untuk cari tipe training yang sama
+            String type = race.getActivity().getTipeRace();
+            System.out.println("tipe dari race"+type);
             
         
-        // Kalau dia runner aja
-        if(!isAdmin){
+        // Kalau dia runner aja && belum selesai
+        if(!isAdmin && isValid.isSuccess()){
             int id_runner = userService.getIdRunnerByIdUsers(id_user);
             
-            CustomResponse<List<Activity>> listOfActivities = activityService.findTrainingOnlyByIdRunner(id_runner);
-    
-            
-            
-    
-            
-                
-    
+            // CustomResponse<List<Activity>> listOfActivities = activityService.findTrainingOnlyByIdRunner(id_runner);
+            CustomResponse<List<Activity>> listOfActivities = activityService.findTrainingAccordingToType(id_runner,type);
+
             // Ada error handling di dalam service nya apabila listOfActivities Null / tidak ada
             CustomResponse<List<Activity>> availableActivities = activityService.filterTrainingAccordingDate(listOfActivities.getData(), race);
 

@@ -121,6 +121,33 @@ public class JDBCRaceRepo implements RaceRepository {
 
     }
 
+    @Override
+    public List<Activity> getAllRaceFiltered(String judul, String sortBy, String sortOrder) {
+        StringBuilder sql = new StringBuilder("Select * FROM activity WHERE id_race IS NOT NULL");
+        
+        
+        List<Object> params = new ArrayList<>();
+    
+        // Handle keyword search
+        if (judul != null && !judul.isEmpty()) {
+            sql.append(" AND judul ILIKE ?");  // Use ILIKE for case-insensitive
+            params.add("%" + judul + "%");  // Add wildcards here, not in SQL
+        }
+
+        // Handle sorting
+        if (sortBy != null && !sortBy.isEmpty()) {
+            sql.append(" ORDER BY ").append(sortBy.toLowerCase());
+            if ("desc".equalsIgnoreCase(sortOrder)) {
+                sql.append(" DESC");
+            } else {
+                sql.append(" ASC");
+            }
+        }
+    
+        return jdbcTemplate.query(sql.toString(), this::mapIdToActivityRace, params.toArray());
+
+    }
+
     private int mapIdRunnerToRP(ResultSet rSet, int rowNum) throws SQLException {
         return rSet.getInt("id_race");
     }

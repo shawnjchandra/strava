@@ -143,4 +143,8 @@ public class RaceService {
         return raceRepository.getAllRace();
     }
 
+    public List<Activity> getAllRaceFiltered(String judul, String sortBy, String sortOrder){
+        return raceRepository.getAllRaceFiltered(judul, sortBy, sortOrder);
+    }
+
 }
