@@ -1,0 +1,55 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+
+/* Content Area Styles */
+.list-of-runners {
+    flex: 1;
+    padding: 20px;
+}
+
+.runners-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.runners-table th,
+.runners-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.runners-table th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.runners-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.status-active {
+    color: #27ae60;
+}
+
+.status-inactive {
+    color: #c0392b;
+}

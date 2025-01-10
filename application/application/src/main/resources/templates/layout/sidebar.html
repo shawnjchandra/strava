@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    
     <link rel="stylesheet" th:href="@{/css/sidebar.css}">
 </head>
 <body>
@@ -24,14 +25,66 @@
                     <li>Maps</li>
                     <li>Challenges</li>
                 </ul>
-                <ul>
+                <!-- <ul>
                     <li>
                         <a th:href="@{/race/create}">Create a Race</a>
                     </li>
-                </ul>
+                </ul> -->
             </div>
         </div>
  
+    </div>
+
+    <div th:fragment="sidebar-admin" class="sidebar">
+        <button class="toggle-btn">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <div class="menu" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <ul>
+                <li>
+                    <a th:href="@{/admin/index}"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
+                </li>
+                <li>
+                    <a th:href="@{/race/create}"><i class="fas fa-flag-checkered"></i> <span>Create a Race</span></a>
+                </li>
+                <!-- <li>
+                    <a href="#"><i class="fas fa-users"></i> <span>Manage Runners</span></a>
+                </li> -->
+            </ul>
+            
+            <ul>
+                <li>
+                    <!-- <a th:href="@{/race/create}"><i class="fas fa-flag-checkered"></i> <span>Create a Race</span></a> -->
+                    <a th:if="${session.status} != null" th:href="@{/logout}" class="signout-btn"><i class="fas fa-sign-out-alt"></i> Sign out</a>
+                </li>
+            </ul>
+        </div>
+        <!-- <span th:text="${admin}"></span> -->
+
+        <script>
+            document.querySelector('.toggle-btn').addEventListener('click', function() {
+                const sidebar = document.querySelector('.sidebar');
+                sidebar.classList.toggle('collapsed');
+                const lis = document.querySelectorAll('li');
+                
+                const icon = this.querySelector('i');
+                if (sidebar.classList.contains('collapsed')) {
+                    icon.classList.remove('fa-chevron-left');
+                    icon.classList.add('fa-chevron-right');
+
+                    for(let li of lis){
+                        li.classList.add('hidden');
+                    }
+                } else {
+                    icon.classList.remove('fa-chevron-right');
+                    icon.classList.add('fa-chevron-left');
+                    for(let li of lis){
+                        li.classList.remove('hidden');
+                    }
+                }
+            });
+        </script>
     </div>
 </body>
 </html>

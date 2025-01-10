@@ -5,36 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/sidebar.css}">
-    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/admin/index.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/sidebar-admin.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Dashboard</title>
 </head>
 <body>
     <!-- Navbar -->
-    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
-
+    <!-- <th:block th:replace="~{/layout/navbar :: navbar}"></th:block> -->
+    
     <!-- Main Layout -->
     <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="profile">
-                <!-- Uncomment and replace with actual image path if needed -->
-                <!-- <img src="your-image.jpg" alt="Profile Picture" class="profile-img"> -->
-                <h2>Shawn Jonathan Chandra</h2>
-            </div>
-            <div class="menu">
-                <ul>
-                    <li>Dashboard</li>
-                    <li>Training</li>
-                    <li>Maps</li>
-                    <li>Challenges</li>
-                </ul>
-                <ul>
-                    <li>
-                        <a th:href="@{/race/create}">Create a Race</a>
-                    </li>
-                </ul>
-            </div>
+        <th:block th:replace="~{/layout/sidebar :: sidebar-admin}"></th:block>
+        
+
+        <div class="list-of-runners">
+            <h2>Registered Runners</h2>
+            <table class="runners-table">
+                <thead>
+                    <tr>
+                        <th>Runner ID</th>
+                        <th>Name</th>
+              
+                   
+                        <th>Status</th>
+                        <th>HAMMER OF BAN</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>R001</td>
+                        <td>John Smith</td>
+               
+
+                        <td><span class="status-active">Active</span></td>
+                        <td>
+                            <button>
+                                BAN
+                            </button>
+                        </td>
+      
+                    </tr>
+                    <tr>
+                        <td>R002</td>
+                        <td>Sarah Johnson</td>
+                
+             
+                        <td><span class="status-active">Active</span></td>
+                        <td>
+                            <button>
+                                BAN
+                            </button>
+                            <button>
+                                UNBAN
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>R003</td>
+                        <td>Mike Wilson</td>
+                
+
+                        <td><span class="status-inactive">Inactive</span></td>
+                        
+                    </tr>
+                </tbody>
+            </table>
         </div>
+    </div>
+
     
-    <span th:text="${admin}"></span>
 </body>
 </html>
