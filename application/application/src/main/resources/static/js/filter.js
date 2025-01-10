@@ -19,7 +19,7 @@ function sortTable(column) {
         'elevasi': document.getElementById('elevasi')
     };
 
-    console.table(heads);
+    // console.table(heads);
 
     Object.keys(heads).forEach(key => {
         const head = heads[key];
@@ -30,7 +30,7 @@ function sortTable(column) {
                 : 'fas fa-sort-down sort-icon sort-icon-desc';
         } else {
             // Reset other columns to default
-            head.className = 'fas fa-sort sort-icon';
+            head.className = 'fa-regular fa-equals';
         }
     });
 
