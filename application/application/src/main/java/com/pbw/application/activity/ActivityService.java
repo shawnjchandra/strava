@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.pbw.application.activityWithEndDate.ActivityWithEndDate;
 import com.pbw.application.custom.CustomResponse;
+import com.pbw.application.user.UserService;
+
 
 
 @Service
@@ -18,11 +20,19 @@ public class ActivityService {
     @Autowired
     private ActivityRepository activityRepository;
 
+    @Autowired UserService userService;
+
     public int getIdActivity(){
         return activityRepository.getIdActivity();
     }
 
-    public List<Activity> findAll(int id_runner){
+    public List<Activity> findAllByIdUser(int id_user){
+        
+        // dari id_user harus convert ke id_runner;
+        int id_runner = userService.getIdRunnerByIdUsers(id_user);
+
+        System.out.println("iduser -> idrunner"+id_user+" "+id_runner);
+
         return activityRepository.findAll(id_runner);
     }
 
@@ -33,7 +43,7 @@ public class ActivityService {
     public CustomResponse<List<Activity>> findTrainingOnlyByIdRunner(int id_runner){
         List<Activity> result = activityRepository.findTrainingOnlyByIdRunner(id_runner);
     
-        return result.size() >0 ?
+        return result != null ?
         new CustomResponse<>(true, "Trainings have been found", result) :
         new CustomResponse<>(false, "No Trainings have been found", null);
     }

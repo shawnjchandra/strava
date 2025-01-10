@@ -13,7 +13,11 @@
     <!-- First Navbar -->
     <div th:fragment="navbar" class="navbar-container">
         <nav class="navbar">
-            <div class="logo">LOGO</div>
+            <div class="logo">
+                <a th:href="@{/}">
+                    <img th:src="@{/img/favicon.png}" style="height: 50px;">
+                </a>
+            </div>
             <ul th:if="${session.status} != null" class="nav-links">
                 <li class="dropdown">
                     <a th:href="@{/activity}">Activities</a>
@@ -26,18 +30,6 @@
                 <a th:if="${session.status} == null" th:href="@{/login}" class="login-btn">Login</a>
                 <a th:if="${session.status} == null" th:href="@{/register}" class="register-btn">Register</a>
                 <a th:if="${session.status} != null" th:href="@{/logout}" class="signout-btn">Sign out</a>
-            </div>
-        </nav>
-    </div>
-
-    <!-- Second Navbar -->
-    <div th:fragment="navbar2" class="navbar-container">
-        <nav class="navbar">
-            <div class="logo">LOGO</div>
-            <div class="auth-links">
-                <a href="" class="login-btn">Login</a>
-                <a href="" class="register-btn">Register</a>
-                <a href="" class="signout-btn">Sign out</a>
             </div>
         </nav>
     </div>
@@ -63,13 +55,16 @@
     
                 <li><a th:href="@{/homeFeature}">Features</a></li>
                 <li><a th:href="@{/maps}">Maps</a></li>
-                <li><a th:href="@{/homeChallenge}">Challenges</a></li>
+                <!-- <li><a th:href="@{/homeChallenge}">Challenges</a></li> -->
+                <li><a th:href="@{/race/}">Challenges</a></li>
+                <li><a th:href="@{/dashboard}">Dashboard</a></li>
     
             </ul>
     
             <div class="auth-linksHome">
                 <a th:if="${session.status} == null" th:href="@{/login}" class="login-btn">Login</a>
                 <a th:if="${session.status} == null" th:href="@{/register}" class="register-btn">Register</a>
+                <a th:if="${session.status} != null" th:href="@{/logout}" class="signout-btn">Sign out</a>
             </div>
         </nav>
     </div>

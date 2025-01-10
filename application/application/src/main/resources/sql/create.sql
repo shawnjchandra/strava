@@ -13,8 +13,10 @@
 		nama varchar(255) NOT NULL,
 		tanggal_lahir DATE NOT NULL,
 		lokasi varchar(255) NOT NULL,
-		gender VARCHAR(16) 
+		gender VARCHAR(16),
+		active BOOLEAN DEFAULT TRUE
 	);
+	
 	CREATE TABLE Admins(
 		id_users INT PRIMARY KEY DEFAULT nextval('seq_id_user'),
 		id_admin INT UNIQUE NOT NULL GENERATED ALWAYS AS IDENTITY,
@@ -26,10 +28,10 @@
 	CREATE TABLE Activity(
 		id_activity INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 		judul varchar(255) NOT NULL,
-		durasi TIME NULL,
+		durasi VARCHAR(16) NULL,
 		jarak FLOAT null,
 		elevasi FLOAT null,
-		createdAt DATE DEFAULT CURRENT_DATE,
+		createdAt TIMESTAMP DEFAULT CURRENT_DATE,
 		urlPath VARCHAR(255) NULL,
 		id_training int UNIQUE null,
 		id_runner int REFERENCES Runners(id_runner) null,

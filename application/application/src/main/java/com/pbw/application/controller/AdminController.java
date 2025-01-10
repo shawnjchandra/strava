@@ -1,36 +1,58 @@
 package com.pbw.application.controller;
 
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pbw.application.RequiredRole;
+import com.pbw.application.activity.Activity;
 import com.pbw.application.admin.Admin;
 import com.pbw.application.admin.AdminService;
+import com.pbw.application.custom.CustomResponse;
+import com.pbw.application.hash.HashService;
+import com.pbw.application.race.RaceService;
 import com.pbw.application.user.User;
+import com.pbw.application.user.UserService;
 
-
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import lombok.Getter;
+import lombok.Setter;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
     
     @Autowired
+    private RaceService raceService;
+
+    @Autowired
+    private HashService hashService;
+    
+    @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private UserService userService;
     
     @GetMapping("/register")
-    // @RequiredRole("admin")
+    @RequiredRole("admin")
     public String adminPage( 
         Admin admin,
         Model model    
@@ -42,11 +64,72 @@ public class AdminController {
     @GetMapping("/index")
     @RequiredRole("admin")
     public String adminIndexPage( 
-        Admin admin,
-        Model model    
-    ){
+        Model model,    
+        HttpSession httpSession
+    ) throws NoSuchAlgorithmException, IOException{
+        Admin admin = (Admin) httpSession.getAttribute("status"); 
+
+        List<User> users = userService.getAllUsers();
+
+        List<Runner> runners = new ArrayList<>();
+        for(User user: users){
+            System.out.println(user);
+            Runner runner = new Runner().userWithIdRunner(user);
+            runners.add(runner);
+        }
+
+        CustomResponse<List<Runner>> runnersToWeb;
+        if(runners.size() >0){
+            runnersToWeb = new CustomResponse<List<Runner>>(true, "Found runners", runners);
+        }else{
+            runnersToWeb = new CustomResponse<List<Runner>>(false, "No runners available", null);
+
+        }
+
+        List<Activity> raceQuery =  raceService.getAllRace();
+        CustomResponse<List<Activity>> raceResponse;
+        if(raceQuery != null){
+            
+            
+            for(Activity act : raceQuery){
+                String originalId = String.valueOf(act.getIdActivity());
+                String hashedId = hashService.hashIdToInt(originalId);
+            
+                act.setIdActivity(Integer.valueOf(hashedId));
+            }
+            raceResponse = new CustomResponse<>(true, "Found available races", raceQuery);
+        }else{
+            raceResponse = new CustomResponse<>(false, "No available races", null);
+
+        }
+
+
+        model.addAttribute("races", raceResponse);
+        model.addAttribute("runners", runnersToWeb);
         model.addAttribute("admin", admin);
         return "admin/index";       
+    }
+
+    @Getter
+    @Setter
+    class Runner{
+        User user;
+        int id_runner;
+        boolean active;
+
+        Runner userWithIdRunner(User user){
+            Runner runner = new Runner();
+
+            String email = user.getEmail();
+            int id_runner = userService.getIdRunnerByEmail(email);
+            boolean status = userService.getActiveStatus(email);
+
+            runner.setUser(user);
+            runner.setId_runner(id_runner);
+            runner.setActive(status);
+
+            return runner;
+        }
     }
 
     @PostMapping("/register/admin")
@@ -110,6 +193,28 @@ public class AdminController {
         }
 
         return "redirect:/admin";
+    }
+
+    @PostMapping("/ban/{id}")
+    public ResponseEntity<String> ban(
+        @PathVariable("id") String id
+    ){
+        int id_runner = Integer.valueOf(id);
+        boolean result = userService.switchActiveStatusByIdRunner(id_runner,false);
+
+        return result ? ResponseEntity.ok("User has been banned") :
+        ResponseEntity.ok("Failed to ban user");
+    
+    }
+    @PostMapping("/unban/{id}")
+    public ResponseEntity<String> unban(
+        @PathVariable("id") String id
+    ){
+        int id_runner = Integer.valueOf(id);
+        boolean result = userService.switchActiveStatusByIdRunner(id_runner,true);
+
+        return result ? ResponseEntity.ok("User has been banned") :
+        ResponseEntity.ok("Failed to ban user");
     }
 
     

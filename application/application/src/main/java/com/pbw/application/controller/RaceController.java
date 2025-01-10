@@ -63,8 +63,10 @@ public class RaceController {
     ) throws NoSuchAlgorithmException, IOException{
 
         
-        int id_runner = (int)httpSession.getAttribute("id_user");
+        int id_user = (int)httpSession.getAttribute("id_user");
         String nama = ((User)httpSession.getAttribute("status")).getNama();
+
+        int id_runner = userService.getIdRunnerByIdUsers(id_user);
 
         CustomResponse<List<Activity>> available = raceService.getAllAvailableRace(id_runner);
         CustomResponse<List<Activity>> joined = raceService.getAllJoinedRace(id_runner);
@@ -153,22 +155,41 @@ public class RaceController {
         HttpSession httpSession
         ) throws NumberFormatException, IOException{
         
-        int id_runner = (int)httpSession.getAttribute("id_user");
-        int id_activity = Integer.valueOf(hashService.getIdByHashedId(id));
-
-        // Race yang diambil
-        // Activity race = raceService.getActivityByIdActivity(id_activity);
         
-        
-        // TODO: Daftar training
-        CustomResponse<List<Activity>> listOfActivities = activityService.findTrainingOnlyByIdRunner(id_runner);
-        System.out.println("id activity buat race "+id_activity);
 
-        ActivityWithEndDate race = activityWithEndDate.getSingleActWithEndDate(id_activity);
+            int id_user = (int)httpSession.getAttribute("id_user");
+            int id_activity = Integer.valueOf(hashService.getIdByHashedId(id));
+
+            boolean isAdmin = httpSession.getAttribute("role").equals("admin");
+
+            ActivityWithEndDate race = activityWithEndDate.getSingleActWithEndDate(id_activity);
             
+        
+        // Kalau dia runner aja
+        if(!isAdmin){
+            int id_runner = userService.getIdRunnerByIdUsers(id_user);
+            
+            CustomResponse<List<Activity>> listOfActivities = activityService.findTrainingOnlyByIdRunner(id_runner);
+    
+            
+            
+    
+            
+                
+    
+            // Ada error handling di dalam service nya apabila listOfActivities Null / tidak ada
+            CustomResponse<List<Activity>> availableActivities = activityService.filterTrainingAccordingDate(listOfActivities.getData(), race);
 
-        // Ada error handling di dalam service nya apabila listOfActivities Null / tidak ada
-        CustomResponse<List<Activity>> availableActivities = activityService.filterTrainingAccordingDate(listOfActivities.getData(), race);
+                    // Untuk cek submission dari user ini
+            Participant sumbission = new Participant().userOfThisRace(id_runner, id_activity);
+            System.out.println("submission: "+sumbission.getActivity().isSuccess());
+
+            model.addAttribute("availableActivities", availableActivities);
+
+            // nanti harus di cek kalo udah pernah submit, ga boleh nambah
+            model.addAttribute("submission", sumbission);
+        }
+
         
 
         List<Integer> participants = raceService.getParticipantsOfSpecificRace(id_activity);
@@ -198,21 +219,14 @@ public class RaceController {
             wrappedRaceParticipants = new CustomResponse<>(false,  "Capacity: "+raceParticipants.size(), raceParticipants);
         }
 
-        // Untuk cek submission dari user ini
-        Participant sumbission = new Participant().userOfThisRace(id_runner, id_activity);
-        System.out.println("submission: "+sumbission.getActivity().isSuccess());
-        
-        
         model.addAttribute("participants", wrappedRaceParticipants);
         model.addAttribute("numberOfParticipants", wrappedRaceParticipants.getData().size());
-        
-        // nanti harus di cek kalo udah pernah submit, ga boleh nambah
-        model.addAttribute("submission", sumbission);
 
         // Buat nambahin submission
         model.addAttribute("id", id);
 
-        model.addAttribute("availableActivities", availableActivities);
+        model.addAttribute("isAdmin", isAdmin);
+        
         model.addAttribute("race", race);
 
         return "race/challenge";
@@ -222,19 +236,17 @@ public class RaceController {
     @Setter
     class Participant{
 
-        
-
         private CustomResponse<Activity> activity;
         private User user;
 
-        protected Participant userOfThisRace(int id_runner, int id_activity){
+        protected Participant userOfThisRace(int id_user, int id_activity){
             Participant participant = new Participant();
 
-            User user = userService.getUserByIdRunner(id_runner);
+            User user = userService.getUserByIdRunner(id_user);
 
             int id_race = raceService.getIdRaceByIdActivity(id_activity);
 
-            CustomResponse<Activity> activity = activityService.getSubmitedActivityOnRace(id_runner, id_race);
+            CustomResponse<Activity> activity = activityService.getSubmitedActivityOnRace(id_user, id_race);
 
             // System.out.println(activity.isSuccess());
 
@@ -255,7 +267,9 @@ public class RaceController {
         HttpSession httpSession
         ){
 
-        int id_runner = (int)httpSession.getAttribute("id_user");
+        int id_user = (int)httpSession.getAttribute("id_user");
+        int id_runner = userService.getIdRunnerByIdUsers(id_user);
+
         int id_activity = Integer.valueOf(id);
 
         CustomResponse<Null> result =raceService.joinRace(id_runner,id_activity);
@@ -274,7 +288,8 @@ public class RaceController {
         HttpSession httpSession
     ) throws NumberFormatException, IOException{
 
-        int id_runner = (int)httpSession.getAttribute("id_user");
+        int id_user = (int)httpSession.getAttribute("id_user");
+        int id_runner = userService.getIdRunnerByIdUsers(id_user);
 
         // id activity dari race
         int id_activity_race = Integer.valueOf(hashService.getIdByHashedId(id));

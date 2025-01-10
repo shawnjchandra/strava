@@ -1,6 +1,8 @@
 package com.pbw.application.user;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +36,16 @@ public class UserService {
         Optional<User> res = userRepository.findByEmail(Email);
         
         if(!res.isPresent()){
-            return new CustomResponse<>(HttpStatus.UNAUTHORIZED,false, "NO USER FOUND" , null );
+            return new CustomResponse<>(HttpStatus.UNAUTHORIZED,false, "No user has been found" , null );
+        }
+
+        boolean active = userRepository.getActiveStatus(Email);
+        if(!active){
+            return new CustomResponse<>(HttpStatus.UNAUTHORIZED,false, "User has been banned" , null );
         }
 
         return passwordEncoder.matches(password, res.get().getPassword()) ? 
-        new CustomResponse<User>(HttpStatus.ACCEPTED,true, "USER FOUND", res.get() ) : new CustomResponse<>(HttpStatus.UNAUTHORIZED,false, "PASSWORD MISMATCH" , null );
+        new CustomResponse<User>(HttpStatus.ACCEPTED,true, "USER FOUND", res.get() ) : new CustomResponse<>(HttpStatus.UNAUTHORIZED,false, "Password mismatch" , null );
     }
 
     // Ga perlu custom response seharusnya, karena bakal disatuin di login????? 
@@ -53,8 +60,52 @@ public class UserService {
     public User getUserByIdRunner(int id_runner){
         return userRepository.getUserByIdRunner(id_runner);
     }
-    
+  
+    public int getIdRunnerByIdUsers(int id_users){
+        return userRepository.getIdRunnerByIdUsers(id_users);
+    }
+
     public List<String> getAllKota(){
         return userRepository.getAllKota();
     }
+
+    
+    //test 
+    public List<User> getAllUsers() {
+        
+        List<User> result = userRepository.getAllUsers();
+
+        return result;
+    }
+
+    public List<User> getAllUsersByFilter(String... filters) {
+        Map<String, String> filterMap = new HashMap<>();
+
+        // NAMA-namaUser, ID-idRunner, STATUS-active
+        for(String filter : filters){
+            String[] input = filter.split("-");
+            filterMap.put(input[0], input[1]);
+        }
+        
+        List<User> result = userRepository.getAllUsersByFilter(filterMap);
+
+        return result;
+    }
+
+    public int getIdRunnerByEmail(String email){
+        return userRepository.getIdRunnerByEmail(email);
+    }
+
+    public boolean getActiveStatus(String email){
+        return userRepository.getActiveStatus(email);
+    }
+    
+    public boolean getActiveStatus(int id_runner){
+        return userRepository.getActiveStatus(id_runner);
+    }
+
+    public boolean switchActiveStatusByIdRunner(int id_runner, boolean status){
+        return userRepository.switchActiveStatusByIdRunner(id_runner, status);
+    }
+
 }

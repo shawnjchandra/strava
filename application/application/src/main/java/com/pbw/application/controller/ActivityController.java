@@ -12,6 +12,7 @@ import com.pbw.application.activity.ActivityService;
 import com.pbw.application.activityWithEndDate.ActivityEndDateCalculator;
 import com.pbw.application.custom.CustomResponse;
 import com.pbw.application.image.ImageService;
+import com.pbw.application.user.UserService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
@@ -37,6 +38,9 @@ public class ActivityController {
     private ActivityService activityService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private ImageService imageService;
 
     @GetMapping
@@ -45,12 +49,14 @@ public class ActivityController {
         Model model,
         HttpSession httpSession
         ) {
-        int id_runner = (int)httpSession.getAttribute("id_user");
+        int id_user = (int)httpSession.getAttribute("id_user");
 
-        List<Activity> act = activityService.findAll(id_runner);
+        List<Activity> act = activityService.findAllByIdUser(id_user);
+        System.out.println("id_user: "+ id_user);
+        System.out.println("activities: "+ act);
 
         CustomResponse<List<Activity>> activities;
-        if(act != null){
+        if(act != null&&act.size()>0){
             activities = new CustomResponse<>(true,"Found Activities", act);
         }else{
             activities = new CustomResponse<>(false,"No Activities Available",null);
@@ -93,7 +99,8 @@ public class ActivityController {
             return "redirect:/activity/add";
         }
 
-        int id_runner = (int)httpSession.getAttribute("id_user");
+        int id_user = (int)httpSession.getAttribute("id_user");
+        int id_runner = userService.getIdRunnerByIdUsers(id_user);
         int nextIdActivity = activityService.getIdActivity() + 1;
 
         // tipe training

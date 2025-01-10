@@ -42,20 +42,27 @@
                 <p>Afternoon Walk • Jan 29, 2022</p>
               </div>
 
-              
-              <div th:each="activity : ${activities}">
-                <div th:replace="~{fragments/activity-card :: activityCard(
-                    name=${nama},
-                    date=${activity.createdAt},
-                    location='Bandung',
-                    title=${activity.judul},
-                    distance=${activity.jarak},
-                    time=${activity.durasi},
-                    elevGain=${activity.elevasi},
-                    gambar=${activity.urlpath}
-                )}">
+
+              <div th:if="${activities.success}">
+                  <div th:each="activity : ${activities.data}">
+                    <div th:replace="~{fragments/activity-card :: activityCard(
+                        name=${nama},
+                        date=${activity.createdAt},
+                        location='Bandung',
+                        title=${activity.judul},
+                        distance=${activity.jarak},
+                        time=${activity.durasi},
+                        elevGain=${activity.elevasi},
+                        gambar=${activity.urlpath}
+                    )}">
+                  </div>
+                </div>
+
               </div>
-            </div>
+              <div th:unless="${activities.success}">
+
+              </div>
+              
           </div>
 
           

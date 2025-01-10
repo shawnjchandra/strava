@@ -12,6 +12,21 @@
     <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
 
     <div class="page-container">
+        <!-- <th:block th:replace="~{/layout/sidebar :: sidebar}"></th:block> -->
+        <!-- <div class="menu">
+            <ul>
+                <li>Dashboard</li>
+                <li>Training</li>
+                <li>Maps</li>
+                <li>Challenges</li>
+            </ul>
+            <ul>
+                <li>
+                    <a th:href="@{/race/create}">Create a Race</a>
+                </li>
+            </ul>
+        </div> -->
+
         <div class="participants-sidebar">
             <div class="participants-header">
                 <h2>Race Participants</h2>
@@ -41,32 +56,17 @@
                                 <span class="unit">km</span>
                             </span>
                         </div>
-                    <div th:unless="${participant.activity.success}">
-                    
-                        <span class="no-submission" th:text="${participant.activity.message}"> </span>
+                        <div th:unless="${participant.activity.success}">
+                        
+                            <span class="no-submission" th:text="${participant.activity.message}"> </span>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-        
-
-                <div class="menu">
-                    <ul>
-                        <li>Dashboard</li>
-                        <li>Training</li>
-                        <li>Maps</li>
-                        <li>Challenges</li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <a th:href="@{/race/create}">Create a Race</a>
-                        </li>
-                    </ul>
-                </div>
-            </div> 
+             
         
             <main class="main-content">
                 <div class="header">
@@ -120,8 +120,10 @@
                         </div>
                     </div> -->
                 </div>
-        
-                <div class="upload-section">
+                <div class="upload-section" th:if="${isAdmin}">
+                    <span>Feature not available for admin</span>
+                </div>
+                <div class="upload-section" th:unless="${isAdmin}">
 
                     <!-- <div class="upload-grid">
                         
