@@ -13,4 +13,5 @@ public interface ActivityRepository {
     public Activity getSubmitedActivityOnRace(int id_training);
 
     Activity findById(int id);
+    Activity findByIdActivityAndIdRunner(int idActivity, int idRunner);
 }

@@ -42,12 +42,12 @@
                 <strong>Uploaded Image:</strong>
             </p>
             <div class="activity-image">
-                <img th:src="@{|/uploads/${activity.urlpath}|}" alt="Activity Image" style="max-width: 100%; height: auto;">
+                <img th:src="@{|${activity.urlpath}|}" alt="Activity Image" style="max-width: 100%; height: auto;">
             </div>
         </section>
 
         <section class="actions">
-            <a th:href="@{/activity/activity}" class="btn">Back to Activities</a>
+            <a th:href="@{/activity}" class="btn">Back to Activities</a>
         </section>
     </main>
 

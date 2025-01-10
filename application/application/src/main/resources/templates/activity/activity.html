@@ -45,8 +45,7 @@
                         <tr th:each="activity, iterStat : ${activities.data}" 
                             th:if="${iterStat.index >= (currentPage * 5) && iterStat.index < ((currentPage * 5) + 5)}">
                             <td>
-                                <a th:href="@{'/activity/' + ${activity.idActivity} + '?id_user=' + ${#session.getAttribute('id_user')}}"
-                                   th:text="${activity.judul}">Morning Run</a>
+                                <a th:href="@{/activity/descActivity(id_activity=${activity.idActivity})}" th:text="${activity.judul}">Morning Run</a>
                             </td>
                             <td th:text="${activity.tipeTraining}">Run</td>
                             <td th:text="${activity.createdAt}">2023-01-01</td>
