@@ -90,7 +90,9 @@ public class ActivityService {
         new CustomResponse<>(false, "No Trainings have been found", null);
     }
 
-    
+    public List<Activity> findAllFilteredTraining(int id_runner, String keywords, String type,String sortBy, String sortOrder){
+        return activityRepository.findAllFilteredTraining(id_runner, keywords, type, sortBy, sortOrder);
+    }
 
     
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -106,6 +107,38 @@ public class JdbcActivityRepository implements ActivityRepository {
         return jdbcTemplate.queryForObject(sql, new ActivityRowMapper(), id_training);
     }
 
+    @Override
+    public List<Activity> findAllFilteredTraining(int id_runner, String keywords, String type, String sortBy, String sortOrder) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM activity WHERE id_runner = ?");
+        
+        List<Object> params = new ArrayList<>();
+        params.add(id_runner);  // Add the first parameter
+    
+        // Handle keyword search
+        if (keywords != null && !keywords.isEmpty()) {
+            sql.append(" AND judul ILIKE ? ");  // Use ILIKE for case-insensitive
+            params.add("%" + keywords + "%");  // Add wildcards here, not in SQL
+        }
+    
+        // Handle type filter
+        if (type != null && !type.isEmpty()) {
+            sql.append(" AND tipe_training = ?::tipeAct");  // Cast both sides
+            params.add(type);
+        }
+    
+        // Handle sorting
+        if (sortBy != null && !sortBy.isEmpty()) {
+            sql.append(" ORDER BY ").append(sortBy.toLowerCase());
+            if ("desc".equalsIgnoreCase(sortOrder)) {
+                sql.append(" DESC");
+            } else {
+                sql.append(" ASC");
+            }
+        }
+    
+        return jdbcTemplate.query(sql.toString(), new ActivityRowMapper(), params.toArray());
+    }
+
 
     private int mapIdActivity(ResultSet rSet, int rowNum) throws SQLException {
         return rSet.getInt("id_activity");
@@ -114,6 +147,8 @@ public class JdbcActivityRepository implements ActivityRepository {
     private int mapIdTraining(ResultSet rSet, int rowNum) throws SQLException {
         return rSet.getInt("id_training");
     }
+
+    
 
     
 

@@ -1,33 +1,26 @@
 package com.pbw.application.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import com.pbw.application.activity.Activity;
-import com.pbw.application.activity.ActivityRepository;
 import com.pbw.application.activity.ActivityService;
-import com.pbw.application.activityWithEndDate.ActivityEndDateCalculator;
 import com.pbw.application.custom.CustomResponse;
+import com.pbw.application.custom.PaginationResponse;
+// import com.pbw.application.custom.CustomWrapper;
 import com.pbw.application.image.ImageService;
 import com.pbw.application.user.UserService;
 
 import jakarta.servlet.http.HttpSession;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDate;
+import java.sql.Wrapper;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -46,14 +39,16 @@ public class ActivityController {
     @GetMapping
     public String getAllActivities(
         @RequestParam(defaultValue = "0") int page,
+
         Model model,
         HttpSession httpSession
         ) {
         int id_user = (int)httpSession.getAttribute("id_user");
 
         List<Activity> act = activityService.findAllByIdUser(id_user);
-        System.out.println("id_user: "+ id_user);
-        System.out.println("activities: "+ act);
+
+        // System.out.println("id_user: "+ id_user);
+        // System.out.println("activities: "+ act);
 
         CustomResponse<List<Activity>> activities;
         if(act != null&&act.size()>0){
@@ -68,6 +63,56 @@ public class ActivityController {
         model.addAttribute("activities", activities);
         return "/activity/activity";
     }
+
+    @GetMapping("/filter")
+    public ResponseEntity<?> filterActivities(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(required = false) String keywords,
+        @RequestParam(required = false) String actType,
+        @RequestParam(defaultValue = "createdAt") String sortBy,
+        @RequestParam(defaultValue = "asc") String sortOrder,
+        Model model,
+        HttpSession httpSession
+    ){
+         try {
+        int id_user = (int)httpSession.getAttribute("id_user");
+        List<Activity> act = activityService.findAllFilteredTraining(id_user, keywords, actType, sortBy, sortOrder);
+
+        PaginationResponse<List<Activity>> activities;
+        CustomResponse<PaginationResponse<List<Activity>>> response;
+
+        if(act != null && !act.isEmpty()) {
+            activities = new PaginationResponse<>(true, act, page, 5, act.size());
+
+            response = new CustomResponse<>(
+            true, 
+            "",
+            activities
+            );
+        } 
+        else {
+        
+            response = new CustomResponse<>(false, "No Activities Available", null);
+        }
+        
+
+        return ResponseEntity.ok(response);
+    } catch (Exception e) {
+        return ResponseEntity.badRequest()
+            .body(new CustomResponse<Exception>(false, "Error: " + e.getMessage(), null));
+    }
+    }
+
+    private String getPaginationHtml(int currentPage, int totalItems, int itemsPerPage, String baseUrl) {
+    Context context = new Context();
+    context.setVariable("currentPage", currentPage);
+    context.setVariable("totalItems", totalItems);
+    context.setVariable("itemsPerPage", itemsPerPage);
+    context.setVariable("baseUrl", baseUrl);
+    
+    SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+    return templateEngine.process("layout/pagination", context);
+}
 
     @GetMapping("/add")
     public String showAddActivityForm(

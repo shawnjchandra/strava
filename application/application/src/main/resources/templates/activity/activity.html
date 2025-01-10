@@ -6,6 +6,8 @@
     <title>My Activities</title>
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/activity.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/js/filter.js}" defer></script>
 </head>
 <body>
     <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
@@ -14,14 +16,16 @@
         <header>
             <h1>My Activities</h1>
             <div class="search-container">
-                <input type="text" placeholder="Keywords" class="search-input" />
+                <input type="text" name="keywords" placeholder="Search by title" class="search-input" />
                 <select class="sport-select">
-                    <option>All Sport Types</option>
+                    <option value="" disabled selected>All Sport Types</option>
                     <option value="run">Running</option>
                     <option value="bike">Cycling</option>
                     <option value="swim">Swimming</option>
                 </select>
                 <button class="search-button">Search</button>
+                <button class="clear">Clear</button>
+
             </div>
         </header>
 
@@ -29,32 +33,42 @@
             <button id="add" th:onclick="|window.location.href='@{/activity/add}'|">Add Training Activity</button>
             <div th:if="${activities.success}">
                 <h2 th:text="${activities.data.size()} + ' Activities'">0 Activities</h2>
-                <table>
+                <table class="table">
                     <thead>
                         <tr>
                             <th>Title</th>
                             <th>Sport</th>
-                            <th>Date</th>
-                            <th>Time</th>
+                            <th th:onclick="sortTable('createdAt')" >Date
+                                <span th:text="${sortBy}"></span>
+
+                                <span th:if="${sortBy == 'createdAt'}" 
+                                    th:text="${sortOrder == 'asc' ? '▲' : '▼'}">
+                                </span>
+                            </th>
+                            <th th:onclick="sortTable('durasi')">
+                                <span th:if="${sortBy == 'durasi'}" 
+                                    th:text="${sortOrder == 'asc' ? '▲' : '▼'}">
+                                </span>
+                                Duration</th>
                             <th>Distance</th>
-                            <th>Duration</th>
                             <th>Elevation</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="activity, iterStat : ${activities.data}" 
-                            th:if="${iterStat.index >= (currentPage * 5) && iterStat.index < ((currentPage * 5) + 5)}">
+                            th:if="${iterStat.index >= (currentPage * 10) && iterStat.index < ((currentPage * 10) + 10)}">
                             <td th:text="${activity.judul}">Morning Run</td>
                             <td th:text="${activity.tipeTraining}">Run</td>
                             <td th:text="${activity.createdAt}">2023-01-01</td>
-                            <td th:text="${activity.durasi}">00:30:00</td>
+                            <td  th:text="${activity.durasi}">00:30:00</td>
                             <td th:text="${activity.jarak} + ' km'">5 km</td>
-                            <td th:text="${activity.durasi}">00:30:00</td>
-                            <td th:text="${activity.elevasi} + ' ft'">100 ft</td>
+                            <td th:text="${activity.elevasi} + ' meter'">100 ft</td>
                         </tr>
                     </tbody>
                 </table>
-                <div th:replace="~{layout/pagination :: pagination(${currentPage}, ${activities.data.size()}, 5, '/activity')}"></div>
+                
+
+                <div th:replace="~{layout/pagination :: pagination(${currentPage}, ${activities.data.size()}, 10, '/activity')}"></div>
 
             </div>
             <div th:unless="${activities.success}">
