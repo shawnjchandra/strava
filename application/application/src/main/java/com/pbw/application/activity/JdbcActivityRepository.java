@@ -87,6 +87,15 @@ public class JdbcActivityRepository implements ActivityRepository {
         return result.size() >0 ? result : null;
 
     }
+    @Override
+    public List<Activity> findTrainingAccordingToType(int id_runner, String type) {
+        String sql = "Select * FROM activity WHERE id_training IS NOT NULL AND id_runner = ? AND tipe_training = ?::tipeAct";
+
+        List<Activity> result = jdbcTemplate.query(sql, new ActivityRowMapper(), id_runner, type);
+
+        return result.size() >0 ? result : null;
+
+    }
 
     @Override
     public int getIdTrainingOfRaceParticipant(int id_runner, int id_race) {

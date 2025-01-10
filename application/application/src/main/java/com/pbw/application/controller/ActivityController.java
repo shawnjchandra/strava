@@ -103,17 +103,7 @@ public class ActivityController {
     }
     }
 
-    private String getPaginationHtml(int currentPage, int totalItems, int itemsPerPage, String baseUrl) {
-    Context context = new Context();
-    context.setVariable("currentPage", currentPage);
-    context.setVariable("totalItems", totalItems);
-    context.setVariable("itemsPerPage", itemsPerPage);
-    context.setVariable("baseUrl", baseUrl);
-    
-    SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-    return templateEngine.process("layout/pagination", context);
-}
-
+  
     @GetMapping("/add")
     public String showAddActivityForm(
         Model model,
