@@ -15,6 +15,7 @@ public class CustomResponse<T> {
     private boolean success;
     private HttpStatus statusCode;
     private String message;
+    private List<String> list;
     private T data;
 
     public CustomResponse(
@@ -40,6 +41,19 @@ public class CustomResponse<T> {
         this.data  = data;
 
     }
+
+    // public CustomResponse(
+    //     boolean success,
+    //     T data,
+    //     String... messages
+    // ){
+    //     this.success = success;
+    //     this.data = data;
+    //     this.list = new ArrayList<>();
+    //     for(String msg: messages){
+    //         list.add(msg);
+    //     }
+    // }
 
 
 
