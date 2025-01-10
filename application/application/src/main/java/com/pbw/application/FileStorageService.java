@@ -44,15 +44,17 @@ public class FileStorageService {
         return objectMapper.readValue(file, new TypeReference<List<PersistentNode>>() {});
     }
 
-     // Retrieve the ID by hashedId
+     
      public String getIdByHashedId(String hashedId) throws IOException {
-        List<PersistentNode> nodes = readAll(); // Load all nodes
+        System.out.println(hashedId);
+        List<PersistentNode> nodes = readAll(); 
         for (PersistentNode node : nodes) {
+            System.out.println(node);
             if (node.getHashedId().equals(hashedId)) {
-                return node.getId(); // Return the ID if hashedId matches
+                return node.getId(); 
             }
         }
-        return null; // Return null if no match is found
+        return null; 
     }
 
     @Getter
