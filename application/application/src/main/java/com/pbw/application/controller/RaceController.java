@@ -28,6 +28,7 @@ import com.pbw.application.admin.Admin;
 import com.pbw.application.custom.CustomResponse;
 import com.pbw.application.hash.HashService;
 import com.pbw.application.race.RaceService;
+import com.pbw.application.race.RaceWinner;
 import com.pbw.application.user.User;
 import com.pbw.application.user.UserService;
 
@@ -168,7 +169,7 @@ public class RaceController {
 
             // untuk cari tipe training yang sama
             String type = race.getActivity().getTipeRace();
-            System.out.println("tipe dari race"+type);
+            //System.out.println("tipe dari race"+type);
             
         
         // Kalau dia runner aja && belum selesai
@@ -183,14 +184,17 @@ public class RaceController {
 
                     // Untuk cek submission dari user ini
             Participant sumbission = new Participant().userOfThisRace(id_runner, id_activity);
-            System.out.println("submission: "+sumbission.getActivity().isSuccess());
+            System.out.println("submission: "+sumbission);
 
             model.addAttribute("availableActivities", availableActivities);
 
             // nanti harus di cek kalo udah pernah submit, ga boleh nambah
             model.addAttribute("submission", sumbission);
+            model.addAttribute("isValidRace", true);
         }
 
+        
+        
         
 
         List<Integer> participants = raceService.getParticipantsOfSpecificRace(id_activity);
@@ -219,6 +223,29 @@ public class RaceController {
         }else{
             wrappedRaceParticipants = new CustomResponse<>(false,  "Capacity: "+raceParticipants.size(), raceParticipants);
         }
+
+        // Kalau udah selesai
+        if(!isValid.isSuccess()){
+            CustomResponse<RaceWinner> winner = raceService.getWinnerFromRace(id_activity);
+
+            if(!isAdmin){
+                int id_runner = userService.getIdRunnerByIdUsers(id_user);
+                
+                System.out.println("winner "+winner.isSuccess());
+
+                if(winner.isSuccess() && winner.getData().getId_runner() == id_runner){
+                    model.addAttribute("isSelf", true);
+                }else{
+                    model.addAttribute("isSelf", false);
+
+                }
+                model.addAttribute("winner",winner);
+
+            }
+
+            model.addAttribute("isValidRace", false);
+        }
+
 
         model.addAttribute("participants", wrappedRaceParticipants);
         model.addAttribute("numberOfParticipants", wrappedRaceParticipants.getData().size());
@@ -249,7 +276,9 @@ public class RaceController {
 
             CustomResponse<Activity> activity = activityService.getSubmitedActivityOnRace(id_user, id_race);
 
-            // System.out.println(activity.isSuccess());
+
+            //System.out.println("activity submission : "+activity.isSuccess());
+            //System.out.println("activity : "+activity.getData());
 
             participant.setUser(user);
             participant.setActivity(activity);
@@ -276,7 +305,7 @@ public class RaceController {
         CustomResponse<Null> result =raceService.joinRace(id_runner,id_activity);
         
         // int id_race = raceService.getIdRaceByIdActivity(id_activity);
-        // System.out.println("id race : "+id_race);
+        // //System.out.println("id race : "+id_race);
 
         return ResponseEntity.ok(result.getMessage());
     }
