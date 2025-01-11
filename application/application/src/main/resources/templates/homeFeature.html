@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{css/navbar.css}">
     <link rel="stylesheet" th:href="@{css/index.css}">
     <link rel="stylesheet" th:href="@{css/homeFeature.css}">
+    <link rel="stylesheet" th:href="@{css/footer.css}">
 </head>
 <body>
     <div th:replace="layout/navbar :: navbar3"></div>
@@ -23,20 +24,26 @@
         </div>
 
         <div class="navfeature">
-            <h3>Automatic Activity Tracking</h3>
+            <a href="#1">
+                <h3>Automatic Activity Tracking</h3>
+            </a>
         </div>
 
         <div class="navfeature">
-            <h3>Record Performance</h3>
+            <a href="#2">
+                <h3>Record Performance</h3>
+            </a>
         </div>
 
         <div class="navfeature">
-            <h3>Fun Race</h3>
+            <a href="#3">
+                <h3>Fun Race</h3>
+            </a>
         </div>
     </div>
 
     <div class="desc-container">
-        <div class="desc">
+        <div class="desc" id="1">
             <img th:src="@{/img/trackz.jpg}">
             <div class="desc-text">
                 <h3>Automatic Activity Tracking</h3>
@@ -44,7 +51,7 @@
             </div>
         </div>
 
-        <div class="desc">
+        <div class="desc" id="2">
             <div class="desc-text">
                 <h3>Record Performance</h3>
                 <h4>Keep track of your performance with precision! Record your stats, monitor your improvements, and set new personal bests!</h4>
@@ -52,7 +59,7 @@
             <img th:src="@{/img/prohress.jpg}">
         </div>
 
-        <div class="desc">
+        <div class="desc" id="3">
             <img th:src="@{/img/chal.jpg}">
             <div class="desc-text">
                 <h3>Fun Challenge</h3>

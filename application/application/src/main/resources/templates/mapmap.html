@@ -1,63 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>Maps</title>
+    <style> 
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; 
+            height: 100%;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            padding: 0;
+        }
+    </style>
     <link rel="stylesheet" th:href="@{css/navbar.css}">
+    <link rel="stylesheet" th:href="@{css/footer.css}">
+    <link rel="stylesheet" th:href="@{css/index.css}">
 </head>
-<style>
-.navbar3 {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 0 20px;
-    background-color: black;
-}
-
-.auth-linksHome {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    width: fit-content;
-    color: white;
-    padding: 5px 10px;
-    border: 1px solid white;
-    border-radius: 5px;
-    font-size: 0.9em;
-    transition: background-color 0.3s, color 0.3s;
-    background-color:white;
-}
-
-.mapswrapper {
-    background: #fff;
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    padding-top: 56.25%; /* Rasio 16:9 untuk responsivitas */
-    overflow: hidden;
-}
-
-.mapswrapper iframe {
-    border: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-}
-
-/* Jika ingin menyembunyikan tautan */
-.mapswrapper a {
-    display: none;
-}
-</style>
 <body>
     <div th:replace="layout/navbar :: navbar3"></div>
-    <div class="mapswrapper">
-        <div class="mapswrapper"><iframe width="1920" height="1080" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=bandung&zoom=12&maptype=roadmap"></iframe><a href="https://dodsafe.org">dod safe</a><style>.mapswrapper{background:#fff;position:relative}.mapswrapper iframe{border:0;position:relative;z-index:2}.mapswrapper a{color:rgba(0,0,0,0);position:absolute;left:0;top:0;z-index:0}</style></div>
+
+    <div class="container">
+        <h1>Explore the Route</h1>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63374.281292904045!2d107.60187206702777!3d-6.903447675098539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6398252477f%3A0x146a1f93d3e815b2!2sBandung%2C%20Bandung%20City%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1736587371771!5m2!1sen!2sid"></iframe>
     </div>
+
+    <div th:replace="layout/footer :: footer"></div>
 </body>
+</html>

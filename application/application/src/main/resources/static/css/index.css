@@ -16,40 +16,11 @@ body{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    background-color: #212121;
+    background-color:#135085;
     height:100px;
     width:100%;
     margin:0;
     font-size:larger;
-}
-.auth-linksHome {
-    margin-left: auto;
-    display: flex;
-    gap:10px;
-    align-items: center;
-    justify-content: flex-end;
-    text-decoration: none;
-    color: #F5F5F5;
-    padding: 0;
-    border:none;
-    font-size: 0.9em;
-    transition: background-color 0.3s, color 0.3s;
-    background-color:transparent;  
-}
-.auth-linksHome a {
-    text-decoration: none; /* Hilangkan underline */
-    color: #F5F5F5; /* Warna teks */
-    padding: 5px 15px; /* Jarak dalam tombol */
-    border: 1px solid white; /* Border tombol */
-    border-radius: 5px; /* Sudut membulat */
-    font-size: 0.9em; /* Ukuran teks */
-    transition: background-color 0.3s, color 0.3s;
-    margin-right:10px;
-}
-
-.auth-linksHome a:hover {
-    background-color: #03A9F4;
-   color:#F5F5F5
 }
 .ss-container{
     flex:1 1 auto;
@@ -65,19 +36,19 @@ body{
     height: 800px;
     max-height:800px;
     object-fit: cover;
-    filter: grayscale(100%);
+    filter: grayscale(80%);
     margin:0;
     transition: filter 0.5s ease, transform 0.5s ease;
 }
 
 .ss-container img:hover {
-    filter: grayscale(80%);
+    filter: grayscale(50%);
 }
 
 
 .text {
     color: #ffffff;
-    font-size: 24px;
+    font-size: 20px;
     position: absolute;
     bottom: 10%;
     width: 80%;
@@ -85,14 +56,14 @@ body{
     margin: 0 auto;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(18, 18, 18, 0.7);
     padding: 10px;
     border-radius: 8px;
 }
 .highlight {
     font-size: 28px;
     font-weight: bold;
-    color: #ffffff;
+    color: white;
 }
  
   /* Fading animation */
@@ -105,18 +76,13 @@ body{
     from {opacity: 0.4;}
     to {opacity: 1;}
 }
-
-/* @keyframes textFadeIn {
-    from {transform: translateY(20px); opacity: 0;}
-    to {transform: translateY(0); opacity: 1;}
-} */
 .tagline{
     position:absolute;
     top:5%;
     left:50%;
     transform: translateX(-50%);
-    color: #ffa500;
-    font-size: 48px;
+    color: #ff6f61;
+    font-size: 40px;
     font-weight: bold;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
     text-align: center;
@@ -126,11 +92,10 @@ body{
 
 .cta{
     text-align: center;
-    /* margin-top: 50px; */
     padding:20px;
-    background-color:#212121;
+    background-color: #212121;
     color:white;
-    /* border-radius: 8px; */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .ctaText{
@@ -143,15 +108,18 @@ body{
     padding: 15px 30px;
     margin:15px;
     font-size: 18px;
-    background-color: #ffa500;
+    background-color: #ff6f61;
     color: white;
     text-decoration: none;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    font-weight: bold;
+    box-shadow: 0px 4px 8px rgba(255, 111, 97, 0.5);
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .ctaBut:hover {
-    background-color: #ff8c00;
+    background-color: #e55a4c;
+    transform: scale(1.05); /* Efek sedikit membesar saat hover */
 }
 
 .keyFeature{
@@ -187,49 +155,7 @@ body{
     color: #555;
 }
 
-footer {
-    display:flex;
-    text-align: left;
-    background-color: #212121;
-    color:white;
-    margin: 0;
-    height: auto;
-    font-size: 32px;
-    padding:20px 10px;
-    flex-shrink:0;
-    margin-bottom: 20px;
-}
 
-footer h3{
-    font-size: 24px;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-footer p{
-    font-size: 16px;
-    margin: 5px 0;
-}
-
-footer a{
-    display: inline-block;
-    margin-right: 10px;
-    font-size: 16px;
-    color: #F5F5F5;
-    text-decoration: underline;
-    transition: color 0.3s;
-}
-
-footer a:hover{
-    color: #03A9F4;
-}
-
-.footerAbout,.footerContact,.footerSosmed{
-    flex: 1 1 30%;
-    margin:10px;
-    padding:20px;
-    text-align: center;
-}
 
 .keyFeature{
     text-align: center;

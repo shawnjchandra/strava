@@ -7,6 +7,7 @@
     <link rel="icon" href="img/favicon.png">
     <link rel="stylesheet" th:href="@{css/navbar.css}">
     <link rel="stylesheet" th:href="@{css/index.css}">
+    <link rel="stylesheet" th:href="@{css/footer.css}">
 </head>
 <body>
     <div th:replace="layout/navbar :: navbar3"></div>
@@ -45,8 +46,7 @@
             </div>
         </div>
     </div>
-
-</div>
+    
     <div class="cta">
         <p class="ctaText">Join our community and start tracking your progress today!</p>
         <a th:if="${session.status} == null" th:href="@{/register}" class="ctaBut">join Now</a>
