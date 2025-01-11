@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.pbw.application.activity.Activity;
+import com.pbw.application.user.User;
 
 public interface RaceRepository {
 
@@ -22,6 +23,8 @@ public interface RaceRepository {
     
     // Lupa buat dispesifikin
     public List<Integer> getFromRaceParticipants(int id_runner);
+
+    public RaceWinner getWinnerFromRace(int id_race);
 
 
 }

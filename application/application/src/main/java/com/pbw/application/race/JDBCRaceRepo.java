@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.pbw.application.activity.Activity;
+import com.pbw.application.user.User;
 
 @Repository
 public class JDBCRaceRepo implements RaceRepository {
@@ -170,6 +171,42 @@ public class JDBCRaceRepo implements RaceRepository {
         
         return act;
     }
+
+    @Override
+    public RaceWinner getWinnerFromRace(int id_race) {
+        String sql = "SELECT \n" + //
+                        "    r.id_runner,\n" + //
+                        "    r.nama,\n" + //
+                        "    a.jarak,\n" + //
+                        "    a.durasi,\n" + //
+                        "    (a.jarak::float / (EXTRACT(EPOCH FROM a.durasi::time)/3600.0)) as speed\n" + //
+                        "FROM activity a\n" + //
+                        "JOIN raceparticipants rp ON a.id_race = rp.id_race\n" + //
+                        "JOIN runners r ON rp.id_runner = r.id_runner\n" + //
+                        "WHERE a.id_race = ? AND rp.id_training IS NOT NULL\n" + //
+                        "ORDER BY \n" + //
+                        "    a.jarak DESC,  \n" + //
+                        "    a.durasi ASC    \n" + //
+                        "LIMIT 1;";
+
+        try {
+            return jdbcTemplate.queryForObject(sql, this::mapRowToWinner, id_race) ;
+            
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    private RaceWinner mapRowToWinner(ResultSet resultSet, int rowNum) throws SQLException {
+        return new RaceWinner(
+            resultSet.getInt("id_runner"),
+            resultSet.getString("nama"),
+            resultSet.getFloat("jarak"),
+            resultSet.getString("durasi")
+            
+        );
+    }
+
 
     
 
