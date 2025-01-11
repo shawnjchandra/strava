@@ -144,6 +144,26 @@ input[type="file"] {
     color: #666;
 }
 
+.winner {
+    background-color: gold;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.no-winner {
+    background-color: #ffcccb;
+    border: 2px solid #ff0000;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.trophy-icon {
+    font-size: 50px; /* Adjust size as needed */
+}
+
 /* =================== */
 
 
