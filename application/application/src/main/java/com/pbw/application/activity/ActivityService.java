@@ -30,7 +30,7 @@ public class ActivityService {
         // dari id_user harus convert ke id_runner;
         int id_runner = userService.getIdRunnerByIdUsers(id_user);
 
-        System.out.println("iduser -> idrunner"+id_user+" "+id_runner);
+        //System.out.println("iduser -> idrunner"+id_user+" "+id_runner);
 
         return activityRepository.findAll(id_runner);
     }
@@ -84,7 +84,7 @@ public class ActivityService {
 
         for(Activity act: activities){
             LocalDateTime createdAt = act.getCreatedAt();
-            System.out.println("di according date : "+ act);
+            //System.out.println("di according date : "+ act);
             if(createdAt.isEqual(startDateTime) || 
                 createdAt.isEqual(endDateTime) || 
                 (createdAt.isAfter(startDateTime) && createdAt.isBefore(endDateTime))) {
