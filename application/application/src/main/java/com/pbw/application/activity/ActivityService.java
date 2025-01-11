@@ -118,9 +118,11 @@ public class ActivityService {
             isValid = true;
 
         }
+        System.out.println(startDateTime+" "+currentDateTime+" "+ endDateTime);
+
         return isValid ? 
         new CustomResponse<>(isValid, "Race is still ongoing", null) :
-        new CustomResponse<>(isValid, "Race has ended", null);
+        new CustomResponse<>(isValid, "Race is not available", null);
 
     }
 
