@@ -69,7 +69,9 @@
              
         
             <main class="main-content">
-                <div th:if="${!isValidRace}">
+                <!-- Kalau sudah selesai dan ada participantnya -->
+                <div th:if="${isValidRace == false && participants.success == true}">
+                    
                     <!-- kalau ada pemenang -->
                     <div th:if="${winner.success}" class="winner">
                         <div class="trophy-icon">🏆</div>
@@ -199,7 +201,7 @@
 
                         </div>
                         <div th:unless="${isValidRace}">
-                            <span>Race has been concluded</span>
+                            <span>Race is not available or has been concluded</span>
                         </div>
 
                         

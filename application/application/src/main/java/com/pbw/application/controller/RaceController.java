@@ -190,7 +190,7 @@ public class RaceController {
 
             // nanti harus di cek kalo udah pernah submit, ga boleh nambah
             model.addAttribute("submission", sumbission);
-            model.addAttribute("isValidRace", true);
+            // model.addAttribute("isValidRace", isValid.isSuccess());
         }
 
         
@@ -208,7 +208,7 @@ public class RaceController {
         // Bungkus pake customResponse
         CustomResponse<List<Participant>> wrappedRaceParticipants;
         
-        if (participants.size()>0) {
+        if (participants != null &&participants.size()>0) {
             
             for(Integer participant : participants){
                 int participant_id = participant.intValue();
@@ -223,6 +223,7 @@ public class RaceController {
         }else{
             wrappedRaceParticipants = new CustomResponse<>(false,  "Capacity: "+raceParticipants.size(), raceParticipants);
         }
+        System.out.println(wrappedRaceParticipants.getMessage());
 
         // Kalau udah selesai
         if(!isValid.isSuccess()){
@@ -243,9 +244,10 @@ public class RaceController {
 
             }
 
-            model.addAttribute("isValidRace", false);
+            // model.addAttribute("isValidRace", false);
         }
-
+        System.out.println(isValid.isSuccess());
+        model.addAttribute("isValidRace", isValid.isSuccess());
 
         model.addAttribute("participants", wrappedRaceParticipants);
         model.addAttribute("numberOfParticipants", wrappedRaceParticipants.getData().size());
