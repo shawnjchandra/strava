@@ -46,10 +46,10 @@ public class FileStorageService {
 
      
      public String getIdByHashedId(String hashedId) throws IOException {
-        System.out.println(hashedId);
+        ////System.out.println(hashedId);
         List<PersistentNode> nodes = readAll(); 
         for (PersistentNode node : nodes) {
-            System.out.println(node);
+            ////System.out.println(node);
             if (node.getHashedId().equals(hashedId)) {
                 return node.getId(); 
             }

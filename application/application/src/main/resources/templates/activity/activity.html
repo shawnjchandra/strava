@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/activity.css}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script th:src="@{/js/filter.js}" defer></script>
 </head>
 <body>
@@ -36,22 +37,35 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th>Sport</th>
-                            <th th:onclick="sortTable('createdAt')" >Date
-                                <span th:text="${sortBy}"></span>
+                            <th  th:onclick="sortTable('judul')">
+                                <!-- <span th:if="${sortBy == 'judul'}">  -->
+                                    Title <i id="judul"></i>
+                                    
 
-                                <span th:if="${sortBy == 'createdAt'}" 
-                                    th:text="${sortOrder == 'asc' ? '▲' : '▼'}">
-                                </span>
+                                <!-- </span> -->
+                                </th>
+                            <th>Sport</th>
+                            <th  th:onclick="sortTable('createdAt')" >
+                                Date <i id="createdAt"></i>
+                                
+
                             </th>
-                            <th th:onclick="sortTable('durasi')">
-                                <span th:if="${sortBy == 'durasi'}" 
-                                    th:text="${sortOrder == 'asc' ? '▲' : '▼'}">
-                                </span>
-                                Duration</th>
-                            <th>Distance</th>
-                            <th>Elevation</th>
+                            <th  th:onclick="sortTable('durasi')">
+                                <!-- <span th:if="${sortBy == 'durasi'}"> -->
+                                    Duration <i id="durasi"></i>
+
+                                <!-- </span> -->
+                                </th>
+                            <th  th:onclick="sortTable('jarak')">
+                                <!-- <span th:if="${sortBy == 'jarak'}"> -->
+                                    Distance <i id="jarak"></i>
+
+                                <!-- </span> -->
+                                </th>
+                            <th  th:onclick="sortTable('elevasi')">
+                               <!--  <span th:if="${sortBy == 'elevasi'}"> -->Elevation <i id="elevasi"></i>
+                            <!-- </span>-->
+                             </th> 
                         </tr>
                     </thead>
                     <tbody>

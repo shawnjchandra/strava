@@ -28,7 +28,7 @@ public class JdbcActivityRepository implements ActivityRepository {
     
 
         List<Activity> result = jdbcTemplate.query(FIND_ALL_QUERY, new ActivityRowMapper(),id_runner);
-        System.out.println("result size: "+result.size());
+        //System.out.println("result size: "+result.size());
 
         return result.size() >0 ? result : null;
     }
@@ -87,12 +87,21 @@ public class JdbcActivityRepository implements ActivityRepository {
         return result.size() >0 ? result : null;
 
     }
+    @Override
+    public List<Activity> findTrainingAccordingToType(int id_runner, String type) {
+        String sql = "Select * FROM activity WHERE id_training IS NOT NULL AND id_runner = ? AND tipe_training = ?::tipeAct";
+
+        List<Activity> result = jdbcTemplate.query(sql, new ActivityRowMapper(), id_runner, type);
+
+        return result.size() >0 ? result : null;
+
+    }
 
     @Override
     public int getIdTrainingOfRaceParticipant(int id_runner, int id_race) {
         String sql = "Select id_training FROM raceparticipants WHERE id_runner = ? AND id_race = ?";
 
-        System.out.println("id runner & id_race" + id_runner+" "+id_race);
+        //System.out.println("id runner & id_race" + id_runner+" "+id_race);
 
         Integer id_training = jdbcTemplate.queryForObject(sql, this::mapIdTraining,id_runner, id_race );
 

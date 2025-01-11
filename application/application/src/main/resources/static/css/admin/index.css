@@ -1,3 +1,13 @@
+:root {
+    --primary-color: #fc5200;
+    --primary-color-older: hsl(20, 95%, 35%);
+    --secondary-color: #242428;
+    --background-color: #f7f7fa;
+    --text-color: #242428;
+    --sidebar-width: 250px;
+    --border-radius: 8px;
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 * {
     margin: 0;
@@ -12,6 +22,7 @@ body {
 .container {
     display: flex;
     min-height: 100vh;
+    width: 100%;
 }
 
 
@@ -25,11 +36,17 @@ body {
 .runners-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+
     background: white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    overflow-y: auto;
+    
 }
-
+.table-container {
+    max-height: 300px; /* Set the maximum height for the table container */
+    overflow-y: auto;  /* Enable vertical scrolling */
+    border: 1px solid #ccc; /* Optional: Add a border for better visual distinction */
+}
 .runners-table th,
 .runners-table td {
     padding: 12px;
@@ -75,6 +92,101 @@ body {
 .btn-inactive:hover {
     background-color: #218838;
 }
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adds space between elements */
+    margin-bottom: 20px;
+}
+
+.search-button-race,
+.search-button-runner {
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.search-button-race:hover,
+.search-button-runner:hover {
+    background-color: #005bb5;
+}
+
+.search-button-race:focus,
+.search-button-runner:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 115, 230, 0.5);
+}
+
+.search-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px; /* Fixed width for better alignment */
+    transition: border-color 0.3s ease;
+}
+
+.clear-race,
+.clear-runner {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.clear-race:hover,
+.clear-runner:hover {
+    background-color: #545b62;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.clear-race:active,
+.clear-runner:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.go-challenge {
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+
+    /* background-color: var(--background-color); */
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    color: white;
+}
+
+.go-challenge a {
+    color: var(--primary-color);
+    text-decoration: none;
+    display: block;
+}
+
+.go-challenge:hover {
+    background-color: var(--primary-color-older);
+    /* font-weight: 300; */
+
+}
+
+
 
 .status-active {
     color: #28a745;

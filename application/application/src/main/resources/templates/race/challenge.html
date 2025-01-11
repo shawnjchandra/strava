@@ -69,9 +69,34 @@
              
         
             <main class="main-content">
+                <div th:if="${!isValidRace}">
+                    <!-- kalau ada pemenang -->
+                    <div th:if="${winner.success}" class="winner">
+                        <div class="trophy-icon">🏆</div>
+                        <h1>Congratulations!</h1>
+
+                        
+                        <b th:if="${isSelf}">
+                            <h3 th:text="${winner.data.nama}"></h3> <h3>(YOU)</h3>
+                            <p> is the winner!</p>
+                            
+                        </b>
+                        <b th:unless="${isSelf}">
+                            <h3 th:text="${winner.data.nama}"></h3>
+                            <h4> are the winner!</h4>
+                            <p>(better luck next time)</p>
+                        </b>
+                    </div>
+
+                    <div th:unless="${winner.success}" class="no-winner">
+                        <h1>No Winner</h1>
+                        <p>Better luck next time!</p>
+                    </div>
+                </div>
+
                 <div class="header">
                     <h1 th:text="${race.activity.judul}">Mountain Trail Challenge</h1>
-                    <span class="status-badge">Active</span>
+                    <!-- <span class="status-badge">Active</span> -->
                 </div>
         
                 <div class="description" th:text="${race.activity.description}">
@@ -83,7 +108,7 @@
                         <h2>Race Details</h2>
                         <div class="info-row">
                             <span class="label">Distance:</span>
-                            <span class="value" th:text="${race.activity.jarak}">21 km</span>
+                            <span class="value" th:text="${race.activity.jarak}+' km'">21 km</span>
                         </div>
                         <div class="info-row">
                             <span class="label">Date:</span>
@@ -144,33 +169,44 @@
                         </div> -->
                 
                         <!-- Choose from Available Activities Form -->
-                        <div th:if="${submission.activity.success}">
-                            <span>You have submitted an activity for this race / challenge</span>
-                            <div>
-                                <span th:text="'Title Of Submitted Activity: '+${submission.activity.data.judul}"></span><br>
-                                <span th:text="'Distance :'+${submission.activity.data.jarak}+' km'"></span>
-                            </div>
-                        </div>
-                        <div class="take-from-available-activity" th:unless="${submission.activity.success}" >
-                            <h2>Choose from Available Activities</h2>
-                            <form th:action="@{/race/challenge/{id}/selectActivity(id=${id})}" method="post">
-                                <div class="dropdown-container">
-                                    <label for="activity">Select an activity:</label>
-                                    <select name="activityId" id="activity" required>
-                                        <option value="" disabled selected>Select an activity</option>
-                                        <option th:if="${availableActivities.success}" th:each="activity : ${availableActivities.data}"  
-                                                th:value="${activity.idActivity}" 
-                                                th:text="${activity.judul + ' - ' + activity.jarak + ' km'}">
-                                            Activity Name
-                                        </option>
-                                    </select>
+                        <div th:if="${isValidRace}">
+
+                            <div th:if="${submission.activity.success}">
+                                <span>You have submitted an activity for this race / challenge</span>
+                                <div>
+                                    <span th:text="'Title Of Submitted Activity: '+${submission.activity.data.judul}"></span><br>
+                                    <span th:text="'Distance :'+${submission.activity.data.jarak}+' km'"></span>
                                 </div>
-                                <button type="submit" class="select-button">Submit</button>
-                            </form>
+                            </div>
+    
+                            <div class="take-from-available-activity" th:unless="${submission.activity.success}" >
+                                <h2>Choose from Available Activities</h2>
+                                <form th:action="@{/race/challenge/{id}/selectActivity(id=${id})}" method="post">
+                                    <div class="dropdown-container">
+                                        <label for="activity">Select an activity:</label>
+                                        <select name="activityId" id="activity" required>
+                                            <option value="" disabled selected>Select an activity</option>
+                                            <option th:if="${availableActivities.success}" th:each="activity : ${availableActivities.data}"  
+                                                    th:value="${activity.idActivity}" 
+                                                    th:text="${activity.judul + ' - ' + activity.jarak + ' km'}">
+                                                Activity Name
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="select-button">Submit</button>
+                                </form>
+                            </div>
+
+                        </div>
+                        <div th:unless="${isValidRace}">
+                            <span>Race has been concluded</span>
                         </div>
 
                         
                     </div>
+                    
+
+
                 </div>
                 
                 

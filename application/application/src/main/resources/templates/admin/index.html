@@ -9,6 +9,8 @@
     <link rel="stylesheet" th:href="@{/css/admin/sidebar-admin.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script th:src="@{/js/hammer.js}" defer></script>
+    <script th:src="@{/js/filterRunner.js}" defer></script>
+    <script th:src="@{/js/filterRace.js}" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Dashboard</title>
 </head>
@@ -17,86 +19,110 @@
     <!-- <th:block th:replace="~{/layout/navbar :: navbar}"></th:block> -->
     
     <!-- Main Layout -->
-    <div class="container">
+    <div class="container" >
         <th:block th:replace="~{/layout/sidebar :: sidebar-admin}"></th:block>
         
 
-        <div style="display: flex; flex-direction: column; height: 100vh; gap: 20px;">">
+        <div style="display: flex; flex-direction: column;width:100%; height: 100vh; gap: 20px;">
 
             <div class="list-of-runners" style="flex: 1; overflow-y: auto; padding: 20px; border-bottom: 1px solid #ccc;">
                 <h2>Registered Runners</h2>
+                <div class="search-container">
+                    <input type="text" name="runnerName" placeholder="Search by name" class="search-input" />
+                    <button class="search-button-runner">Search</button> <button class="clear-runner">Clear</button>
+
+                </div>
+
                 <table class="runners-table">
                     <thead>
                         <tr>
                             <th>Runner ID</th>
                             <th>Name</th>
-    
                             <th>Status</th>
                             <th>HAMMER OF BAN</th>
     
                         </tr>
                     </thead>
-                    <tbody th:if="${runners.success}">
-                        <tr th:each="runner : ${runners.data}">
-                            <td th:text="${runner.id_runner}">R002</td>
-                            <td th:text="${runner.user.nama}">Sarah Johnson</td>
-                    
-                 
-                            <div th:if="${runner.active}">
-                                <td><span class="status-active">Active</span></td>
-                                <td>
-                                    <button class="btn-active" th:data-id="${runner.id_runner}">
-                                        BAN
-                                    </button>
+                    <div class="table-container">
+                        <tbody class="tbody-runner" th:if="${runners.success}">
+                            <tr th:each="runner : ${runners.data}">
+                                <td th:text="${runner.id_runner}">R002
+                                    
                                 </td>
-                                
-                            </div>
-                            <div th:unless="${runner.active}">
-                                <td ><span class="status-inactive">Inactive</span></td>
-                                <td>
-                                    <button class="btn-inactive" th:data-id="${runner.id_runner}">
-                                        UNBAN
-                                    </button>
-                                </td>
-                                
-                            </div >
-                        </tr>
+                                <td th:text="${runner.user.nama}">Sarah Johnson</td>
                         
-                    </tbody>
-                    <tbody th:unless="${runners.success}">
-                        <tr>
-                            <td colspan="4" th:text="${runners.message}" style="text-align: center;"></td>
-    
-                        </tr>
-                    </tbody>
+                     
+                                <div th:if="${runner.active}">
+                                    <td><span class="status-active">Active</span></td>
+                                    <td>
+                                        <button class="btn-active" th:data-id="${runner.id_runner}">
+                                            BAN
+                                        </button>
+                                    </td>
+                                    
+                                </div>
+                                <div th:unless="${runner.active}">
+                                    <td ><span class="status-inactive">Inactive</span></td>
+                                    <td>
+                                        <button class="btn-inactive" th:data-id="${runner.id_runner}">
+                                            UNBAN
+                                        </button>
+                                    </td>
+                                    
+                                </div >
+                            </tr>
+                            
+                        </tbody>
+                        <tbody th:unless="${runners.success}">
+                            <tr>
+                                <td colspan="4" th:text="${runners.message}" style="text-align: center;"></td>
+        
+                            </tr>
+                        </tbody>
+
+                    </div>
                 </table>
             </div>
 
             <div style="flex: 1; overflow-y: auto; padding: 20px;">
                 <div class="race-container">
                     <div class="race-header">
-                        <h1>My Races</h1>
+                        <h2>Races</h2>
                     </div>
+                    <div  class="search-container">
+                        <input type="text" name="raceName" placeholder="Search by race" class="search-input" />
+                        <button class="search-button-race">Search</button>
+                        <button class="clear-race">Clear</button>
 
-                    <div th:if="${races.success}">
-                        <table>
+                    </div>
+                    <div class="table-container" th:if="${races.success}">
+                        <table class="runners-table">
                             <thead>
                                 <tr>
-                                    <th>Race Name</th>
-                                    <th>Distance</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
+                                    <th th:onclick="sortTable('judul')">Race Name 
+                                        <i id="judul"></i>
+
+                                    </th>
+                                    <th th:onclick="sortTable('jarak')">Distance 
+                                        <i id="jarak"></i>
+                                    </th>
+                                    <th th:onclick="sortTable('createdAt')">Date 
+                                        <i id="createdAt"></i>
+                                    </th>
+                                    <th th:onclick="sortTable('kuota_max')">Max Capacity 
+                                        <i id="kuota_max"></i>
+                                    </th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="tbody-race">
                                 <tr th:each="race: ${races.data}">
                                     <td th:text="${race.judul}">Coastal Run</td>
                                     <td th:text="${race.jarak}">10 km</td>
                                     <td th:text="${race.createdAt}">June 22, 2023</td>
                                     <td th:text="${race.kuota_max}">87/100</td>
                                     <td>
-                                        <a th:href="@{/race/challenge/{id}(id=${race.idActivity})}" class="btn go-challenge">
+                                        <a th:href="@{/race/challenge/{id}(id=${race.idActivity})}" class="go-challenge">
                                             Check
                                         </a>
                                     </td>

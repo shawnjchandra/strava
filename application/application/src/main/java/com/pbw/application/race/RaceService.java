@@ -68,11 +68,11 @@ public class RaceService {
         }
 
         for(int id_race: listOfJoinedRace){
-            System.out.println("id race :"+id_race);
+            //System.out.println("id race :"+id_race);
             Activity act = getActivityByIdRace(id_race);
             result.add(act);
         }
-        System.out.println(result.size()+" "+result.get(0));
+        //System.out.println(result.size()+" "+result.get(0));
 
         return result.size()>0 ? 
         new CustomResponse<>(true, "Joined Races Found", result) 
@@ -89,7 +89,7 @@ public class RaceService {
     public CustomResponse<Null> joinRace(int id_runner, int id_activity) {
         int id_race = getIdRaceByIdActivity(id_activity);
 
-        System.out.println(id_runner+" id runner dan id race dari join "+id_race);
+        //System.out.println(id_runner+" id runner dan id race dari join "+id_race);
 
         return raceRepository.joinRace(id_runner, id_race) == true ?
         new CustomResponse<>(true, "You have join the race", null) :
@@ -137,10 +137,26 @@ public class RaceService {
         return raceRepository.addSubmissionToRace(id_runner, id_race, id_training);
     } 
 
+    public CustomResponse<RaceWinner> getWinnerFromRace(int id_activity){
+        int id_race = getIdRaceByIdActivity(id_activity);
+
+        RaceWinner winner = raceRepository.getWinnerFromRace(id_race);
+
+        return winner != null ? 
+        new CustomResponse<>(true, "Winner is "+ winner.getNama(), winner) :
+        new CustomResponse<>(false, "No winner currently", null);
+    }
+
 
     // BUAT ADMIN LIAT RACE
     public List<Activity> getAllRace(){
         return raceRepository.getAllRace();
     }
+
+    public List<Activity> getAllRaceFiltered(String judul, String sortBy, String sortOrder){
+        return raceRepository.getAllRaceFiltered(judul, sortBy, sortOrder);
+    }
+
+
 
 }

@@ -25,6 +25,7 @@ import com.pbw.application.activity.Activity;
 import com.pbw.application.admin.Admin;
 import com.pbw.application.admin.AdminService;
 import com.pbw.application.custom.CustomResponse;
+import com.pbw.application.custom.PaginationResponse;
 import com.pbw.application.hash.HashService;
 import com.pbw.application.race.RaceService;
 import com.pbw.application.user.User;
@@ -73,7 +74,7 @@ public class AdminController {
 
         List<Runner> runners = new ArrayList<>();
         for(User user: users){
-            System.out.println(user);
+           
             Runner runner = new Runner().userWithIdRunner(user);
             runners.add(runner);
         }
@@ -108,6 +109,73 @@ public class AdminController {
         model.addAttribute("runners", runnersToWeb);
         model.addAttribute("admin", admin);
         return "admin/index";       
+    }
+
+     @GetMapping("/filter/race")
+    public ResponseEntity<?> filterRace(
+        @RequestParam(required = false) String raceName,
+        @RequestParam(defaultValue = "judul") String sortBy,
+        @RequestParam(defaultValue = "asc") String sortOrder,
+        Model model,
+        HttpSession httpSession
+    ){
+         try {
+            List<Activity> raceQuery =  raceService.getAllRaceFiltered(raceName, sortBy, sortOrder);
+            CustomResponse<List<Activity>> raceResponse;
+            if(raceQuery != null){
+            
+            
+            for(Activity act : raceQuery){
+                String originalId = String.valueOf(act.getIdActivity());
+                String hashedId = hashService.hashIdToInt(originalId);
+            
+                act.setIdActivity(Integer.valueOf(hashedId));
+            }
+            raceResponse = new CustomResponse<>(true, "Found available races", raceQuery);
+        }else{
+            raceResponse = new CustomResponse<>(false, "No available races", null);
+
+        }
+
+        return ResponseEntity.ok(raceResponse);
+    } catch (Exception e) {
+        return ResponseEntity.badRequest()
+            .body(new CustomResponse<Exception>(false, "Error: " + e.getMessage(), null));
+    }
+    }
+     @GetMapping("/filter/runner")
+    public ResponseEntity<?> filterRunner(
+        @RequestParam(required = false) String runnerName,
+        @RequestParam(defaultValue = "id_runner") String sortBy,
+        @RequestParam(defaultValue = "asc") String sortOrder,
+        Model model,
+        HttpSession httpSession
+    ){
+         try {
+            //System.out.println("runner name"+runnerName);
+
+            List<User> users = userService.getAllUsersByFilter(runnerName,sortBy,sortOrder);
+
+            List<Runner> runners = new ArrayList<>();
+            for(User user: users){
+               
+                Runner runner = new Runner().userWithIdRunner(user);
+                runners.add(runner);
+            }
+    
+            CustomResponse<List<Runner>> runnersToWeb;
+            if(runners.size() >0){
+                runnersToWeb = new CustomResponse<>(true, "Found runners", runners);
+            }else{
+                runnersToWeb = new CustomResponse<>(false, "No runners available", null);
+    
+            }
+
+        return ResponseEntity.ok(runnersToWeb);
+    } catch (Exception e) {
+        return ResponseEntity.badRequest()
+            .body(new CustomResponse<Exception>(false, "Error: " + e.getMessage(), null));
+    }
     }
 
     @Getter
@@ -162,22 +230,22 @@ public class AdminController {
                  "passwordMismatch",
                   "Passwords do not match");
 
-                  System.out.println("rejected do not match");
+                  //System.out.println("rejected do not match");
                 
                 return "admin/adminRegistration";
                 
             }
-            System.out.println("no reject password");
+            //System.out.println("no reject password");
             
             if(bindungResult.hasErrors()){
                 
                 List<ObjectError> errors = bindungResult.getAllErrors();
                 for(int i = 0; i<errors.size();i++){
-                    System.out.println("Error-"+i+": "+ errors.get(i));
+                    //System.out.println("Error-"+i+": "+ errors.get(i));
                 }
                 return "admin/adminRegistration";
             }
-            System.out.println("no errors");
+            //System.out.println("no errors");
             
             
             
@@ -185,7 +253,7 @@ public class AdminController {
             boolean isSuccessful = adminService.register(admin);
             
             
-            System.out.println("services register success");
+            //System.out.println("services register success");
         
         
         if(isSuccessful){

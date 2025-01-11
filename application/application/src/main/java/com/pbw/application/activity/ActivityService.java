@@ -30,7 +30,7 @@ public class ActivityService {
         // dari id_user harus convert ke id_runner;
         int id_runner = userService.getIdRunnerByIdUsers(id_user);
 
-        System.out.println("iduser -> idrunner"+id_user+" "+id_runner);
+        //System.out.println("iduser -> idrunner"+id_user+" "+id_runner);
 
         return activityRepository.findAll(id_runner);
     }
@@ -41,6 +41,14 @@ public class ActivityService {
 
     public CustomResponse<List<Activity>> findTrainingOnlyByIdRunner(int id_runner){
         List<Activity> result = activityRepository.findTrainingOnlyByIdRunner(id_runner);
+    
+        return result != null ?
+        new CustomResponse<>(true, "Trainings have been found", result) :
+        new CustomResponse<>(false, "No Trainings have been found", null);
+    }
+
+    public CustomResponse<List<Activity>> findTrainingAccordingToType(int id_runner, String type){
+        List<Activity> result = activityRepository.findTrainingAccordingToType(id_runner, type);
     
         return result != null ?
         new CustomResponse<>(true, "Trainings have been found", result) :
@@ -76,7 +84,7 @@ public class ActivityService {
 
         for(Activity act: activities){
             LocalDateTime createdAt = act.getCreatedAt();
-
+            //System.out.println("di according date : "+ act);
             if(createdAt.isEqual(startDateTime) || 
                 createdAt.isEqual(endDateTime) || 
                 (createdAt.isAfter(startDateTime) && createdAt.isBefore(endDateTime))) {
@@ -93,8 +101,28 @@ public class ActivityService {
     public List<Activity> findAllFilteredTraining(int id_runner, String keywords, String type,String sortBy, String sortOrder){
         return activityRepository.findAllFilteredTraining(id_runner, keywords, type, sortBy, sortOrder);
     }
-
     
+
+    public CustomResponse<Boolean> isRaceEnded(ActivityWithEndDate awend){
+        boolean isValid = false;
+        
+        LocalDateTime startDateTime = awend.getActivity().getCreatedAt();
+        LocalDateTime endDateTime = awend.getEndDateTime();
+
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        if(currentDateTime.isEqual(startDateTime) || 
+            currentDateTime.isEqual(endDateTime) || 
+            (currentDateTime.isAfter(startDateTime) && currentDateTime.isBefore(endDateTime))) {
+
+            isValid = true;
+
+        }
+        return isValid ? 
+        new CustomResponse<>(isValid, "Race is still ongoing", null) :
+        new CustomResponse<>(isValid, "Race has ended", null);
+
+    }
 
 
 }

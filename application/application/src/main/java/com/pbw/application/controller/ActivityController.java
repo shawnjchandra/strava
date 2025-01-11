@@ -47,8 +47,8 @@ public class ActivityController {
 
         List<Activity> act = activityService.findAllByIdUser(id_user);
 
-        // System.out.println("id_user: "+ id_user);
-        // System.out.println("activities: "+ act);
+        // //System.out.println("id_user: "+ id_user);
+        // //System.out.println("activities: "+ act);
 
         CustomResponse<List<Activity>> activities;
         if(act != null&&act.size()>0){
@@ -103,17 +103,7 @@ public class ActivityController {
     }
     }
 
-    private String getPaginationHtml(int currentPage, int totalItems, int itemsPerPage, String baseUrl) {
-    Context context = new Context();
-    context.setVariable("currentPage", currentPage);
-    context.setVariable("totalItems", totalItems);
-    context.setVariable("itemsPerPage", itemsPerPage);
-    context.setVariable("baseUrl", baseUrl);
-    
-    SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-    return templateEngine.process("layout/pagination", context);
-}
-
+  
     @GetMapping("/add")
     public String showAddActivityForm(
         Model model,
@@ -136,26 +126,20 @@ public class ActivityController {
                                 @RequestParam(required = false) float elevasi,
                                 @RequestParam(required = false) String description,
                                 // @RequestParam(required = false) Integer id_runner,
-                                @RequestParam("image") MultipartFile file,
+                                @RequestParam(required =  false) MultipartFile image,
                                 HttpSession httpSession) throws IOException {
 
-                        
-        if(file.isEmpty()){
-            // Sementara kalau ga ada input gambar di balikin ke halaman add
-            return "redirect:/activity/add";
-        }
 
         int id_user = (int)httpSession.getAttribute("id_user");
         int id_runner = userService.getIdRunnerByIdUsers(id_user);
         int nextIdActivity = activityService.getIdActivity() + 1;
 
         // tipe training
-        CustomResponse<String> isAdded = imageService.addImage(file, id_runner, nextIdActivity,"T");
-        
-        // if(!isAdded.isSuccess()){
 
-        //     System.out.println(isAdded.getMessage());
-        // }
+        
+
+        // CustomResponse<String> isAdded = imageService.addImage(image, id_runner, nextIdActivity,"T");
+        
 
         // ====================================================
         // Format durasi sebagai hh:mm:ss
@@ -173,21 +157,16 @@ public class ActivityController {
         activity.setDescription(description);
         activity.setIdRunner(id_runner);
 
+        if (image != null && !image.isEmpty()) {
+            CustomResponse<String> isAdded = imageService.addImage(image, id_runner, nextIdActivity, "T");
+            String path = imageService.getActualImagePath(id_runner, isAdded.getData());
+            activity.setUrlpath(path);
+
+
+        }
+
         // set url path dengan yang sebelumnya telah dibuat
-        String path = imageService.getActualImagePath(id_runner, isAdded.getData());
-        activity.setUrlpath(isAdded.getData());
-
-        activity.setUrlpath(path);
-
-        // System.out.println("Parameters: " + 
-        // activity.getJudul() + ", " + 
-        // activity.getTipeTraining() + ", " +
-        // activity.getCreatedAt() + ", " +
-        // activity.getDurasi() + ", " +
-        // activity.getJarak() + ", " +
-        // activity.getElevasi() + ", " +
-        // activity.getDescription() + ", " +
-        // activity.getIdRunner());
+       
 
         activityService.save(activity);
         return "redirect:/activity";
