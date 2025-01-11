@@ -41,7 +41,7 @@ public class AuthorizationAspect {
 
         String currentRole = (String)httpSession.getAttribute("role");
 
-        System.out.println("current role: "+currentRole);
+        //System.out.println("current role: "+currentRole);
 
         boolean isAllowed = false;
         for(String role : requiredRole.value()){
@@ -50,7 +50,7 @@ public class AuthorizationAspect {
             }
         }
         
-        System.out.println("check: "+ isAllowed);
+        //System.out.println("check: "+ isAllowed);
         if(!isAllowed){
             redirectToUnauthorized();
             // throw new Throwable("Insufficient Permission");
@@ -59,11 +59,11 @@ public class AuthorizationAspect {
 
     @Before("execution(* com.example.m08.LoginController.*(..))")
     public void log(){
-        // System.out.println("EXECUTING METHOD IN LOGIN CONTROLLER ");
+        // //System.out.println("EXECUTING METHOD IN LOGIN CONTROLLER ");
     }
 
     private void redirectToUnauthorized() throws IOException {
-        System.out.println("Redirecting to unauthorized");
+        //System.out.println("Redirecting to unauthorized");
         httpServletResponse.sendRedirect("/unauthorized");
     }
 

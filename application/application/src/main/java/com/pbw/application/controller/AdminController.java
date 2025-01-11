@@ -152,7 +152,7 @@ public class AdminController {
         HttpSession httpSession
     ){
          try {
-            System.out.println("runner name"+runnerName);
+            //System.out.println("runner name"+runnerName);
 
             List<User> users = userService.getAllUsersByFilter(runnerName,sortBy,sortOrder);
 
@@ -230,22 +230,22 @@ public class AdminController {
                  "passwordMismatch",
                   "Passwords do not match");
 
-                  System.out.println("rejected do not match");
+                  //System.out.println("rejected do not match");
                 
                 return "admin/adminRegistration";
                 
             }
-            System.out.println("no reject password");
+            //System.out.println("no reject password");
             
             if(bindungResult.hasErrors()){
                 
                 List<ObjectError> errors = bindungResult.getAllErrors();
                 for(int i = 0; i<errors.size();i++){
-                    System.out.println("Error-"+i+": "+ errors.get(i));
+                    //System.out.println("Error-"+i+": "+ errors.get(i));
                 }
                 return "admin/adminRegistration";
             }
-            System.out.println("no errors");
+            //System.out.println("no errors");
             
             
             
@@ -253,7 +253,7 @@ public class AdminController {
             boolean isSuccessful = adminService.register(admin);
             
             
-            System.out.println("services register success");
+            //System.out.println("services register success");
         
         
         if(isSuccessful){

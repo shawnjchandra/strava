@@ -90,21 +90,21 @@ public class RegisterController {
                  "passwordMismatch",
                   "Passwords do not match");
 
-                  System.out.println("rejected do not match");
+                  //System.out.println("rejected do not match");
                 
                 return "register";
                 
             }
-            System.out.println("no reject password"); 
+            //System.out.println("no reject password"); 
             if(bindungResult.hasErrors()){
                 
                 List<ObjectError> errors = bindungResult.getAllErrors();
                 for(int i = 0; i<errors.size();i++){
-                    System.out.println("Error-"+i+": "+ errors.get(i));
+                    //System.out.println("Error-"+i+": "+ errors.get(i));
                 }
                 return "register";
             }
-            System.out.println("no errors");
+            //System.out.println("no errors");
             
             
             
@@ -112,7 +112,7 @@ public class RegisterController {
             boolean isSuccessful = userService.register(user);
             
             
-            System.out.println("services register success");
+            //System.out.println("services register success");
         
         
         if(isSuccessful){
