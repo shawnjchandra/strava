@@ -1,4 +1,4 @@
-	DROP TABLE IF EXISTS Runners, Admins, Activity, RaceParticipants CASCADE;
+	DROP TABLE IF EXISTS Runners, Admins, Activity, RaceParticipants, Kota CASCADE;
 	DROP SEQUENCE IF EXISTS seq_id_user CASCADE;
 	DROP SEQUENCE IF EXISTS training_id_seq CASCADE;
 	DROP SEQUENCE IF EXISTS race_id_seq CASCADE;
@@ -31,7 +31,7 @@
 		durasi VARCHAR(16) NULL,
 		jarak FLOAT null,
 		elevasi FLOAT null,
-		createdAt TIMESTAMP DEFAULT CURRENT_DATE,
+		createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 		urlPath VARCHAR(255) NULL,
 		id_training int UNIQUE null,
 		id_runner int REFERENCES Runners(id_runner) null,
@@ -46,8 +46,8 @@
 
 	CREATE TABLE RaceParticipants(
 		id_runner int references Runners(id_runner) not null,
-		id_race int references Activity(id_race) not null
-		id_training int NULL;
+		id_race int references Activity(id_race) not null,
+		id_training int NULL
 		
 	);
 
