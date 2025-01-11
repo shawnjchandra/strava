@@ -120,7 +120,7 @@ public class JdbcUserRepository implements UserRepository {
             params.add("%" + nama + "%");  // Add wildcards here, not in SQL
         }
 
-        System.out.println(nama);
+        //System.out.println(nama);
 
         // Handle sorting
         if (sortBy != null && !sortBy.isEmpty()) {
