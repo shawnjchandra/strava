@@ -48,8 +48,8 @@ public class ImageService {
         setUPLOAD_DIRECTORY(id);
 
             File dirs = new File(UPLOAD_DIRECTORY);
-            System.out.println("DIRECTORY FILE : "+UPLOAD_DIRECTORY);
-            System.out.println("folder exists: "+dirs.exists());
+            //System.out.println("DIRECTORY FILE : "+UPLOAD_DIRECTORY);
+            //System.out.println("folder exists: "+dirs.exists());
 
             if(!dirs.exists()){
                 dirs.mkdirs();
