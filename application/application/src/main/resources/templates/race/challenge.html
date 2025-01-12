@@ -35,9 +35,9 @@
                 <span class="participant-count" th:text="${numberOfParticipants} + '/' + ${race.activity.kuota_max}">145/200</span>
             </div>
             
-            <div class="search-box">
+            <!-- <div class="search-box">
                 <input type="text" placeholder="Search participants..." id="participantSearch">
-            </div>
+            </div> -->
             
             <div class="participants-list">
              
@@ -71,8 +71,10 @@
         
             <main class="main-content">
                 <!-- Kalau sudah selesai dan ada participantnya -->
-                <div th:if="${isValidRace == false && participants.success == true}">
+                <div th:if="${isValidRace.success == false && participants.success == true}">
                     <!-- Check if winner is not null before accessing its properties -->
+                    
+
                     <div th:if="${winner != null && winner.success}" class="winner">
                         <div class="trophy-icon">🏆</div>
                         <h1>Congratulations!</h1>
@@ -88,9 +90,17 @@
                         </b>
                     </div>
                 
+
                     <div th:unless="${winner != null && winner.success}" class="no-winner">
-                        <h1>No Winner</h1>
-                        <p>Better luck next time!</p>
+                        <div th:if="${isValidRace.message == 'before'}">
+                            <h1>Race has not started yet</h1>
+                            <p>Please wait</p>
+                        </div>
+                        <div th:unless="${isValidRace.message == 'before'}">
+                            <h1>You Are Not The Winner</h1>
+                            <p>Better luck next time!</p>
+
+                        </div>
                     </div>
                 </div>
 
@@ -112,7 +122,7 @@
                         </div>
                         <div class="info-row">
                             <span class="label">Date:</span>
-                            <span class="value" th:text="${${#temporals.format(race.activity.createdAt, 'yyyy-MM-dd HH:mm')}}">July 15, 2023</span>
+                            <span class="value" th:text="${#temporals.format(race.activity.createdAt, 'yyyy-MM-dd HH:mm')}">July 15, 2023</span>
                             
                         </div>
                         <div class="info-row">
@@ -126,7 +136,7 @@
                         </div>
                         <div class="info-row">
                             <span class="label">Deadline:</span>
-                            <span class="value" th:text="${race.endDateTime}">June 30, 2023</span>
+                            <span class="value" th:text="${#temporals.format(race.endDateTime, 'yyyy-MM-dd HH:mm')}">June 30, 2023</span>
                         </div>
                         <div class="info-row">
                             <span class="label">Category:</span>
@@ -170,7 +180,7 @@
                         </div> -->
                 
                         <!-- Choose from Available Activities Form -->
-                        <div th:if="${isValidRace}">
+                        <div th:if="${isValidRace.success}">
 
                             <div th:if="${submission.activity.success}">
                                 <span>You have submitted an activity for this race / challenge</span>
@@ -199,7 +209,7 @@
                             </div>
 
                         </div>
-                        <div th:unless="${isValidRace}">
+                        <div th:unless="${isValidRace.success}">
                             <span>Race is not available or has been concluded</span>
                         </div>
 
