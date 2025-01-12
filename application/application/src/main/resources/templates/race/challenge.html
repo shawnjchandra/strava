@@ -72,17 +72,14 @@
             <main class="main-content">
                 <!-- Kalau sudah selesai dan ada participantnya -->
                 <div th:if="${isValidRace == false && participants.success == true}">
-                    
-                    <!-- kalau ada pemenang -->
-                    <div th:if="${winner.success}" class="winner">
+                    <!-- Check if winner is not null before accessing its properties -->
+                    <div th:if="${winner != null && winner.success}" class="winner">
                         <div class="trophy-icon">🏆</div>
                         <h1>Congratulations!</h1>
-
-                        
+                
                         <b th:if="${isSelf}">
                             <h3 th:text="${winner.data.nama}"></h3> <h3>(YOU)</h3>
                             <p> is the winner!</p>
-                            
                         </b>
                         <b th:unless="${isSelf}">
                             <h3 th:text="${winner.data.nama}"></h3>
@@ -90,8 +87,8 @@
                             <p>(better luck next time)</p>
                         </b>
                     </div>
-
-                    <div th:unless="${winner.success}" class="no-winner">
+                
+                    <div th:unless="${winner != null && winner.success}" class="no-winner">
                         <h1>No Winner</h1>
                         <p>Better luck next time!</p>
                     </div>
