@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/timer.css}">
     <script th:src="@{/script/timer.js}" defer></script>
+    <script th:src="@{/script/countdown.js}" defer></script>
 
 </head>
 <body>
@@ -48,16 +49,30 @@
                     <button id="reset">Reset</button>
                     <button id="mark">Mark</button>
                 </div>
-                <div class="marks">
-                    <h4>Marks:</h4>
-                    <ul id="marksList"></ul>
-                </div>
+                
             </div>
+            <div class="new">
+                <div class="countdown-timer">
+                    <h4>Countdown Timer</h4>
+                    <div id="countdown-display">00:00:00</div>
+                    <div class="timer-controls">
+                        <button id="start-timer">Start Countdown</button>
+                        <button id="add-time">+10s</button>
+                        <button id="subtract-time">-10s</button>
+                        <button id="reset-timer">Reset Timer</button>
+                    </div>
+                </div>
+             
+            </div>
+
         </div>
 
         <!-- Right Section -->
-        <div class="right" style="background-color: #ebebeb;">
-
+        <div class="right" style="background-color: #f7f7f7;">
+            <div class="marks">
+                <h4>Marks:</h4>
+                <ul id="marksList"></ul>
+            </div>
         </div>
     </div>
 </body>

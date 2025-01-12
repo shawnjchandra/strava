@@ -37,6 +37,15 @@ public class JdbcActivityRepository implements ActivityRepository {
 
         return result.size() >0 ? result : null;
     }
+    @Override
+    public List<Activity> findAllDescending(int id_runner) {
+        String sql = "SELECT * FROM Activity WHERE id_runner = ? ORDER BY createdAt DESC";
+
+        List<Activity> result = jdbcTemplate.query(sql, new ActivityRowMapper(),id_runner);
+        //System.out.println("result size: "+result.size());
+
+        return result.size() >0 ? result : null;
+    }
 
     @Override
     public void save(Activity activity) {

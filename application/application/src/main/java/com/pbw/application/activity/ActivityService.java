@@ -35,6 +35,16 @@ public class ActivityService {
         return activityRepository.findAll(id_runner);
     }
 
+    public List<Activity> findAllByIdUserDescending(int id_user){
+        
+        // dari id_user harus convert ke id_runner;
+        int id_runner = userService.getIdRunnerByIdUsers(id_user);
+
+        //System.out.println("iduser -> idrunner"+id_user+" "+id_runner);
+
+        return activityRepository.findAllDescending(id_runner);
+    }
+
     public void save(Activity activity){
         activityRepository.save(activity);
     }

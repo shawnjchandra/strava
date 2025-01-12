@@ -43,7 +43,8 @@ public class MainController {
         String nama = ((User)httpSession.getAttribute("status")).getNama();
         int id_user = (int)httpSession.getAttribute("id_user");
 
-        List<Activity> act = activityService.findAllByIdUser(id_user);
+        // List<Activity> act = activityService.findAllByIdUser(id_user);
+        List<Activity> act = activityService.findAllByIdUserDescending(id_user);
 
         // //System.out.println(act);
         
