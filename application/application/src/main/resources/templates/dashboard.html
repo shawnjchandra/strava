@@ -52,7 +52,7 @@
                   <div th:each="activity : ${activities.data}">
                     <div th:replace="~{fragments/activity-card :: activityCard(
                         name=${nama},
-                        date=${activity.createdAt},
+                        date=${#temporals.format(activity.createdAt, 'yyyy-MM-dd')},
                         location='Bandung',
                         title=${activity.judul},
                         distance=${activity.jarak},
@@ -74,7 +74,7 @@
           <div class="right">
               <div class="graph">
                   <h3 style="display: flex; justify-content: center;">Activity Graph</h3>
-                  <p> this is how well you do for the last :</p>
+                  <p> This is how well you do for the last :</p>
                   <div class="tabs">
                       <button> Week</button>
                       <button> Month</button>
