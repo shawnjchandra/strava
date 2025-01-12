@@ -25,7 +25,8 @@
 <body>
 
     <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
-    <div class="container">
+
+    <div class="container" th:style="|height : 100vh;background: url('@{/img/background-triathlon.jpg}') no-repeat center center/cover ;|">
 
         <div class="signup-container">
             <h1>Sign Up for Free</h1>
@@ -59,7 +60,7 @@
                     </div>
                     <div class="form-group">
                         <label for="tanggal-lahir">Tanggal Lahir</label>
-                        <input type="date" id="tanggal-lahir" name="tanggal_lahir" th:field="*{tanggal_lahir}" required>
+                        <input type="date" id="tanggal-lahir" name="tanggal_lahir" th:field="*{tanggal_lahir}" th:attr="max=${#dates.formatISO(#dates.createNow()).substring(0, 10)}" required>
                         <div class="error-tag" th:errors="*{tanggal_lahir}"></div>
                     </div>
                     <div class="form-group">
