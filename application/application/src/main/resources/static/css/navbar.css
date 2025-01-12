@@ -12,6 +12,11 @@
     font-size: 1.5em;
     color: white;
 }
+/* .navbar3 .logo a {
+    text-decoration: none;
+    font-size: 1.5em;
+    color: white;
+} */
 
 .nav-links {
     list-style: none;
@@ -21,6 +26,9 @@
 
 .nav-links li {
     position: relative;
+}
+.nav-links li :hover {
+    font-weight: 700;
 }
 
 .nav-links a {
@@ -76,6 +84,7 @@
 
 .auth-links a:hover {
     background-color: white;
+    font-weight: 700;
     color: #333;
 }
 
@@ -87,6 +96,25 @@ body {
     /* Prevent content jump when navbar becomes sticky */
     padding-top: 0;
 }
+.logo{
+    display: flex;
+}
+.logo a{
+    display: flex;
+    align-items: center;
+}
+
+.logo-text {
+    
+    font-family: 'Poppins', sans-serif; /* Use Google Fonts for modern typography */
+    font-size: 24px; /* Adjust size as needed */
+    font-weight: 400; /* Regular weight */
+    color: white; /* Black text */
+  }
+  
+  .logo-highlight {
+    font-weight: 700; /* Bold weight for emphasis */
+  }
 
 /* Ensure smooth scrolling */
 html {
