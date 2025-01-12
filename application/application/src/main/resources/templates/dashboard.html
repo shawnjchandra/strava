@@ -65,7 +65,13 @@
 
               </div>
               <div th:unless="${activities.success}">
+                <b style="display: flex; flex-direction: column;justify-content: center; align-items: center; margin-top: 200px;">
 
+                    <div th:replace="~{fragments/svg-run}"></div>
+                   
+                    <span th:text="${activities.message}"></span>
+                    
+                </b>
               </div>
               
           </div>
