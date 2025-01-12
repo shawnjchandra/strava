@@ -54,7 +54,7 @@
     background-color: #135085;
     padding: 10px 0;
     list-style: none;
-    z-index: 100;
+    z-index:1000;
     min-width: 150px;
 }
 
