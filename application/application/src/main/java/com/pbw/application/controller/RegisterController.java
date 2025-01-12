@@ -42,6 +42,9 @@ public class RegisterController {
         @RequestParam("confirmpassword") String confirmpassword,
     
         Model model) throws Exception{
+            List<String> daftarkota = userService.getAllKota();
+
+            
 
             if(user.getEmail() == null || user.getEmail().length() < 4){
                 // bindungResult.addError(new ObjectError("emailError", "email error"));;
@@ -51,14 +54,14 @@ public class RegisterController {
 
             }
             if(user.getPassword() == null || user.getPassword().length() < 4){
-                // bindungResult.addError(new ObjectError("passError", "password error"));;
+                bindungResult.addError(new ObjectError("passError", "password error"));;
                 bindungResult.rejectValue("password",
                  "passwordNotAllowed",
                   "password doesn't fulfilled the requirements");
 
             }
             if(user.getNama() == null || user.getNama().length() < 4){
-                // bindungResult.addError(new ObjectError("namaError", "nama error"));;
+                bindungResult.addError(new ObjectError("namaError", "nama error"));;
                 bindungResult.rejectValue("nama",
                  "nameNotAllowed",
                   "Name doesn't fulfilled the requirements");
@@ -66,19 +69,19 @@ public class RegisterController {
             }
 
             if(user.getTanggal_lahir() == null){
-                // bindungResult.addError(new ObjectError("tanggal_lahirError", "dob error"));;
+                bindungResult.addError(new ObjectError("tanggal_lahirError", "dob error"));;
                 bindungResult.rejectValue("tanggal_lahir", "tgl_lahirEmpty",
                 "Tanggal Lahir can't be empty");
             }
 
             if(user.getLokasi() == null){
-                // bindungResult.addError(new ObjectError("lokasiError", "lokasi error"));;
+                bindungResult.addError(new ObjectError("lokasiError", "lokasi error"));;
                 bindungResult.rejectValue("lokasi", "lokasiEmpty",
                 "Lokasi can't be empty");
             }
 
             if(user.getGender() == null){
-                // bindungResult.addError(new ObjectError("genderError", "gender error"));;
+                bindungResult.addError(new ObjectError("genderError", "gender error"));;
                 bindungResult.rejectValue("gender", "genderEmpty",
                 "gender can't be empty");
             }
@@ -91,20 +94,21 @@ public class RegisterController {
                   "Passwords do not match");
 
                   //System.out.println("rejected do not match");
-                
+                model.addAttribute("daftarkota", daftarkota);
                 return "register";
                 
             }
             //System.out.println("no reject password"); 
-            // if(bindungResult.hasErrors()){
+            if(bindungResult.hasErrors()){
                 
-            //     List<ObjectError> errors = bindungResult.getAllErrors();
-            //     for(int i = 0; i<errors.size();i++){
-            //         //System.out.println("Error-"+i+": "+ errors.get(i));
-            //     }
-            //     return "register";
-            // }
-            //System.out.println("no errors");
+                List<ObjectError> errors = bindungResult.getAllErrors();
+                for(int i = 0; i<errors.size();i++){
+                    //System.out.println("Error-"+i+": "+ errors.get(i));
+                }
+                model.addAttribute("daftarkota", daftarkota);
+                return "register";
+            }
+          
             
             
             
@@ -118,8 +122,8 @@ public class RegisterController {
         if(isSuccessful){
             return "redirect:/login";
         }
-
-        return "redirect:/register";
+        model.addAttribute("daftarkota", daftarkota);
+        return "register";
     }
 
 

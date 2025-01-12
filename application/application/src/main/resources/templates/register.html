@@ -32,26 +32,27 @@
             <h1>Sign Up for Free</h1>
             <form th:action="@{/register}" method="post" th:object="${user}">
                 <!-- Part 1 -->
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter your email" name="email" th:field="*{email}" required>
-                    <div class="error-tag" th:errors="*{email}"></div>
+                <div id="part1" class="form-step active-step">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Enter your email" name="email" th:field="*{email}" required>
+                        <div class="error-tag" th:errors="*{email}"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Create a password" name="password" th:field="*{password}" required>
+                        <div class="error-tag" th:errors="*{password}"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmpassword">Confirm Password</label>
+                        <input type="password" id="confirmpassword" placeholder="Confirm password" name="confirmpassword" th:field="*{confirmpassword}" required>
+                        <div class="error-tag" th:errors="*{confirmpassword}"></div>
+                    </div>
+                    <button type="button" class="submit-btn" onclick="nextStep()">Next</button>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Create a password" name="password" th:field="*{password}" required>
-                    <div class="error-tag" th:errors="*{password}"></div>
-                </div>
-                <div class="form-group">
-                    <label for="confirmpassword">Confirm Password</label>
-                    <input type="password" id="password" placeholder="Confirm password" name="confirmpassword" th:field="*{confirmpassword}" required>
-                    <div class="error-tag" th:errors="*{confirmpassword}"></div>
-                </div>
-    
-                <button type="button" class="submit-btn" onclick="showPart2()">Continue</button>
-    
+        
                 <!-- Part 2 -->
-                <div id="part2">
+                <div id="part2" class="form-step">
                     <div class="separator"><span>PART 2</span></div>
                     <div class="form-group">
                         <label for="nama">Nama</label>
@@ -60,15 +61,15 @@
                     </div>
                     <div class="form-group">
                         <label for="tanggal-lahir">Tanggal Lahir</label>
-                        <input type="date" id="tanggal-lahir" name="tanggal_lahir" th:field="*{tanggal_lahir}" th:attr="max=${#dates.formatISO(#dates.createNow()).substring(0, 10)}" required>
+                        <input type="date" id="tanggal-lahir" name="tanggal_lahir" th:field="*{tanggal_lahir}"
+                            th:attr="max=${#dates.formatISO(#dates.createNow()).substring(0, 10)}" required>
                         <div class="error-tag" th:errors="*{tanggal_lahir}"></div>
                     </div>
                     <div class="form-group">
                         <label for="lokasi">Lokasi</label>
-                        <!-- <input type="text" id="lokasi" placeholder="Enter your location" name="lokasi" th:field="*{lokasi}" required> -->
                         <select id="lokasi" name="lokasi" th:field="*{lokasi}" required>
                             <option value="" disabled selected>Select your location</option>
-                            <option th:each="kota: ${daftarkota}" th:value="${kota}" th:text="${kota}">Male</option>
+                            <option th:each="kota: ${daftarkota}" th:value="${kota}" th:text="${kota}"></option>
                         </select>
                         <div class="error-tag" th:errors="*{lokasi}"></div>
                     </div>
@@ -81,16 +82,46 @@
                             <option value="other">Other</option>
                         </select>
                         <div class="error-tag" th:errors="*{gender}"></div>
-                        <div class="error-tag" th:errors="*{gender}"></div>
-
                     </div>
-    
                     <button type="submit" class="submit-btn">Sign Up</button>
+                    <button type="button" class="prev-btn" onclick="previousStep()">Previous</button>
                 </div>
             </form>
             <p class="terms">By signing up, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
         </div>
     </div>
+    <script>
+        let currentStep = 1;
+    
+        function nextStep() {
+            console.log(currentStep);
+            document.getElementById(`part${currentStep}`).classList.remove('active-step');
+            currentStep++;
+            console.log(currentStep);
+            document.getElementById(`part${currentStep}`).classList.add('active-step');
+        }
+    
+        function previousStep() {
+            document.getElementById(`part${currentStep}`).classList.remove('active-step');
+            currentStep--;
+            document.getElementById(`part${currentStep}`).classList.add('active-step');
+        }
+    </script>
+    <style>
+    .form-step {
+        display: none;
+    }
 
+    .form-step.active-step {
+        display: block;
+    }
+
+    .signup-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    </style>
 </body>
 </html>
