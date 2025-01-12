@@ -15,7 +15,11 @@
         <nav class="navbar">
             <div class="logo">
                 <a th:href="@{/}">
-                    <img th:src="@{/img/favicon.png}" style="height: 50px;">
+                    <div class="logo-text" style="display: flex;">
+                        <img th:src="@{/img/favicon2.png}" style="max-height: 32px;max-width: 32px;margin: 0 5px 0 5px; align-items: center;">
+                        <p class="logo-text">Gerak</p><p class="logo-highlight">In</p>
+
+                    </div>
                 </a>
             </div>
             <ul th:if="${session.status} != null" class="nav-links">
@@ -39,7 +43,11 @@
         <nav class="navbar3">
             <div class="logo">
                 <a th:href="@{/}">
-                    <img th:src="@{/img/favicon.png}" style="height: 50px;">
+                    <div class="logo-text" style="display: flex;">
+                        <img th:src="@{/img/favicon2.png}" style="max-height: 32px;max-width: 32px; padding-top:26px ; margin: 0 5px 0 20px; display: flex;align-items: center;">
+                        <p class="logo-text">Gerak</p><p class="logo-highlight">In</p>
+
+                    </div>
                 </a>
             </div>
 
