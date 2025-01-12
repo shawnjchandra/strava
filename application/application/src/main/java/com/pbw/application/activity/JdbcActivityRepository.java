@@ -168,12 +168,4 @@ public class JdbcActivityRepository implements ActivityRepository {
         String sql = "SELECT * FROM Activity WHERE id_activity = ? AND id_runner = ?";
         return jdbcTemplate.queryForObject(sql, new ActivityRowMapper(), idActivity, idRunner);
     }
-    
-
-    
-
-    
-
-
-    
 }
