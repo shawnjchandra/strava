@@ -126,5 +126,12 @@ public class ActivityService {
 
     }
 
+    public Activity getActivityByIdAndRunner(int idActivity, int idRunner) {
+        return activityRepository.findByIdActivityAndIdRunner(idActivity, idRunner);
+    }
+
+    public int getIdRunnerByIdUser(int idUser) {
+        return userService.getIdRunnerByIdUsers(idUser);
+    }
 
 }

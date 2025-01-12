@@ -172,5 +172,25 @@ public class ActivityController {
         return "redirect:/activity";
     }
 
-    
+    @GetMapping("/descActivity")
+    public String getActivityDetails(@RequestParam("id_activity") int idActivity, HttpSession session, Model model) {
+        Integer idUser = (Integer) session.getAttribute("id_user");
+        if (idUser == null) {
+            return "redirect:/login"; // Redirect ke login jika session tidak ditemukan
+        }
+
+        // Ambil id_runner dari id_user
+        int idRunner = activityService.getIdRunnerByIdUser(idUser);
+
+        // Cari activity berdasarkan id_activity dan id_runner
+        Activity activity = activityService.getActivityByIdAndRunner(idActivity, idRunner);
+
+        if (activity == null) {
+            model.addAttribute("message", "Activity not found or you don't have permission to access it.");
+            return "error";
+        }
+
+        model.addAttribute("activity", activity);
+        return "/activity/descActivity"; // Tampilkan halaman detail
+    }
 }

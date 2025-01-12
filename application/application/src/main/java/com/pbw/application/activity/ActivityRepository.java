@@ -15,4 +15,6 @@ public interface ActivityRepository {
 
     public List<Activity> findAllFilteredTraining(int id_runner, String keywords, String type, String sortBy, String sortOrder);
 
+    Activity findById(int id);
+    Activity findByIdActivityAndIdRunner(int idActivity, int idRunner);
 }

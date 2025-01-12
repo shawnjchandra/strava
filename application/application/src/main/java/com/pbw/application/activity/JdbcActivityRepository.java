@@ -158,7 +158,16 @@ public class JdbcActivityRepository implements ActivityRepository {
     }
 
     
+    @Override
+    public Activity findById(int id) {
+        String sql = "SELECT * FROM activity WHERE id_activity = ?";
+        return jdbcTemplate.queryForObject(sql, new ActivityRowMapper(), id);
+    }
 
+    public Activity findByIdActivityAndIdRunner(int idActivity, int idRunner) {
+        String sql = "SELECT * FROM Activity WHERE id_activity = ? AND id_runner = ?";
+        return jdbcTemplate.queryForObject(sql, new ActivityRowMapper(), idActivity, idRunner);
+    }
     
 
     
