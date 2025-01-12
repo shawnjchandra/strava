@@ -1,10 +1,12 @@
 .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    background-color: #333;
-    padding: 10px 20px;
-    color: white;
+    background-color: #135085;
+    height:100px;
+    width:100%;
+    margin:0;
+    font-size:larger;
 }
 
 .navbar .logo a {
@@ -22,6 +24,7 @@
     list-style: none;
     display: flex;
     gap: 20px;
+    padding-left: 20px;
 }
 
 .nav-links li {
@@ -32,10 +35,15 @@
     color: aliceblue;
 }
 
+
 .nav-links a {
     text-decoration: none;
     color: white;
     font-size: 1em;
+}
+
+.nav-links a:hover {
+    color: #ff6f61;
 }
 
 .nav-links .dropdown-menu {
@@ -43,7 +51,7 @@
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #444;
+    background-color: #135085;
     padding: 10px 0;
     list-style: none;
     z-index: 100;
@@ -63,10 +71,23 @@
     text-decoration: none;
     font-size: 0.9em;
 }
+.nav-links .dropdown-menu a:hover {
+    color:#ff6f61;
+}
 
 .auth-links {
+    margin-left: auto;
     display: flex;
-    gap: 10px;
+    gap:10px;
+    align-items: center;
+    justify-content: flex-end;
+    text-decoration: none;
+    color: #F5F5F5;
+    padding: 10px;
+    border:none;
+    font-size: 0.9em;
+    transition: background-color 0.3s, color 0.3s;
+    background-color:transparent; 
 }
 
 .auth-links a {

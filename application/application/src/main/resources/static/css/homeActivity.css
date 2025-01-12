@@ -25,6 +25,7 @@
     z-index: 2;
     color: #fff;
     width: 40%;
+    font-weight: bold;
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
     text-align: left;
 }
@@ -32,12 +33,12 @@
 .run-container h1 {
     font-size:40px;
     margin: 3px 0;
-    color: #ff5722;
+    color: #ff6f61;
 }
 
 .run-container h2 {
     font-size: 24px;
-    color: #FFFF99 ;
+    color: white ;
 }
 .RunFeature {
     text-align: center;

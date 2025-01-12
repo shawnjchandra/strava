@@ -23,14 +23,20 @@
             <div class="profile">
                 <!-- <img src="your-image.jpg" alt="Profile Picture" class="profile-img"> -->
                 <h2 th:text="${nama}"></h2>
+                <p>Welcome to your activity tracker! Keep running strong!</p>
             </div>
             <div class="menu">
                 <ul>
-                    <li>Dashboard</li>
-                    <li>Training</li>
-                    <li>Maps</li>
-                    <li>Challenges</li>
+                    <li></li>
+                    <li><div class="clock" style="display: flex;flex-direction: column; align-items: center;justify-content: center;">
+                        <h3>Current Time</h3>
+                        <p id="clock">00:00:00</p>
+                    </div></li>
+                    
                 </ul>
+            </div>
+            <div class="motivational-quote">
+                <p>"Run like you're chasing a pizza delivery!"</p>
             </div>
         </div>
 
@@ -38,8 +44,7 @@
         <div class="middle">
             
             <div class="latest-activity" >
-                <h3>Latest Activity</h3>
-                <p>Afternoon Walk • Jan 29, 2022</p>
+                <h3 style="display: flex; justify-content: center;">Latest Activity</h3>
               </div>
 
 
@@ -68,7 +73,7 @@
           
           <div class="right">
               <div class="graph">
-                  <h3>Activity Graph</h3>
+                  <h3 style="display: flex; justify-content: center;">Activity Graph</h3>
                   <p> this is how well you do for the last :</p>
                   <div class="tabs">
                       <button> Week</button>
@@ -85,7 +90,18 @@
           </div>
         <script th:inline="javascript">
             window.activitiesData = /*[[${activities.data}]]*/ [];
+            function updateClock() {
+            const clockElement = document.getElementById('clock');
+            const currentTime = new Date();
+            let hours = currentTime.getHours().toString().padStart(2, '0');
+            let minutes = currentTime.getMinutes().toString().padStart(2, '0');
+            let seconds = currentTime.getSeconds().toString().padStart(2, '0');
+            
+            clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+        }
 
+        setInterval(updateClock, 1000);
+        updateClock();
         </script>
 </body>
 </html>
