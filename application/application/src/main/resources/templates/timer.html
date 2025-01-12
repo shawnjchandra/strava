@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch Dashboard</title>
+    <link rel="shortcut icon" th:href="@{/img/favicon2.png}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/timer.css}">
+    <script th:src="@{/script/timer.js}" defer></script>
+
+</head>
+<body>
+
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
+    
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left" style="max-width: 400px;">
+            <div class="profile">
+                <h2>Stopwatch Tracker</h2>
+                <p>Track your time and mark important moments!</p>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li>
+                        <div class="clock" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <h3>Current Time</h3>
+                            <p id="clock">00:00:00</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="motivational-quote">
+                <p>"Time flies, but you are the pilot."</p>
+            </div>
+        </div>
+
+        <!-- Middle Section -->
+        <div class="middle">
+            <div class="stopwatch-container">
+                <h3 style="display: flex; justify-content: center;">Stopwatch</h3>
+                <div class="stopwatch" id="display">00:00:00</div>
+                <div class="buttons">
+                    <button id="start">Start</button>
+                    <button id="pause">Pause</button>
+                    <button id="reset">Reset</button>
+                    <button id="mark">Mark</button>
+                </div>
+                <div class="marks">
+                    <h4>Marks:</h4>
+                    <ul id="marksList"></ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right" style="background-color: #ebebeb;">
+
+        </div>
+    </div>
+</body>
+</html>

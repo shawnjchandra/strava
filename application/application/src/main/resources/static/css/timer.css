@@ -1,0 +1,129 @@
+.stopwatch-container {
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.stopwatch {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.buttons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.buttons button:active {
+    transform: scale(0.95);
+}
+
+.buttons button#start {
+    background-color: #28a745;
+}
+
+.buttons button#pause {
+    background-color: #ffc107;
+}
+
+.buttons button#stop {
+    background-color: #dc3545;
+}
+
+.buttons button#reset {
+    background: #dc3545;
+    color: white;
+}
+
+.marks {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.marks ul {
+    list-style: none;
+    padding: 0;
+}
+
+.marks li {
+    background: rgba(255, 255, 255, 0.2);
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    color: #333;
+}
+
+.buttons button#mark {
+    background-color: #007bff; /* Warna biru */
+    color: #fff; /* Warna teks putih */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.buttons button#mark:hover {
+    background-color: #0056b3; /* Warna biru gelap saat hover */
+}
+
+.buttons button#mark:active {
+    transform: scale(0.95); /* Efek saat tombol ditekan */
+}   
+
+.buttons button#start:hover {
+    background-color: #218838; /* Hijau gelap saat hover */
+}
+
+.buttons button#start:active {
+    transform: scale(0.95); /* Efek saat ditekan */
+}
+
+.buttons button#start:active {
+    transform: scale(0.95); /* Efek saat ditekan */
+}
+
+.buttons button#pause {
+    background-color: #ffc107; /* Kuning */
+}
+
+.buttons button#pause:hover {
+    background-color: #e0a800; /* Kuning gelap saat hover */
+}
+
+.buttons button#pause:active {
+    transform: scale(0.95);
+}
+
+.buttons button#reset {
+    background-color: #dc3545; /* Merah */
+}
+
+.buttons button#reset:hover {
+    background-color: #c82333; /* Merah gelap saat hover */
+}
+
+.buttons button#reset:active {
+    transform: scale(0.95);
+}
+
