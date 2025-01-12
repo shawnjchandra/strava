@@ -96,4 +96,8 @@ public class MainController {
         return "homeChallenge";
     }
 
+    @GetMapping("/timer")
+    public String timer(){
+        return "timer";
+    }
 }
