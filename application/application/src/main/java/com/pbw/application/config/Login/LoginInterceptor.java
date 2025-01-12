@@ -18,6 +18,12 @@ public class LoginInterceptor implements HandlerInterceptor {
     
     private final List<String> PUBLIC_PATHS = Arrays.asList(
         "/",
+        "/maps",
+        "/homeRun",
+        "/homeCycle",
+        "/homeSwim",
+        "/homeFeature",
+        "/homeChallenge",
         "/login",
         "/register",
         "/maps",
