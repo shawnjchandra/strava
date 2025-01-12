@@ -44,7 +44,7 @@ body {
 
 .profile {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .profile img {
@@ -54,7 +54,7 @@ body {
 }
 
 .menu {
-  padding: 25px 25px 0 25px;
+  padding: 5px 25px 0 25px;
 }
 
 .menu ul {
@@ -90,6 +90,27 @@ a {
   text-decoration: none;
   color: #007bff;
   font-weight: bold;
+}
+
+.clock {
+  background-color: #f8f8f8;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+#clock {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff6a00; /* Light orange color */
+}
+.motivational-quote {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #ff5722;  /* Fun orange color */
+  font-style: italic;
 }
 
 .tabs {

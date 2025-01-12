@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navigation Bars</title>
     <!-- Add your CSS links -->
-    <!-- <link rel="stylesheet" th:href="@{/css/navbar.css}">
-    <link rel="stylesheet" th:href="@{/css/styles.css}"> -->
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 
@@ -23,12 +23,16 @@
                 </a>
             </div>
             <ul th:if="${session.status} != null" class="nav-links">
+                </li>
+                    <a th:href="@{/dashboard}">Dashboard</a>
+                </li>
                 <li class="dropdown">
                     <a th:href="@{/activity}">Activities</a>
                 </li>
                 <li>
                     <a th:href="@{/race/}">Race</a>
                 </li>
+                <li><a th:href="@{/maps}">Maps</a></li>
             </ul>
             <div class="auth-links">
                 <a th:if="${session.status} == null" th:href="@{/login}" class="login-btn">Login</a>
@@ -69,7 +73,7 @@
     
             </ul>
     
-            <div class="auth-linksHome">
+            <div class="auth-links">
                 <a th:if="${session.status} == null" th:href="@{/login}" class="login-btn">Login</a>
                 <a th:if="${session.status} == null" th:href="@{/register}" class="register-btn">Register</a>
                 <a th:if="${session.status} != null" th:href="@{/logout}" class="signout-btn">Sign out</a>

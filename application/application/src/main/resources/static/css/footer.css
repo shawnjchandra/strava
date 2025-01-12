@@ -1,0 +1,43 @@
+footer {
+    display:flex;
+    text-align: left;
+    background-color:#135085;
+    color:white;
+    margin: 0;
+    height: auto;
+    font-size: 32px;
+    padding:10px 5px;
+    flex-shrink:0;
+    margin-bottom:0;
+}
+
+footer h3{
+    font-size: 24px;
+    font-weight: bold;
+    margin:3px;
+}
+
+footer p{
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+footer a{
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 16px;
+    color: #F5F5F5;
+    text-decoration: underline;
+    transition: color 0.3s;
+}
+
+footer a:hover{
+    color: #03A9F4;
+}
+
+.footerAbout,.footerContact,.footerSosmed{
+    flex: 1 1 30%;
+    margin:5px;
+    padding:10px;
+    text-align: center;
+}

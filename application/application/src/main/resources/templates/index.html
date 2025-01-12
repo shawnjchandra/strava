@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" th:href="@{css/navbar.css}">
     <link rel="stylesheet" th:href="@{css/index.css}">
+    <link rel="stylesheet" th:href="@{css/footer.css}">
 </head>
 <body>
     <th:block th:replace="~{/layout/navbar :: navbar3}"></th:block>
@@ -46,8 +47,7 @@
             </div>
         </div>
     </div>
-
-</div>
+    
     <div class="cta">
         <p class="ctaText">Join our community and start tracking your progress today!</p>
         <a th:if="${session.status} == null" th:href="@{/register}" class="ctaBut">join Now</a>
