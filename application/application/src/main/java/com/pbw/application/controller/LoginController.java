@@ -96,7 +96,7 @@ public class LoginController {
             StringBuilder message = new StringBuilder();
             
             errors.forEach((error)->{
-                message.append("- "+error.getMessage()+"\n");
+                message.append(""+error.getMessage()+"\n");
             });
             
             model.addAttribute("error", message);
