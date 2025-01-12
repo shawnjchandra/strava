@@ -35,7 +35,7 @@
         <main>
             <button id="add" th:onclick="|window.location.href='@{/activity/add}'|">Add Training Activity</button>
             <div th:if="${activities.success}">
-                <h2 th:text="${activities.data.size()} + ' Activities'">0 Activities</h2>
+                <h2 th:text="${activities.data.size()} + ' Activities'" id="quantity">0 Activities</h2>
                 <table class="table">
                     <thead>
                         <tr>
@@ -68,6 +68,9 @@
                                <!--  <span th:if="${sortBy == 'elevasi'}"> -->Elevation <i id="elevasi"></i>
                             <!-- </span>-->
                              </th> 
+                             <th>
+                                Action
+                             </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -115,7 +118,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="7" th:text="${activities.message}" style="text-align: center;"></td>
+                            <td colspan="8" th:text="${activities.message}" style="text-align: center;"></td>
     
                         </tr>
             
