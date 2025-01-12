@@ -111,20 +111,31 @@ public class ActivityService {
 
         LocalDateTime currentDateTime = LocalDateTime.now();
 
+        if(currentDateTime.isBefore(startDateTime)){
+            System.out.println(currentDateTime +" before "+startDateTime);
+            return new CustomResponse<Boolean>(isValid, "before", null);
+        }
+        
+        if(currentDateTime.isAfter(endDateTime)){
+            System.out.println(currentDateTime +" after "+endDateTime);
+            return new CustomResponse<Boolean>(isValid, "after", null);
+        }
+
         if(currentDateTime.isEqual(startDateTime) || 
             currentDateTime.isEqual(endDateTime) || 
             (currentDateTime.isAfter(startDateTime) && currentDateTime.isBefore(endDateTime))) {
 
             isValid = true;
-
+            
         }
-        System.out.println(startDateTime+" "+currentDateTime+" "+ endDateTime);
+        
+        return new CustomResponse<>(isValid, "Race is still ongoing", null);
 
-        return isValid ? 
-        new CustomResponse<>(isValid, "Race is still ongoing", null) :
-        new CustomResponse<>(isValid, "Race is not available", null);
+        
 
     }
+
+
 
     public Activity getActivityByIdAndRunner(int idActivity, int idRunner) {
         return activityRepository.findByIdActivityAndIdRunner(idActivity, idRunner);

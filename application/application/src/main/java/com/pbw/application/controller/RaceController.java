@@ -246,8 +246,8 @@ public class RaceController {
 
             // model.addAttribute("isValidRace", false);
         }
-        System.out.println(isValid.isSuccess());
-        model.addAttribute("isValidRace", isValid.isSuccess());
+        System.out.println(isValid.getMessage());
+        model.addAttribute("isValidRace", isValid);
 
         model.addAttribute("participants", wrappedRaceParticipants);
         model.addAttribute("numberOfParticipants", wrappedRaceParticipants.getData().size());

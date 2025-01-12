@@ -52,8 +52,9 @@
                                     <tr>
                                         <th>Race Name</th>
                                         <th>Sport</th>
-                                        <th>Distance</th>
+                                        <!-- <th>Distance</th> -->
                                         <th>Date</th>
+                                        <th>Race Duration</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -62,8 +63,9 @@
                                     <tr th:each="av: ${joined}">
                                         <td th:text="${av.judul}">Coastal Run</td>
                                         <td th:text="${av.tipeRace}">Coastal Run</td>
-                                        <td th:text="${av.jarak}">10 km</td>
+                                        <!-- <td th:text="${av.jarak}">10 km</td> -->
                                         <td th:text="${#temporals.format(av.createdAt, 'yyyy-MM-dd HH:mm')}">June 22, 2023</td>
+                                        <td th:text="${av.durasi}">10 km</td>
                                         <td th:text="${av.kuota_max}">87/100</td>
                                         <td>
                                             <a th:href="@{/race/challenge/{id}(id=${av.idActivity})}" class="btn go-challenge">
@@ -89,8 +91,9 @@
                                     <tr>
                                         <th>Race Name</th>
                                         <th>Sport</th>
-                                        <th>Distance</th>
+                                        <!-- <th>Distance</th> -->
                                         <th>Date</th>
+                                        <th>Race Duration</th>
                                         <th>Capacity</th>
                                         <th>Action</th>
                                     </tr>
@@ -99,8 +102,9 @@
                                     <tr th:each="av: ${available}">
                                         <td th:text="${av.judul}">Coastal Run</td>
                                         <td th:text="${av.tipeRace}">Coastal Run</td>
-                                        <td th:text="${av.jarak}">10 km</td>
+                                        <!-- <td th:text="${av.jarak}">10 km</td> -->
                                         <td th:text="${#temporals.format(av.createdAt, 'yyyy-MM-dd HH:mm')}">June 22, 2023</td>
+                                        <td th:text="${av.durasi}">10 km</td>
                                         <td th:text="${av.kuota_max}">87/100</td>
                                         <td>
                                             <button class="join-btn" th:data-id="${av.idActivity}">Join</button>
