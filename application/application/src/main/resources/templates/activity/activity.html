@@ -35,7 +35,7 @@
         <main>
             <button id="add" th:onclick="|window.location.href='@{/activity/add}'|">Add Training Activity</button>
             <div th:if="${activities.success}">
-                <h2 th:text="${activities.data.size()} + ' Activities'">0 Activities</h2>
+                <h2 th:text="${activities.data.size()} + ' Activities'" id="quantity">0 Activities</h2>
                 <table class="table">
                     <thead>
                         <tr>
@@ -68,6 +68,9 @@
                                <!--  <span th:if="${sortBy == 'elevasi'}"> -->Elevation <i id="elevasi"></i>
                             <!-- </span>-->
                              </th> 
+                             <th>
+                                Action
+                             </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,9 +81,19 @@
                             </td>
                             <td th:text="${activity.tipeTraining}">Run</td>
                             <td th:text="${#temporals.format(activity.createdAt, 'yyyy-MM-dd HH:mm')}">2023-01-01</td>
-                            <td  th:text="${activity.durasi}">00:30:00</td>
+                            <td th:text="${activity.durasi}">00:30:00</td>
                             <td th:text="${activity.jarak} + ' km'">5 km</td>
                             <td th:text="${activity.elevasi} + ' meter'">100 ft</td>
+                            <td>
+                                <form th:action="@{/activity/edit}" method="get" style="display: inline;">
+                                    <input type="hidden" name="id_activity" th:value="${activity.idActivity}">
+                                    <button type="submit" class="edit-button">Edit</button>
+                                </form>
+                                <form th:action="@{/activity/delActivity}" method="post" style="display: inline;">
+                                    <input type="hidden" name="id_activity" th:value="${activity.idActivity}" />
+                                    <button type="submit" class="delete-button">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -105,7 +118,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="7" th:text="${activities.message}" style="text-align: center;"></td>
+                            <td colspan="8" th:text="${activities.message}" style="text-align: center;"></td>
     
                         </tr>
             
@@ -114,18 +127,8 @@
 
             </div>
         </main>
-
-        <footer>
-            <p>© Lari boss</p>
-            <nav>
-                <a href="#">About</a>
-                <a href="#">Features</a>
-                <a href="#">Mobile</a>
-                <a href="#">Subscription</a>
-                <a href="#">Help</a>
-                <a href="#">More</a>
-            </nav>
-        </footer>
     </div>
+
+    <th:block th:replace="~{/layout/footer :: footer}"></th:block>
 </body>
 </html>

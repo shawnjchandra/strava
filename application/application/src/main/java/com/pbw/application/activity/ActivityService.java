@@ -145,4 +145,12 @@ public class ActivityService {
         return userService.getIdRunnerByIdUsers(idUser);
     }
 
+    public boolean deleteByIdActivityAndIdRunner(int idActivity, int idRunner) {
+        Activity activity = activityRepository.findByIdActivityAndIdRunner(idActivity, idRunner);
+        if (activity != null) {
+            activityRepository.delete(activity);
+            return true;
+        }
+        return false;
+    }
 }

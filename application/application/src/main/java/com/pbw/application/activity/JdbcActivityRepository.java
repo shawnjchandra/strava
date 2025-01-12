@@ -23,6 +23,11 @@ public class JdbcActivityRepository implements ActivityRepository {
     // hanya untuk tipe training
     private static final String INSERT_QUERY = "INSERT INTO activity (judul, tipe_training, createdAt, durasi, jarak, elevasi, description, id_runner, urlpath) VALUES (?, ?::tipeAct, ?::timestamp, ?, ?, ?, ?, ?, ?)";
 
+    private static final String UPDATE_QUERY = 
+    "UPDATE activity SET judul = ?, tipe_training = ?::tipeAct, createdAt = ?::timestamp, " +
+    "durasi = ?, jarak = ?, elevasi = ?, description = ?, id_runner = ?, urlpath = ? " +
+    "WHERE id_activity = ?";
+
     @Override
     public List<Activity> findAll(int id_runner) {
     
@@ -35,17 +40,37 @@ public class JdbcActivityRepository implements ActivityRepository {
 
     @Override
     public void save(Activity activity) {
-        jdbcTemplate.update(INSERT_QUERY, 
-            activity.getJudul(),
-            activity.getTipeTraining(),
-            activity.getCreatedAt(),
-            activity.getDurasi(),
-            activity.getJarak(),
-            activity.getElevasi(),
-            activity.getDescription(),
-            activity.getIdRunner(),
-            activity.getUrlpath()
-        );
+        String checkExistQuery = "SELECT COUNT(*) FROM activity WHERE id_activity = ?";
+        int count = jdbcTemplate.queryForObject(checkExistQuery, Integer.class, activity.getIdActivity());
+
+        if (count > 0) {
+            // Jika activity sudah ada, lakukan update
+            jdbcTemplate.update(UPDATE_QUERY,
+                activity.getJudul(),
+                activity.getTipeTraining(),
+                activity.getCreatedAt(),
+                activity.getDurasi(),
+                activity.getJarak(),
+                activity.getElevasi(),
+                activity.getDescription(),
+                activity.getIdRunner(),
+                activity.getUrlpath(),
+                activity.getIdActivity() // id_activity digunakan untuk menandai activity yang akan diupdate
+            );
+        } else {
+            // Jika activity belum ada, lakukan insert
+            jdbcTemplate.update(INSERT_QUERY, 
+                activity.getJudul(),
+                activity.getTipeTraining(),
+                activity.getCreatedAt(),
+                activity.getDurasi(),
+                activity.getJarak(),
+                activity.getElevasi(),
+                activity.getDescription(),
+                activity.getIdRunner(),
+                activity.getUrlpath()
+            );
+        }
     }
 
     private static class ActivityRowMapper implements RowMapper<Activity> {
@@ -168,12 +193,10 @@ public class JdbcActivityRepository implements ActivityRepository {
         String sql = "SELECT * FROM Activity WHERE id_activity = ? AND id_runner = ?";
         return jdbcTemplate.queryForObject(sql, new ActivityRowMapper(), idActivity, idRunner);
     }
-    
 
-    
-
-    
-
-
-    
+    @Override
+    public void delete(Activity Activity) {
+        String sql = "DELETE FROM activity WHERE id_activity = ?";
+        jdbcTemplate.update(sql, Activity.getIdActivity());
+    }
 }

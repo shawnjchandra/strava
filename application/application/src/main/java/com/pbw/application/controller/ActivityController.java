@@ -1,6 +1,7 @@
 package com.pbw.application.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,9 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Wrapper;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/activity")
@@ -193,4 +196,91 @@ public class ActivityController {
         model.addAttribute("activity", activity);
         return "/activity/descActivity"; // Tampilkan halaman detail
     }
+
+    @PostMapping("/delActivity")
+    public String deleteActivity(
+        @RequestParam("id_activity") int idActivity,
+        HttpSession session,
+        Model model
+    ) {
+        Integer idUser = (Integer) session.getAttribute("id_user");
+        if (idUser == null) {
+            return "redirect:/login"; // Redirect ke login jika session tidak ditemukan
+        }
+
+        // Ambil id_runner dari id_user
+        int idRunner = activityService.getIdRunnerByIdUser(idUser);
+
+        // Lakukan penghapusan
+        boolean isDeleted = activityService.deleteByIdActivityAndIdRunner(idActivity, idRunner);
+
+        if (!isDeleted) {
+            model.addAttribute("message", "Failed to delete activity or unauthorized access.");
+            return "error";
+        }
+
+        return "redirect:/activity"; // Redirect kembali ke halaman aktivitas
+    }
+
+    @GetMapping("/edit")
+    public String showEditActivityForm(@RequestParam("id_activity") int idActivity, HttpSession session, Model model) {
+        Integer idUser = (Integer) session.getAttribute("id_user");
+        if (idUser == null) {
+            return "redirect:/login";
+        }
+
+        int idRunner = activityService.getIdRunnerByIdUser(idUser);
+        Activity activity = activityService.getActivityByIdAndRunner(idActivity, idRunner);
+
+        if (activity == null) {
+            model.addAttribute("message", "Activity not found or you don't have permission to access it.");
+            return "error";
+        }
+
+        model.addAttribute("activity", activity);
+        return "/activity/edit"; 
+    }
+
+    @PostMapping("/update")
+    public String updateActivity(
+        @RequestParam("id_activity") int idActivity,
+        @RequestParam String judul,
+        @RequestParam String tipe_training,
+        @RequestParam String createdAt,
+        @RequestParam float jarak,
+        @RequestParam(required = false) float elevasi,
+        @RequestParam(required = false) String description,
+        HttpSession httpSession,
+        Model model) {
+
+        Integer idUser = (Integer) httpSession.getAttribute("id_user");
+        if (idUser == null) {
+            return "redirect:/login";
+        }
+
+        // Get the id_runner by id_user
+        int idRunner = activityService.getIdRunnerByIdUser(idUser);
+
+        // Fetch the activity
+        Activity activity = activityService.getActivityByIdAndRunner(idActivity, idRunner);
+
+        if (activity == null) {
+            model.addAttribute("message", "Activity not found or you don't have permission to access it.");
+            return "error";
+        }
+
+        // Update the activity details
+        activity.setJudul(judul);
+        activity.setTipeTraining(tipe_training);
+        activity.setCreatedAt(LocalDateTime.parse(createdAt + "T00:00:00"));
+        activity.setJarak(jarak);
+        activity.setElevasi(elevasi);
+        activity.setDescription(description);
+
+        // Save the updated activity
+        activityService.save(activity);
+
+        return "redirect:/activity"; // Redirect to the activity list
+    }
+
 }
