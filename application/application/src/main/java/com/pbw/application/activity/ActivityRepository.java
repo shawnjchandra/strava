@@ -6,6 +6,7 @@ import java.util.List;
 public interface ActivityRepository {
     List<Activity> findAll(int id_runner);
     void save(Activity activity);
+    void delete(Activity activity);
     int getIdActivity();
 
     public List<Activity> findTrainingOnlyByIdRunner(int id_runner);

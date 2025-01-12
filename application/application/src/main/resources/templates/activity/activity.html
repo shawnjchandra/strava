@@ -78,9 +78,19 @@
                             </td>
                             <td th:text="${activity.tipeTraining}">Run</td>
                             <td th:text="${#temporals.format(activity.createdAt, 'yyyy-MM-dd HH:mm')}">2023-01-01</td>
-                            <td  th:text="${activity.durasi}">00:30:00</td>
+                            <td th:text="${activity.durasi}">00:30:00</td>
                             <td th:text="${activity.jarak} + ' km'">5 km</td>
                             <td th:text="${activity.elevasi} + ' meter'">100 ft</td>
+                            <td>
+                                <form th:action="@{/activity/edit}" method="get" style="display: inline;">
+                                    <input type="hidden" name="id_activity" th:value="${activity.idActivity}">
+                                    <button type="submit" class="edit-button">Edit</button>
+                                </form>
+                                <form th:action="@{/activity/delActivity}" method="post" style="display: inline;">
+                                    <input type="hidden" name="id_activity" th:value="${activity.idActivity}" />
+                                    <button type="submit" class="delete-button">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -114,18 +124,8 @@
 
             </div>
         </main>
-
-        <footer>
-            <p>© Lari boss</p>
-            <nav>
-                <a href="#">About</a>
-                <a href="#">Features</a>
-                <a href="#">Mobile</a>
-                <a href="#">Subscription</a>
-                <a href="#">Help</a>
-                <a href="#">More</a>
-            </nav>
-        </footer>
     </div>
+
+    <th:block th:replace="~{/layout/footer :: footer}"></th:block>
 </body>
 </html>
