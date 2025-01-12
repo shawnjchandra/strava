@@ -40,8 +40,14 @@
             <i class="fas fa-chevron-left"></i>
         </button>
         
-        <div class="menu" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div class="menu" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
             <ul>
+                <li>
+                    <div class="clock" style="display: flex;flex-direction: column; align-items: center;justify-content: center; border: 1px; border-style: dotted; border-radius: 15px; padding: 10px 5px 10px 5px;">
+                        <h3>Current Time</h3>
+                        <p id="clock" >00:00:00</p>
+                    </div>
+                </li>
                 <li>
                     <a th:href="@{/admin/index}"><i class="fas fa-chart-line"></i> <span>Dashboard</span></a>
                 </li>
@@ -84,6 +90,19 @@
                     }
                 }
             });
+
+            function updateClock() {
+            const clockElement = document.getElementById('clock');
+            const currentTime = new Date();
+            let hours = currentTime.getHours().toString().padStart(2, '0');
+            let minutes = currentTime.getMinutes().toString().padStart(2, '0');
+            let seconds = currentTime.getSeconds().toString().padStart(2, '0');
+            
+            clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+            }
+
+            setInterval(updateClock, 1000);
+            updateClock();
         </script>
     </div>
 </body>
