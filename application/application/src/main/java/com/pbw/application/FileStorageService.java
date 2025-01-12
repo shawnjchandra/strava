@@ -32,14 +32,15 @@ public class FileStorageService {
         }
         nodes.add(new PersistentNode(id, hashedId)); // Add new node
 
-        // Write back to file
+       
         objectMapper.writeValue(new File(FILE_PATH), nodes);
     }
 
     public List<PersistentNode> readAll() throws IOException {
         File file = new File(FILE_PATH);
         if (!file.exists()) {
-            return new ArrayList<>(); // Return empty list if file doesn't exist
+            return new ArrayList<>(); 
+            
         }
         return objectMapper.readValue(file, new TypeReference<List<PersistentNode>>() {});
     }

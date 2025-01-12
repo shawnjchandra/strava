@@ -1,4 +1,4 @@
-    // Clock Functionality
+    // Clock 
     function updateClock() {
         const clockElement = document.getElementById('clock');
         const currentTime = new Date();
@@ -10,7 +10,7 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Stopwatch Functionality
+    // Stopwatch 
     let timer = null;
     let elapsedTime = 0;
     let isRunning = false;

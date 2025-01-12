@@ -95,10 +95,10 @@ function updateRaceTable(runners) {
 // Event listeners
 document.addEventListener('DOMContentLoaded', function() {
 
-    // Search button click handler
+    // Search button 
     document.querySelector('.search-button-race').addEventListener('click', fetchRaceActivities);
 
-    // Handle enter key in search input
+    // untuk key Enter
     document.querySelector("input[name='raceName']").addEventListener('keypress', function(e) {
 
         // console.log(e);

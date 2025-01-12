@@ -155,21 +155,20 @@ public class JdbcActivityRepository implements ActivityRepository {
         StringBuilder sql = new StringBuilder("SELECT * FROM activity WHERE id_runner = ?");
         
         List<Object> params = new ArrayList<>();
-        params.add(id_runner);  // Add the first parameter
+        params.add(id_runner); 
     
-        // Handle keyword search
+     
         if (keywords != null && !keywords.isEmpty()) {
-            sql.append(" AND judul ILIKE ? ");  // Use ILIKE for case-insensitive
-            params.add("%" + keywords + "%");  // Add wildcards here, not in SQL
+            sql.append(" AND judul ILIKE ? "); 
+            params.add("%" + keywords + "%");  
         }
-    
-        // Handle type filter
+ 
         if (type != null && !type.isEmpty()) {
-            sql.append(" AND tipe_training = ?::tipeAct");  // Cast both sides
+            sql.append(" AND tipe_training = ?::tipeAct");  
             params.add(type);
         }
     
-        // Handle sorting
+     
         if (sortBy != null && !sortBy.isEmpty()) {
             sql.append(" ORDER BY ").append(sortBy.toLowerCase());
             if ("desc".equalsIgnoreCase(sortOrder)) {

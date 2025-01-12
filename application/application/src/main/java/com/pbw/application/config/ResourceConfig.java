@@ -9,10 +9,10 @@ public class ResourceConfig implements WebMvcConfigurer {
     
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // Get the absolute path to the upload directory
+ 
         String uploadPath = System.getProperty("user.dir") + "/uploads/";
         
-        // Register the resource handler
+
         registry.addResourceHandler("/uploads/**")
                .addResourceLocations("file:" + uploadPath)
                .setCachePeriod(0);

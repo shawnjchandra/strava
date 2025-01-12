@@ -26,18 +26,18 @@
             activity.elevasi.toString()
         ]);
         
-        // Table styling
+      
         doc.setFontSize(10);
         const cellWidth = 38;
         const cellHeight = 10;
         
-        // First page starts after the chart
+     
         let currentY = 140;
-        const marginTop = 20;  // Margin from top of page for subsequent pages
+        const marginTop = 20; 
         const pageHeight = doc.internal.pageSize.height;
-        const marginBottom = 20;  // Margin from bottom of page
+        const marginBottom = 20;  
         
-        // Draw headers function
+        // Bagian header
         const drawHeaders = (y) => {
             doc.setFont(undefined, 'bold');
             headers.forEach((header, i) => {
@@ -48,7 +48,7 @@
             return y + cellHeight;  // Return next Y position
         };
         
-        // Draw initial headers
+        // Draw header awal
         currentY = drawHeaders(currentY);
         
         // Draw data
@@ -56,15 +56,15 @@
             // Check if we need a new page
             if (currentY + cellHeight > pageHeight - marginBottom) {
                 doc.addPage();
-                currentY = marginTop;  // Reset Y position for new page
-                currentY = drawHeaders(currentY);  // Draw headers and update Y position
+                currentY = marginTop;  // Reset posisi Y untuk page baruu
+                currentY = drawHeaders(currentY);  // Draw headers dan update posisi y
             }
             
-            // Draw row
+            // Draw setiap row
             row.forEach((cell, columnIndex) => {
                 doc.rect(10 + (columnIndex * cellWidth), currentY, cellWidth, cellHeight);
                 
-                // Truncate text if too long
+                // Truncate text kalau terlalu panjang
                 let text = cell;
                 if (doc.getStringUnitWidth(text) * 10 > cellWidth - 4) {
                     text = text.substring(0, 15) + '...';
@@ -73,11 +73,11 @@
                 doc.text(text, 10 + (columnIndex * cellWidth) + cellWidth/2, currentY + 6, { align: 'center' });
             });
             
-            // Move to next row
+            // Pindah ke row selanjutnya
             currentY += cellHeight;
         });
         
-        // Save the PDF
+        // Save PDF
         doc.save('dashboard-aktivitas.pdf');
     });
 })();

@@ -51,7 +51,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         Object user = session.getAttribute("status");
         
-        // If no user in session, redirect to login
+        // kalau blm login atau tercatat di session, balikin ke login
         if (user == null) {
             response.sendRedirect("/login");
             return false;
@@ -61,16 +61,16 @@ public class LoginInterceptor implements HandlerInterceptor {
     }
     
     private boolean isPublicPath(String requestURI) {
-        // First check exact matches
+        // cek kalau sama persis
         if (PUBLIC_PATHS.contains(requestURI)) {
             return true;
         }
         
-        // Then check if the URI starts with any of our public paths
+    //    cek kalau ada kesamaan di folder childnya
         return PUBLIC_PATHS.stream()
             .anyMatch(path -> 
-                requestURI.startsWith(path + "/") || // Matches subdirectories
-                requestURI.startsWith(path + ".")    // Matches files with extensions
+                requestURI.startsWith(path + "/") ||
+                requestURI.startsWith(path + ".")    
             );
     }
 }

@@ -116,12 +116,6 @@ public class LoginController {
         return "redirect:/dashboard";
     }
 
-    // @GetMapping("/dashboard")
-    // @RequiredRole({"*"})
-    // public String getDashboardView(){
-    //     return "/dashboard";
-    // }
-
     @GetMapping("/logout")
     public String logout(
         HttpSession httpSession

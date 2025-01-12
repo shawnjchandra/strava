@@ -1,5 +1,5 @@
 let countdownInterval;
-let countdownTime = 60; // 60 seconds for countdown timer
+let countdownTime = 60;
 let lapHistory = [];
 
 const countdownDisplay = document.getElementById('countdown-display');
@@ -14,9 +14,9 @@ const addTimeButton = document.getElementById('add-time');
 const subtractTimeButton = document.getElementById('subtract-time');
 const resetTimerButton = document.getElementById('reset-timer');
 
-// Countdown Timer Logic
+
 startTimerButton.addEventListener('click', () => {
-    if (countdownInterval) clearInterval(countdownInterval); // Stop any existing countdown
+    if (countdownInterval) clearInterval(countdownInterval); 
     countdownInterval = setInterval(() => {
         if (countdownTime > 0) {
             countdownTime--;
@@ -30,20 +30,20 @@ startTimerButton.addEventListener('click', () => {
     }, 1000);
 });
 
-// Adjust Countdown Timer Time (Add/Subtract)
+
 addTimeButton.addEventListener('click', () => {
-    countdownTime += 10; // Add 10 seconds
+    countdownTime += 10; 
     updateCountdownDisplay();
 });
 
 subtractTimeButton.addEventListener('click', () => {
-    countdownTime -= 10; // Subtract 10 seconds (ensure no negative time)
+    countdownTime -= 10; 
     if (countdownTime < 0) countdownTime = 0;
     updateCountdownDisplay();
 });
 
 resetTimerButton.addEventListener('click', () => {
-    countdownTime = 60; // Reset to the initial time
+    countdownTime = 60; 
     updateCountdownDisplay();
 });
 
