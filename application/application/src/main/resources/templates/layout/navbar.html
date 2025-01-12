@@ -11,7 +11,7 @@
 <body>
 
     <!-- First Navbar -->
-    <div th:fragment="navbar" class="navbar-container">
+    <div th:fragment="navbar" class="navbar-container" th:if="${session.role == 'runner'}">
         <nav class="navbar">
             <div class="logo">
                 <a th:href="@{/}">
