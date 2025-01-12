@@ -29,6 +29,7 @@
 }
 .nav-links li :hover {
     font-weight: 700;
+    color: aliceblue;
 }
 
 .nav-links a {
