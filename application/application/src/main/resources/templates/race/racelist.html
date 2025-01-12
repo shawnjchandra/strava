@@ -63,7 +63,7 @@
                                         <td th:text="${av.judul}">Coastal Run</td>
                                         <td th:text="${av.tipeRace}">Coastal Run</td>
                                         <td th:text="${av.jarak}">10 km</td>
-                                        <td th:text="${av.createdAt}">June 22, 2023</td>
+                                        <td th:text="${#temporals.format(av.createdAt, 'yyyy-MM-dd HH:mm')}">June 22, 2023</td>
                                         <td th:text="${av.kuota_max}">87/100</td>
                                         <td>
                                             <a th:href="@{/race/challenge/{id}(id=${av.idActivity})}" class="btn go-challenge">
@@ -100,7 +100,7 @@
                                         <td th:text="${av.judul}">Coastal Run</td>
                                         <td th:text="${av.tipeRace}">Coastal Run</td>
                                         <td th:text="${av.jarak}">10 km</td>
-                                        <td th:text="${av.createdAt}">June 22, 2023</td>
+                                        <td th:text="${#temporals.format(av.createdAt, 'yyyy-MM-dd HH:mm')}">June 22, 2023</td>
                                         <td th:text="${av.kuota_max}">87/100</td>
                                         <td>
                                             <button class="join-btn" th:data-id="${av.idActivity}">Join</button>

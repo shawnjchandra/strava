@@ -115,7 +115,8 @@
                         </div>
                         <div class="info-row">
                             <span class="label">Date:</span>
-                            <span class="value" th:text="${race.activity.createdAt}">July 15, 2023</span>
+                            <span class="value" th:text="${${#temporals.format(race.activity.createdAt, 'yyyy-MM-dd HH:mm')}}">July 15, 2023</span>
+                            
                         </div>
                         <div class="info-row">
                             <span class="label">Max Participants:</span>

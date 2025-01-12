@@ -73,9 +73,11 @@
                     <tbody>
                         <tr th:each="activity, iterStat : ${activities.data}" 
                             th:if="${iterStat.index >= (currentPage * 10) && iterStat.index < ((currentPage * 10) + 10)}">
-                            <td th:text="${activity.judul}">Morning Run</td>
+                            <td>
+                                <a th:href="@{/activity/descActivity(id_activity=${activity.idActivity})}" th:text="${activity.judul}">Morning Run</a>
+                            </td>
                             <td th:text="${activity.tipeTraining}">Run</td>
-                            <td th:text="${activity.createdAt}">2023-01-01</td>
+                            <td th:text="${#temporals.format(activity.createdAt, 'yyyy-MM-dd HH:mm')}">2023-01-01</td>
                             <td  th:text="${activity.durasi}">00:30:00</td>
                             <td th:text="${activity.jarak} + ' km'">5 km</td>
                             <td th:text="${activity.elevasi} + ' meter'">100 ft</td>

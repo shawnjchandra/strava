@@ -12,7 +12,17 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-
+a{
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Set initial text color */
+    display: inline-block; /* Ensures the hover effect works smoothly */
+    transition: all 0.3s ease-in-out; /* Adds smooth animation */
+}
+a:hover{
+    color: #007bff; /* Change text color to blue */
+    transform: scale(1.1); /* Slightly enlarge the link */
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle text shadow */
+}
 header {
     display: flex;
     flex-direction: column;

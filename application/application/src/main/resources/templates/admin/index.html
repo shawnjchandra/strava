@@ -121,7 +121,7 @@
                                 <tr th:each="race: ${races.data}">
                                     <td th:text="${race.judul}">Coastal Run</td>
                                     <td th:text="${race.jarak}">10 km</td>
-                                    <td th:text="${race.createdAt}">June 22, 2023</td>
+                                    <td th:text="${#temporals.format(race.createdAt, 'yyyy-MM-dd HH:mm')}">June 22, 2023</td>
                                     <td th:text="${race.kuota_max}">87/100</td>
                                     <td>
                                         <a th:href="@{/race/challenge/{id}(id=${race.idActivity})}" class="go-challenge">
