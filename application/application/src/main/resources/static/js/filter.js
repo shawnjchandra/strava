@@ -42,6 +42,7 @@ function fetchActivities() {
     const actType = document.querySelector(".sport-select").value || "";
     const page = 0; // For pagination
 
+
     fetch(`/activity/filter?page=${page}&keywords=${keywords}&actType=${actType}&sortBy=${sortBy}&sortOrder=${sortOrder}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
@@ -52,6 +53,8 @@ function fetchActivities() {
             
             updateTable(result.data.data);
             updatePagination(result.currentPage, result.totalItems, result.itemsPerPage, "/activity");
+            document.getElementById('quantity').textContent = result.data.data.length + " Activities";
+
         } else {
             // Better error handling
             
@@ -66,6 +69,10 @@ function fetchActivities() {
     });
 }
 
+function updateActQuantity(data){
+    
+}
+
 function updateTable(activities) {
     const tbody = document.querySelector("tbody");
     tbody.innerHTML = "";
@@ -75,13 +82,33 @@ function updateTable(activities) {
         row.innerHTML = `
             <td>${activity.judul || ''}</td>
             <td>${activity.tipeTraining || ''}</td>
-            <td onclick="sortTable('createdAt')">${activity.createdAt || ''}</td>
+            <td onclick="sortTable('createdAt')">${formatDate(activity.createdAt) || ''}</td>
             <td onclick="sortTable('durasi')">${activity.durasi || ''}</td>
             <td>${activity.jarak ? activity.jarak + ' km' : ''}</td>
             <td>${activity.elevasi ? activity.elevasi + ' meter' : ''}</td>
+            <td>
+            <form action="/activity/edit" method="get" style="display: inline;">
+                <input type="hidden" name="id_activity" value="${activity.idActivity}">
+                <button type="submit" class="edit-button">Edit</button>
+            </form>
+            <form action="/activity/delActivity" method="post" style="display: inline;">
+                <input type="hidden" name="id_activity" value="${activity.idActivity}">
+                <button type="submit" class="delete-button">Delete</button>
+            </form>
+        </td>
         `;
         tbody.appendChild(row);
     });
+}
+
+function formatDate(dateString) {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.getFullYear() + '-' + 
+           String(date.getMonth() + 1).padStart(2, '0') + '-' + 
+           String(date.getDate()).padStart(2, '0') + ' ' + 
+           String(date.getHours()).padStart(2, '0') + ':' + 
+           String(date.getMinutes()).padStart(2, '0');
 }
 
 function updatePagination(currentPage, totalItems, itemsPerPage, url){
