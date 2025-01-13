@@ -43,7 +43,8 @@ body {
     padding: 32px;
 }
 
-.form-group {
+.form-group,
+.duration-input {
     margin-bottom: 24px;
 }
 

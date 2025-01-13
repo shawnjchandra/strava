@@ -244,6 +244,7 @@ public class AdminController {
                 for(int i = 0; i<errors.size();i++){
                     //System.out.println("Error-"+i+": "+ errors.get(i));
                 }
+                // model.addAttribute("confirmpassword", errors)
                 return "admin/adminRegistration";
             }
             //System.out.println("no errors");
@@ -258,10 +259,10 @@ public class AdminController {
         
         
         if(isSuccessful){
-            return "redirect:/login";
+            return "redirect:/admin/index";
         }
-
-        return "redirect:/admin";
+        
+        return "admin/adminRegistration";
     }
 
     @PostMapping("/ban/{id}")
