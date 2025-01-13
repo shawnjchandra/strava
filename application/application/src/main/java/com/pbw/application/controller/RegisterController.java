@@ -121,9 +121,14 @@ public class RegisterController {
         
         if(isSuccessful){
             return "redirect:/login";
+        }else{
+            bindungResult.rejectValue("email",
+                 "emailUsed",
+                  "Email is already used");
+
+            model.addAttribute("daftarkota", daftarkota);
+            return "register";
         }
-        model.addAttribute("daftarkota", daftarkota);
-        return "register";
     }
 
 

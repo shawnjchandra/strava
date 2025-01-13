@@ -13,7 +13,7 @@ $(document).ready(function(){
             url: `/race/join/${id}`,
             type: "POST",
             success: function(response){
-                alert("Response from server: "+response);
+                // alert("Response from server: "+response);
                 location.reload();
             },
             error: function(xhr, status, error){
