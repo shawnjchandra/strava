@@ -38,7 +38,10 @@
                 <table class="runners-table">
                     <thead>
                         <tr>
-                            <th>Runner ID</th>
+                            <th th:onclick="sortTable('id_runner')">Runner ID
+                                <i id="id_runner"></i>
+
+                            </th>
                             <th>Name</th>
                             <th>Status</th>
                             <th>HAMMER OF BAN</th>
@@ -48,7 +51,7 @@
                     <div class="table-container">
                         <tbody class="tbody-runner" th:if="${runners.success}">
                             <tr th:each="runner : ${runners.data}">
-                                <td th:text="${runner.id_runner}">R002
+                                <td th:text="${runner.id_runner}" >R002
                                     
                                 </td>
                                 <td th:text="${runner.user.nama}">Sarah Johnson</td>
@@ -101,17 +104,17 @@
                         <table class="runners-table">
                             <thead>
                                 <tr>
-                                    <th th:onclick="sortTable('judul')">Race Name 
+                                    <th th:onclick="sortRaceTable('judul')">Race Name 
                                         <i id="judul"></i>
 
                                     </th>
-                                    <th th:onclick="sortTable('jarak')">Distance 
+                                    <th th:onclick="sortRaceTable('jarak')">Distance 
                                         <i id="jarak"></i>
                                     </th>
-                                    <th th:onclick="sortTable('createdAt')">Date 
+                                    <th th:onclick="sortRaceTable('createdAt')">Date 
                                         <i id="createdAt"></i>
                                     </th>
-                                    <th th:onclick="sortTable('kuota_max')">Max Capacity 
+                                    <th th:onclick="sortRaceTable('kuota_max')">Max Capacity 
                                         <i id="kuota_max"></i>
                                     </th>
                                     <th>Action</th>

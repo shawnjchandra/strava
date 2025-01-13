@@ -27,7 +27,7 @@ public class AuthorizationAspect {
         this.httpServletResponse = httpServletResponse;
     }
 
-    @After("@annotation(requiredRole)")
+    @Before("@annotation(requiredRole)")
     public void checkAuthorization(JoinPoint joinPoint
     , RequiredRole requiredRole
     ) throws Throwable{

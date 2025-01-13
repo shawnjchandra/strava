@@ -31,6 +31,8 @@ label {
 
 input[type="text"],
 input[type="date"],
+input[type="number"],
+input[type="file"],
 input[type="time"],
 select,
 textarea {
@@ -39,8 +41,27 @@ textarea {
     border-radius: 4px;
 }
 
+input[type="file"]::file-selector-button{
+    background-color: #007bff;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 25px;
+}
+
+input[type="file"]::file-selector-button:hover{
+    background-color: #005abb;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 25px;
+    cursor: pointer;
+}
+
 input[type="text"]:focus,
 input[type="date"]:focus,
+input[type="number"]:focus,
+input[type="file"]:focus,
 input[type="time"]:focus,
 select:focus,
 textarea:focus {

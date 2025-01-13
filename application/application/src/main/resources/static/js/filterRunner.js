@@ -11,28 +11,24 @@ function sortTable(column) {
         sortOrder = "asc";
     }
 
-    // let heads = {
-    //     'judul': document.getElementById('judul'),
-    //     'createdAt': document.getElementById('createdAt'),
-    //     'durasi': document.getElementById('durasi'),
-    //     'jarak': document.getElementById('jarak'),
-    //     'elevasi': document.getElementById('elevasi')
-    // };
+    let heads = {
+        'id_runner': document.getElementById('id_runner'),
+    };
 
  
 
-    // Object.keys(heads).forEach(key => {
-    //     let head = heads[key];
-    //     if (key === column) {
-    //         // Set active column icon based on sort order
-    //         head.className = sortOrder === 'asc' 
-    //             ? 'fas fa-sort-up sort-icon sort-icon-asc' 
-    //             : 'fas fa-sort-down sort-icon sort-icon-desc';
-    //     } else {
-    //         // Reset other columns to default
-    //         head.className = 'fa-regular fa-equals';
-    //     }
-    // });
+    Object.keys(heads).forEach(key => {
+        let head = heads[key];
+        if (key === column) {
+            // Set active column icon based on sort order
+            head.className = sortOrder === 'asc' 
+                ? 'fas fa-sort-up sort-icon sort-icon-asc' 
+                : 'fas fa-sort-down sort-icon sort-icon-desc';
+        } else {
+            // Reset other columns to default
+            head.className = 'fa-regular fa-equals';
+        }
+    });
 
     fetchActivities();
 }

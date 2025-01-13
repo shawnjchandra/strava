@@ -38,6 +38,7 @@ import lombok.Setter;
 
 @Controller
 @RequestMapping("/admin")
+
 public class AdminController {
     
     @Autowired
@@ -68,7 +69,7 @@ public class AdminController {
         Model model,    
         HttpSession httpSession
     ) throws NoSuchAlgorithmException, IOException{
-        Admin admin = (Admin) httpSession.getAttribute("status"); 
+        // Admin admin = (Admin) httpSession.getAttribute("status"); 
 
         List<User> users = userService.getAllUsers();
 
@@ -107,7 +108,7 @@ public class AdminController {
 
         model.addAttribute("races", raceResponse);
         model.addAttribute("runners", runnersToWeb);
-        model.addAttribute("admin", admin);
+        // model.addAttribute("admin", admin);
         return "admin/index";       
     }
 

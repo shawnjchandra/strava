@@ -3,15 +3,17 @@ let sortOrderRace = "asc";
 
 function sortRaceTable(column) {
 
-    console.log(column);
+    console.log(column+" "+sortOrderRace);
     if (sortByRace === column) {
+        console.log(sortByRace === column);
         sortOrderRace = sortOrderRace === "asc" ? "desc" : "asc";
     } else {
+        console.log(sortByRace === column);
         sortByRace = column;
         sortOrderRace = "asc";
     }
 
-    let heads = {
+    const heads = {
         'judul': document.getElementById('judul'),
         'createdAt': document.getElementById('createdAt'),
         'kuota_max': document.getElementById('kuota_max'),
@@ -25,7 +27,7 @@ function sortRaceTable(column) {
         let head = heads[key];
         if (key === column) {
             // Set active column icon based on sort order
-            head.className = sortOrder === 'asc' 
+            head.className = sortOrderRace === 'asc' 
                 ? 'fas fa-sort-up sort-icon sort-icon-asc' 
                 : 'fas fa-sort-down sort-icon sort-icon-desc';
         } else {
@@ -73,7 +75,7 @@ function updateRaceTable(runners) {
         row.innerHTML = `
             <td>${race.judul || ''}</td>
             <td>${race.jarak ? race.jarak + ' km' : ''}</td>
-            <td>${race.createdAt || ''}</td>
+            <td>${formatDate(race.createdAt) || ''}</td>
             <td>${race.kuota_max || ''}</td>
             <td>
                 <a href="@{/race/challenge/${race.idActivity}}" class="go-challenge">
@@ -91,6 +93,15 @@ function updateRaceTable(runners) {
 }
 
 
+function formatDate(dateString) {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.getFullYear() + '-' + 
+           String(date.getMonth() + 1).padStart(2, '0') + '-' + 
+           String(date.getDate()).padStart(2, '0') + ' ' + 
+           String(date.getHours()).padStart(2, '0') + ':' + 
+           String(date.getMinutes()).padStart(2, '0');
+}
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', function() {
