@@ -31,7 +31,7 @@ public class JDBCRaceRepo implements RaceRepository {
     
     @Override
     public List<Integer> getFromRaceParticipants(int id_runner){
-        String sql = "Select * FROM raceparticipants WHERE id_runner = ?";
+        String sql = "Select * FROM raceparticipants WHERE id_runner = ? ORDER BY id_race DESC";
 
         return jdbcTemplate.query(sql, this::mapIdRunnerToRP, id_runner);
     }
