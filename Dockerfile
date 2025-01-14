@@ -2,7 +2,10 @@ FROM ubuntu:latest AS build
 RUN apt-get update
 RUN apt-get install openjdk-21-jdk -y
 COPY . .
+
+RUN chmod 777 gradlew
 RUN ./gradlew bootJar --no-daemon
+
 FROM openjdk:21-jdk-slim
 
 EXPOSE 8080
